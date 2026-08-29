@@ -1,114 +1,37 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>The Museum of Sayak</title>
-
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div id="film">
+    <main class="entrance">
 
-    <!-- BACKGROUND MUSIC -->
-    <audio id="bgMusic" loop preload="auto">
-        <source src="mp3.mpeg" type="audio/mpeg">
-    </audio>
+        <!-- Background image -->
+        <div class="background"></div>
 
+        <!-- Dark cinematic overlay -->
+        <div class="overlay"></div>
 
-    <!-- OPENING -->
+        <section class="hero">
 
-    <section id="opening">
+            <h1>THE MUSEUM<br>OF SAYAK</h1>
 
-        <div class="opening-content">
+            <p>exploring you, through my eyes.</p>
 
-            <div class="opening-small">
-                A FILM BY MAADONA
-            </div>
-
-            <h1>
-                THE MUSEUM<br>
-                OF SAYAK
-            </h1>
-
-            <div class="opening-line"></div>
-
-            <p>
-                exploring you<br>
-                through my eyes
-            </p>
-
-            <button onclick="startMovie()">
-                BEGIN
+            <button id="enterBtn">
+                ENTER
+                <span>→</span>
             </button>
 
-        </div>
+        </section>
 
-    </section>
+    </main>
 
-
-    <!-- MOVIE -->
-
-    <div id="movie">
-
-        <!-- CINEMATIC BACKGROUND -->
-        <div id="background"></div>
-
-        <!-- DARK OVERLAY -->
-        <div id="dark"></div>
-
-
-        <!-- CHAPTER TITLE -->
-
-        <div id="chapter">
-
-            <div id="chapter-number"></div>
-
-            <div id="chapter-title"></div>
-
-        </div>
-
-
-        <!-- STORY TEXT -->
-
-        <div id="story">
-
-            <div id="text"></div>
-
-        </div>
-
-
-        <!-- MOVIE CONTROLS -->
-
-        <div id="controls">
-
-            <button onclick="previousScene()">
-                ←
-            </button>
-
-            <button onclick="togglePlay()" id="play">
-                ▶
-            </button>
-
-            <button onclick="nextScene()">
-                →
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- JAVASCRIPT -->
-
-<script src="script.js"></script>
-
+    <script src="script.js"></script>
 </body>
 </html>
-```
