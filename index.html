@@ -1,15 +1,24 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Museum of Sayak</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>The Museum of Sayak</title>
+
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <div id="film">
+
+    <!-- BACKGROUND MUSIC -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="mp3.mpeg" type="audio/mpeg">
+    </audio>
+
 
     <!-- OPENING -->
 
@@ -46,27 +55,48 @@
 
     <div id="movie">
 
+        <!-- CINEMATIC BACKGROUND -->
         <div id="background"></div>
+
+        <!-- DARK OVERLAY -->
         <div id="dark"></div>
 
+
+        <!-- CHAPTER TITLE -->
+
         <div id="chapter">
+
             <div id="chapter-number"></div>
+
             <div id="chapter-title"></div>
+
         </div>
 
+
+        <!-- STORY TEXT -->
+
         <div id="story">
+
             <div id="text"></div>
+
         </div>
+
+
+        <!-- MOVIE CONTROLS -->
 
         <div id="controls">
 
-            <button onclick="previousScene()">←</button>
+            <button onclick="previousScene()">
+                ←
+            </button>
 
             <button onclick="togglePlay()" id="play">
                 ▶
             </button>
 
-            <button onclick="nextScene()">→</button>
+            <button onclick="nextScene()">
+                →
+            </button>
 
         </div>
 
@@ -74,7 +104,11 @@
 
 </div>
 
+
+<!-- JAVASCRIPT -->
+
 <script src="script.js"></script>
 
 </body>
 </html>
+```
