@@ -1,591 +1,577 @@
-document.addEventListener("DOMContentLoaded", async () => {
+/* =====================================================
+   MUSEUM PAGE
+===================================================== */
 
+.museum {
+    position: fixed;
+    inset: 0;
 
-    /* =====================================================
-       ELEMENTS
-    ===================================================== */
+    width: 100vw;
+    height: 100vh;
 
-    const chapter =
-        document.querySelector(".chapter");
+    overflow: hidden;
 
-    const chapterSmall =
-        document.getElementById("chapterSmall");
+    background: #090807;
 
-    const chapterTitle =
-        document.getElementById("chapterTitle");
+    color: #eee8dc;
 
-    const chapterText =
-        document.getElementById("chapterText");
+    font-family:
+        "Inter",
+        sans-serif;
+}
 
-    const chapterImage =
-        document.getElementById("chapterImage");
 
-    const currentNumber =
-        document.getElementById("currentNumber");
+/* BACKGROUND */
 
-    const photoCurrent =
-        document.getElementById("photoCurrent");
+.museum-background {
+    position: absolute;
+    inset: -4%;
 
-    const chapterDots =
-        document.getElementById("chapterDots");
+    background-image:
+        url("sayak_bkgnd.jpeg");
 
-    const prevBtn =
-        document.getElementById("prevBtn");
+    background-size: cover;
 
-    const nextBtn =
-        document.getElementById("nextBtn");
+    background-position: center;
 
-    const musicBtn =
-        document.getElementById("musicBtn");
+    filter:
+        brightness(.34)
+        contrast(1.05)
+        saturate(.65);
 
-    const soundText =
-        document.getElementById("soundText");
+    transform: scale(1.08);
 
-    const music =
-        document.getElementById("museumMusic");
+    animation:
+        museumZoom 25s ease-in-out infinite alternate;
 
-    const backBtn =
-        document.getElementById("backBtn");
+    z-index: 0;
+}
 
 
-    /* =====================================================
-       DATA
-    ===================================================== */
+.museum-vignette {
+    position: absolute;
+    inset: 0;
 
-    let data = null;
+    z-index: 1;
 
-    let chapters = [];
+    background:
+        linear-gradient(
+            90deg,
+            rgba(5,4,3,.96),
+            rgba(5,4,3,.72) 42%,
+            rgba(5,4,3,.28) 72%,
+            rgba(5,4,3,.58)
+        );
+}
 
-    let currentChapter = 0;
 
-    let currentParagraph = 0;
+.museum-grain {
+    position: absolute;
+    inset: 0;
 
-    let currentPhoto = 0;
+    z-index: 2;
 
-    let changing = false;
+    pointer-events: none;
 
+    opacity: .055;
 
-    /* =====================================================
-       IMAGE PATH FIX
-    ===================================================== */
+    background-image:
+        url("sayak_bkgnd.jpeg");
 
-    function imagePath(path) {
+    background-size: 300px;
 
-        if (!path) return null;
+    mix-blend-mode: overlay;
+}
 
-        /*
-           Your files are in the same location
-           as museum.html.
 
-           Therefore:
+/* TOP */
 
-           assets/images/strong.jpeg
+.museum-top {
+    position: absolute;
 
-           becomes:
+    top: 36px;
+    left: 6vw;
+    right: 6vw;
 
-           strong.jpeg
-        */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-        return path
-            .replace(/^assets\/images\//, "")
-            .replace(/^assets\\images\\/, "");
+    z-index: 10;
+}
 
-    }
 
+.museum-title {
+    font-size: 8px;
 
-    /* =====================================================
-       GET PHOTOS
-    ===================================================== */
+    letter-spacing: 5px;
 
-    function getPhotos(chapterNumber) {
+    opacity: .55;
+}
 
-        const chapterData =
-            data[`chapter_${chapterNumber}`];
 
-        if (!chapterData) return [];
+.counter {
+    font-family:
+        "Cormorant Garamond",
+        serif;
 
+    font-size: 18px;
 
-        if (
-            Array.isArray(
-                chapterData.photo_sequence
-            )
-        ) {
+    display: flex;
 
-            return chapterData.photo_sequence
-                .map(photo => {
+    gap: 7px;
 
-                    if (
-                        typeof photo === "object"
-                    ) {
-                        return imagePath(
-                            photo.image
-                        );
-                    }
+    opacity: .65;
+}
 
-                    return imagePath(photo);
 
-                })
-                .filter(Boolean);
+/* CONTENT */
 
-        }
+.museum-content {
+    position: absolute;
 
+    inset: 0;
 
-        if (
-            data.photo_map &&
-            data.photo_map[
-                `chapter_${chapterNumber}`
-            ]
-        ) {
+    z-index: 5;
 
-            return data.photo_map[
-                `chapter_${chapterNumber}`
-            ]
-            .map(imagePath)
-            .filter(Boolean);
+    display: flex;
 
-        }
+    align-items: center;
 
+    justify-content: space-between;
 
-        return [];
+    padding:
+        90px
+        9vw
+        110px
+        7vw;
 
-    }
+    gap: 8vw;
+}
 
 
-    /* =====================================================
-       CREATE DOTS
-    ===================================================== */
+/* TEXT */
 
-    function createDots() {
+.text-side {
+    width: 45%;
 
-        chapterDots.innerHTML = "";
+    max-width: 570px;
 
-        chapters.forEach(
-            (_, index) => {
+    transition:
+        opacity .5s ease,
+        transform .5s ease;
+}
 
-                const dot =
-                    document.createElement("span");
 
-                dot.className =
-                    "chapter-dot";
+.text-side.fade-out {
+    opacity: 0;
 
-                if (
-                    index === currentChapter
-                ) {
-                    dot.classList.add("active");
-                }
+    transform:
+        translateX(-25px);
+}
 
-                dot.addEventListener(
-                    "click",
-                    () => {
 
-                        showChapter(index);
+.chapter-number {
+    font-size: 8px;
 
-                    }
-                );
+    letter-spacing: 5px;
 
-                chapterDots.appendChild(dot);
+    opacity: .48;
 
-            }
+    margin-bottom: 25px;
+}
+
+
+.text-side h1 {
+    margin: 0;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(
+            55px,
+            6vw,
+            100px
         );
 
+    font-weight: 300;
+
+    line-height: .86;
+
+    letter-spacing: -3px;
+
+    text-transform: uppercase;
+}
+
+
+.little-line {
+    width: 48px;
+
+    height: 1px;
+
+    margin:
+        30px
+        0;
+
+    background:
+        rgba(255,255,255,.5);
+}
+
+
+#chapterText {
+    max-width: 430px;
+
+    margin: 0;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: 21px;
+
+    line-height: 1.45;
+
+    font-weight: 300;
+
+    color:
+        rgba(238,232,220,.78);
+}
+
+
+/* IMAGE */
+
+.image-side {
+    width: 40%;
+
+    max-width: 560px;
+
+    height: 67vh;
+
+    position: relative;
+
+    transition:
+        opacity .5s ease,
+        transform .5s ease;
+}
+
+
+.image-side.fade-out {
+    opacity: 0;
+
+    transform:
+        translateX(25px);
+}
+
+
+.image-wrapper {
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    background: #111;
+
+    box-shadow:
+        0 30px 90px
+        rgba(0,0,0,.65);
+}
+
+
+#chapterImage {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    object-position: center;
+
+    cursor: pointer;
+
+    transition:
+        opacity .3s ease,
+        transform 1.2s ease;
+}
+
+
+#chapterImage:hover {
+    transform: scale(1.025);
+}
+
+
+.image-counter {
+    position: absolute;
+
+    left: -35px;
+    bottom: 0;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: 15px;
+
+    opacity: .45;
+}
+
+
+/* BOTTOM */
+
+.bottom-navigation {
+    position: absolute;
+
+    bottom: 37px;
+    left: 7vw;
+
+    z-index: 10;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 22px;
+}
+
+
+.bottom-navigation button {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(255,255,255,.35);
+
+    background: transparent;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 17px;
+
+    transition:
+        background .3s ease,
+        color .3s ease,
+        opacity .3s ease;
+}
+
+
+.bottom-navigation button:hover:not(:disabled) {
+    background: #eee8dc;
+
+    color: #090807;
+}
+
+
+.bottom-navigation button:disabled {
+    opacity: .18;
+
+    cursor: default;
+}
+
+
+.progress {
+    width: 110px;
+
+    height: 1px;
+
+    background:
+        rgba(255,255,255,.2);
+}
+
+
+.progress-fill {
+    height: 100%;
+
+    width: 0%;
+
+    background:
+        rgba(255,255,255,.8);
+
+    transition:
+        width .6s ease;
+}
+
+
+/* SOUND */
+
+.sound-button {
+    position: absolute;
+
+    right: 38px;
+    bottom: 38px;
+
+    z-index: 10;
+
+    border: 0;
+
+    background: transparent;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 8px;
+
+    letter-spacing: 3px;
+
+    opacity: .5;
+
+    cursor: pointer;
+
+    transition: opacity .3s ease;
+}
+
+
+.sound-button:hover {
+    opacity: 1;
+}
+
+
+.sound-button:first-letter {
+    font-family:
+        "Cormorant Garamond",
+        serif;
+}
+
+
+/* BACK */
+
+.back-button {
+    position: absolute;
+
+    right: 6vw;
+    top: 36px;
+
+    transform:
+        translateY(30px);
+
+    z-index: 10;
+
+    border: 0;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 7px;
+
+    letter-spacing: 3px;
+
+    opacity: .3;
+
+    cursor: pointer;
+
+    transition: opacity .3s ease;
+}
+
+
+.back-button:hover {
+    opacity: 1;
+}
+
+
+/* ANIMATION */
+
+@keyframes museumZoom {
+
+    from {
+        transform: scale(1.08);
+    }
+
+    to {
+        transform: scale(1.14);
+    }
+
+}
+
+
+/* MOBILE */
+
+@media (max-width: 800px) {
+
+    .museum {
+        overflow-y: auto;
     }
 
 
-    /* =====================================================
-       UPDATE DOTS
-    ===================================================== */
+    .museum-content {
 
-    function updateDots() {
+        position: relative;
 
-        const dots =
-            document.querySelectorAll(
-                ".chapter-dot"
-            );
+        min-height: 100vh;
 
-        dots.forEach(
-            (dot, index) => {
+        flex-direction: column;
 
-                dot.classList.toggle(
-                    "active",
-                    index === currentChapter
-                );
+        align-items: flex-start;
 
-            }
-        );
+        justify-content: center;
 
+        padding:
+            110px
+            25px
+            120px;
+
+        gap: 45px;
     }
 
 
-    /* =====================================================
-       SHOW CHAPTER
-    ===================================================== */
-
-    function showChapter(index) {
-
-        if (
-            changing ||
-            !chapters[index]
-        ) {
-            return;
-        }
-
-
-        changing = true;
-
-
-        chapter.classList.add(
-            "changing"
-        );
-
-
-        setTimeout(() => {
-
-            currentChapter = index;
-
-            currentParagraph = 0;
-
-            currentPhoto = 0;
-
-
-            const chapterInfo =
-                chapters[currentChapter];
-
-            const number =
-                chapterInfo.number;
-
-
-            const chapterData =
-                data[
-                    `chapter_${number}`
-                ];
-
-
-            /* ---------------------------------------------
-               NUMBER
-            --------------------------------------------- */
-
-            const formattedNumber =
-                String(number)
-                    .padStart(2, "0");
-
-
-            currentNumber.textContent =
-                formattedNumber;
-
-
-            chapterSmall.textContent =
-                `CHAPTER ${formattedNumber}`;
-
-
-            /* ---------------------------------------------
-               TITLE
-            --------------------------------------------- */
-
-            chapterTitle.textContent =
-                chapterData.title ||
-                chapterInfo.title;
-
-
-            /* ---------------------------------------------
-               TEXT
-            --------------------------------------------- */
-
-            if (
-                Array.isArray(
-                    chapterData.content
-                ) &&
-                chapterData.content.length
-            ) {
-
-                chapterText.textContent =
-                    chapterData.content[0];
-
-            } else {
-
-                chapterText.textContent =
-                    "";
-
-            }
-
-
-            /* ---------------------------------------------
-               PHOTOS
-            --------------------------------------------- */
-
-            const photos =
-                getPhotos(number);
-
-
-            if (photos.length > 0) {
-
-                chapterImage.src =
-                    photos[0];
-
-                chapterImage.style.display =
-                    "block";
-
-                photoCurrent.textContent =
-                    "01";
-
-            } else {
-
-                chapterImage.style.display =
-                    "none";
-
-            }
-
-
-            /* ---------------------------------------------
-               BUTTONS
-            --------------------------------------------- */
-
-            prevBtn.disabled =
-                currentChapter === 0;
-
-            nextBtn.disabled =
-                currentChapter ===
-                chapters.length - 1;
-
-
-            updateDots();
-
-
-            chapter.classList.remove(
-                "changing"
-            );
-
-
-            changing = false;
-
-
-        }, 500);
-
+    .text-side {
+        width: 100%;
     }
 
 
-    /* =====================================================
-       NEXT CHAPTER
-    ===================================================== */
-
-    nextBtn.addEventListener(
-        "click",
-        () => {
-
-            if (
-                currentChapter <
-                chapters.length - 1
-            ) {
-
-                showChapter(
-                    currentChapter + 1
-                );
-
-            }
-
-        }
-    );
-
-
-    /* =====================================================
-       PREVIOUS CHAPTER
-    ===================================================== */
-
-    prevBtn.addEventListener(
-        "click",
-        () => {
-
-            if (currentChapter > 0) {
-
-                showChapter(
-                    currentChapter - 1
-                );
-
-            }
-
-        }
-    );
-
-
-    /* =====================================================
-       PHOTO CLICK
-    ===================================================== */
-
-    chapterImage.addEventListener(
-        "click",
-        () => {
-
-            const number =
-                chapters[currentChapter].number;
-
-            const photos =
-                getPhotos(number);
-
-
-            if (photos.length <= 1) {
-                return;
-            }
-
-
-            currentPhoto++;
-
-            if (
-                currentPhoto >= photos.length
-            ) {
-
-                currentPhoto = 0;
-
-            }
-
-
-            chapterImage.style.opacity = "0";
-
-
-            setTimeout(() => {
-
-                chapterImage.src =
-                    photos[currentPhoto];
-
-                chapterImage.style.opacity =
-                    "1";
-
-
-                photoCurrent.textContent =
-                    String(
-                        currentPhoto + 1
-                    ).padStart(2, "0");
-
-
-            }, 350);
-
-        }
-    );
-
-
-    /* =====================================================
-       MUSIC
-    ===================================================== */
-
-    musicBtn.addEventListener(
-        "click",
-        async () => {
-
-            if (
-                music.paused
-            ) {
-
-                try {
-
-                    await music.play();
-
-                    soundText.textContent =
-                        "SOUND ON";
-
-                } catch (error) {
-
-                    console.log(error);
-
-                }
-
-            } else {
-
-                music.pause();
-
-                soundText.textContent =
-                    "SOUND OFF";
-
-            }
-
-        }
-    );
-
-
-    /* =====================================================
-       BACK
-    ===================================================== */
-
-    backBtn.addEventListener(
-        "click",
-        () => {
-
-            window.location.href =
-                "index.html";
-
-        }
-    );
-
-
-    /* =====================================================
-       KEYBOARD
-    ===================================================== */
-
-    document.addEventListener(
-        "keydown",
-        event => {
-
-            if (
-                event.key === "ArrowRight"
-            ) {
-
-                nextBtn.click();
-
-            }
-
-            if (
-                event.key === "ArrowLeft"
-            ) {
-
-                prevBtn.click();
-
-            }
-
-        }
-    );
-
-
-    /* =====================================================
-       LOAD JSON
-    ===================================================== */
-
-    try {
-
-        const response =
-            await fetch(
-                "sayak_content.json"
-            );
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                "Could not load museum data."
-            );
-
-        }
-
-
-        data =
-            await response.json();
-
-
-        chapters =
-            data.film.chapters;
-
-
-        createDots();
-
-        showChapter(0);
-
-
-    } catch (error) {
-
-        console.error(error);
-
-        chapterTitle.textContent =
-            "THE MUSEUM";
-
-        chapterText.textContent =
-            "The collection could not be opened.";
-
+    .text-side h1 {
+        font-size: 52px;
     }
 
-});
+
+    #chapterText {
+        font-size: 18px;
+    }
+
+
+    .image-side {
+        width: 100%;
+
+        height: 50vh;
+    }
+
+
+    .museum-top {
+        left: 25px;
+        right: 25px;
+    }
+
+
+    .museum-title {
+        letter-spacing: 3px;
+    }
+
+
+    .bottom-navigation {
+        left: 25px;
+        bottom: 25px;
+    }
+
+
+    .sound-button {
+        right: 25px;
+        bottom: 25px;
+    }
+
+
+    .back-button {
+        right: 25px;
+    }
+
+}
