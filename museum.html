@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>The Museum of Sayak</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="museum">
+
+        <!-- Cinematic museum background -->
+        <div class="museum-bg"></div>
+        <div class="museum-dark"></div>
+        <div class="museum-grain"></div>
+
+        <!-- TOP BAR -->
+        <header class="topbar">
+
+            <div class="museum-name">
+                THE MUSEUM OF SAYAK
+            </div>
+
+            <div class="chapter-counter">
+                <span id="currentNumber">01</span>
+                <span class="counter-line"></span>
+                <span>10</span>
+            </div>
+
+        </header>
+
+
+        <!-- MAIN CONTENT -->
+        <section class="chapter">
+
+            <!-- LEFT -->
+            <div class="chapter-info">
+
+                <div class="chapter-small" id="chapterSmall">
+                    CHAPTER 01
+                </div>
+
+                <h1 id="chapterTitle">
+                    WHO ARE YOU?
+                </h1>
+
+                <div class="title-line"></div>
+
+                <p id="chapterText">
+                    You are someone I keep discovering,
+                    even after all these years.
+                </p>
+
+            </div>
+
+
+            <!-- RIGHT IMAGE -->
+            <div class="photo-area">
+
+                <div class="photo-number">
+                    <span id="photoCurrent">01</span>
+                </div>
+
+                <div class="photo-frame">
+
+                    <img
+                        id="chapterImage"
+                        src="strong.jpeg"
+                        alt="Sayak"
+                    >
+
+                </div>
+
+                <div class="photo-caption">
+                    A MEMORY I KEEP
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- BOTTOM NAVIGATION -->
+        <footer class="bottom">
+
+            <button
+                id="prevBtn"
+                class="nav-btn"
+            >
+                ←
+            </button>
+
+            <div class="chapter-dots" id="chapterDots"></div>
+
+            <button
+                id="nextBtn"
+                class="nav-btn"
+            >
+                →
+            </button>
+
+        </footer>
+
+
+        <!-- SOUND -->
+        <button
+            id="musicBtn"
+            class="sound"
+        >
+            <span>♪</span>
+            <span id="soundText">SOUND ON</span>
+        </button>
+
+
+        <!-- BACK -->
+        <button
+            id="backBtn"
+            class="back"
+        >
+            EXIT MUSEUM
+        </button>
+
+    </main>
+
+
+    <audio
+        id="museumMusic"
+        src="mp3.mpeg"
+        loop
+    ></audio>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
