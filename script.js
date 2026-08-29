@@ -1,72 +1,89 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
 
-    const enterBtn = document.getElementById("enterBtn");
-    const entrance = document.getElementById("entrance");
-    const museum = document.getElementById("museum");
-    const intro = document.querySelector(".intro");
 
-    const chapterNumber =
-        document.getElementById("chapterNumber");
+    /* =====================================================
+       ELEMENTS
+    ===================================================== */
 
-    const chapterLabel =
-        document.getElementById("chapterLabel");
+    const chapter =
+        document.querySelector(".chapter");
+
+    const chapterSmall =
+        document.getElementById("chapterSmall");
 
     const chapterTitle =
         document.getElementById("chapterTitle");
 
-    const chapterDescription =
-        document.getElementById("chapterDescription");
+    const chapterText =
+        document.getElementById("chapterText");
 
     const chapterImage =
         document.getElementById("chapterImage");
 
-    const progressNumber =
-        document.getElementById("progressNumber");
+    const currentNumber =
+        document.getElementById("currentNumber");
 
-    const nextBtn =
-        document.getElementById("nextBtn");
+    const photoCurrent =
+        document.getElementById("photoCurrent");
+
+    const chapterDots =
+        document.getElementById("chapterDots");
 
     const prevBtn =
         document.getElementById("prevBtn");
 
-    const backBtn =
-        document.getElementById("backBtn");
+    const nextBtn =
+        document.getElementById("nextBtn");
 
     const musicBtn =
         document.getElementById("musicBtn");
 
-    const musicText =
-        document.getElementById("musicText");
+    const soundText =
+        document.getElementById("soundText");
 
     const music =
         document.getElementById("museumMusic");
 
+    const backBtn =
+        document.getElementById("backBtn");
 
-    let museumData = null;
+
+    /* =====================================================
+       DATA
+    ===================================================== */
+
+    let data = null;
+
     let chapters = [];
+
     let currentChapter = 0;
+
+    let currentParagraph = 0;
+
     let currentPhoto = 0;
-    let entered = false;
-    let musicPlaying = false;
+
+    let changing = false;
 
 
-    /* =====================================
-       FIX IMAGE PATHS
-    ===================================== */
+    /* =====================================================
+       IMAGE PATH FIX
+    ===================================================== */
 
-    function fixImagePath(path) {
+    function imagePath(path) {
 
-        if (!path) return "";
+        if (!path) return null;
 
         /*
-         Your JSON contains:
+           Your files are in the same location
+           as museum.html.
 
-         assets/images/strong.jpeg
+           Therefore:
 
-         But your actual files are beside
-         index.html.
+           assets/images/strong.jpeg
 
-         So we only need the filename.
+           becomes:
+
+           strong.jpeg
         */
 
         return path
@@ -76,138 +93,54 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =====================================
-       LOAD JSON
-    ===================================== */
-
-    async function loadMuseum() {
-
-        try {
-
-            const response =
-                await fetch("sayak_content.json");
-
-            if (!response.ok) {
-                throw new Error(
-                    "Could not load sayak_content.json"
-                );
-            }
-
-            museumData =
-                await response.json();
-
-            chapters =
-                museumData.film.chapters;
-
-            showChapter(0);
-
-        } catch (error) {
-
-            console.error(error);
-
-            chapterTitle.textContent =
-                "THE COLLECTION";
-
-            chapterDescription.textContent =
-                "The museum could not be loaded.";
-
-        }
-
-    }
-
-
-    /* =====================================
-       GET CHAPTER
-    ===================================== */
-
-    function getChapterData(index) {
-
-        const chapter =
-            chapters[index];
-
-        if (!chapter) return null;
-
-        return museumData[
-            `chapter_${chapter.number}`
-        ];
-
-    }
-
-
-    /* =====================================
+    /* =====================================================
        GET PHOTOS
-    ===================================== */
+    ===================================================== */
 
-    function getPhotos(number) {
+    function getPhotos(chapterNumber) {
 
-        const chapter =
-            museumData[`chapter_${number}`];
+        const chapterData =
+            data[`chapter_${chapterNumber}`];
 
-        if (!chapter) return [];
+        if (!chapterData) return [];
 
-
-        /* Normal photo sequence */
 
         if (
             Array.isArray(
-                chapter.photo_sequence
+                chapterData.photo_sequence
             )
         ) {
 
-            if (
-                chapter.photo_sequence.length === 0
-            ) {
-                return [];
-            }
+            return chapterData.photo_sequence
+                .map(photo => {
 
+                    if (
+                        typeof photo === "object"
+                    ) {
+                        return imagePath(
+                            photo.image
+                        );
+                    }
 
-            /*
-             Chapter 1 has objects:
+                    return imagePath(photo);
 
-             {
-                 image: "...",
-                 text_index: 0
-             }
-            */
-
-            if (
-                typeof chapter.photo_sequence[0]
-                === "object"
-            ) {
-
-                return chapter.photo_sequence
-                    .map(photo =>
-                        fixImagePath(photo.image)
-                    )
-                    .filter(Boolean);
-
-            }
-
-
-            return chapter.photo_sequence
-                .map(photo =>
-                    fixImagePath(photo)
-                )
+                })
                 .filter(Boolean);
 
         }
 
 
-        /* Chapter 2 */
-
         if (
-            museumData.photo_map &&
-            museumData.photo_map[
-                `chapter_${number}`
+            data.photo_map &&
+            data.photo_map[
+                `chapter_${chapterNumber}`
             ]
         ) {
 
-            return museumData.photo_map[
-                `chapter_${number}`
+            return data.photo_map[
+                `chapter_${chapterNumber}`
             ]
-            .map(photo =>
-                fixImagePath(photo)
-            )
+            .map(imagePath)
             .filter(Boolean);
 
         }
@@ -218,207 +151,221 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =====================================
-       SHOW CHAPTER
-    ===================================== */
+    /* =====================================================
+       CREATE DOTS
+    ===================================================== */
 
-    function showChapter(index) {
+    function createDots() {
 
-        if (!chapters.length) return;
+        chapterDots.innerHTML = "";
 
+        chapters.forEach(
+            (_, index) => {
 
-        currentChapter =
-            Math.max(
-                0,
-                Math.min(
-                    index,
-                    chapters.length - 1
-                )
-            );
+                const dot =
+                    document.createElement("span");
 
+                dot.className =
+                    "chapter-dot";
 
-        currentPhoto = 0;
+                if (
+                    index === currentChapter
+                ) {
+                    dot.classList.add("active");
+                }
 
+                dot.addEventListener(
+                    "click",
+                    () => {
 
-        const chapter =
-            chapters[currentChapter];
+                        showChapter(index);
 
-        const data =
-            getChapterData(currentChapter);
+                    }
+                );
 
+                chapterDots.appendChild(dot);
 
-        if (!data) return;
-
-
-        const number =
-            String(chapter.number)
-                .padStart(2, "0");
-
-
-        chapterNumber.textContent =
-            number;
-
-        progressNumber.textContent =
-            number;
-
-        chapterLabel.textContent =
-            `CHAPTER ${number}`;
-
-        chapterTitle.textContent =
-            data.title ||
-            chapter.title;
-
-
-        /*
-         Show first paragraph.
-        */
-
-        if (
-            Array.isArray(data.content) &&
-            data.content.length
-        ) {
-
-            chapterDescription.textContent =
-                data.content[0];
-
-        } else {
-
-            chapterDescription.textContent =
-                "";
-
-        }
-
-
-        /*
-         Load first photo.
-        */
-
-        const photos =
-            getPhotos(chapter.number);
-
-
-        if (photos.length) {
-
-            chapterImage.src =
-                photos[0];
-
-            chapterImage.alt =
-                data.title ||
-                "Sayak";
-
-            chapterImage.style.display =
-                "block";
-
-        } else {
-
-            chapterImage.removeAttribute("src");
-
-            chapterImage.style.display =
-                "none";
-
-        }
-
-
-        prevBtn.disabled =
-            currentChapter === 0;
-
-        nextBtn.disabled =
-            currentChapter ===
-            chapters.length - 1;
-
-
-        animateChapter();
-
-    }
-
-
-    /* =====================================
-       ANIMATION
-    ===================================== */
-
-    function animateChapter() {
-
-        const content =
-            document.querySelector(
-                ".chapter-content"
-            );
-
-        if (!content) return;
-
-        content.classList.remove(
-            "chapter-change"
-        );
-
-        void content.offsetWidth;
-
-        content.classList.add(
-            "chapter-change"
+            }
         );
 
     }
 
 
-    /* =====================================
-       ENTER
-    ===================================== */
+    /* =====================================================
+       UPDATE DOTS
+    ===================================================== */
 
-    enterBtn.addEventListener(
-        "click",
-        async () => {
+    function updateDots() {
 
-            if (entered) return;
+        const dots =
+            document.querySelectorAll(
+                ".chapter-dot"
+            );
 
-            entered = true;
+        dots.forEach(
+            (dot, index) => {
 
-            enterBtn.disabled = true;
-
-            intro.classList.add("exit");
-
-            setTimeout(() => {
-
-                entrance.classList.add("leave");
-
-            }, 250);
-
-
-            setTimeout(() => {
-
-                entrance.style.display =
-                    "none";
-
-                museum.classList.add("active");
-
-            }, 900);
-
-
-            /*
-             Start music after ENTER.
-            */
-
-            try {
-
-                await music.play();
-
-                musicPlaying = true;
-
-                musicText.textContent =
-                    "SOUND ON";
-
-            } catch (error) {
-
-                console.log(
-                    "Music playback blocked."
+                dot.classList.toggle(
+                    "active",
+                    index === currentChapter
                 );
 
             }
+        );
 
+    }
+
+
+    /* =====================================================
+       SHOW CHAPTER
+    ===================================================== */
+
+    function showChapter(index) {
+
+        if (
+            changing ||
+            !chapters[index]
+        ) {
+            return;
         }
-    );
 
 
-    /* =====================================
-       NEXT
-    ===================================== */
+        changing = true;
+
+
+        chapter.classList.add(
+            "changing"
+        );
+
+
+        setTimeout(() => {
+
+            currentChapter = index;
+
+            currentParagraph = 0;
+
+            currentPhoto = 0;
+
+
+            const chapterInfo =
+                chapters[currentChapter];
+
+            const number =
+                chapterInfo.number;
+
+
+            const chapterData =
+                data[
+                    `chapter_${number}`
+                ];
+
+
+            /* ---------------------------------------------
+               NUMBER
+            --------------------------------------------- */
+
+            const formattedNumber =
+                String(number)
+                    .padStart(2, "0");
+
+
+            currentNumber.textContent =
+                formattedNumber;
+
+
+            chapterSmall.textContent =
+                `CHAPTER ${formattedNumber}`;
+
+
+            /* ---------------------------------------------
+               TITLE
+            --------------------------------------------- */
+
+            chapterTitle.textContent =
+                chapterData.title ||
+                chapterInfo.title;
+
+
+            /* ---------------------------------------------
+               TEXT
+            --------------------------------------------- */
+
+            if (
+                Array.isArray(
+                    chapterData.content
+                ) &&
+                chapterData.content.length
+            ) {
+
+                chapterText.textContent =
+                    chapterData.content[0];
+
+            } else {
+
+                chapterText.textContent =
+                    "";
+
+            }
+
+
+            /* ---------------------------------------------
+               PHOTOS
+            --------------------------------------------- */
+
+            const photos =
+                getPhotos(number);
+
+
+            if (photos.length > 0) {
+
+                chapterImage.src =
+                    photos[0];
+
+                chapterImage.style.display =
+                    "block";
+
+                photoCurrent.textContent =
+                    "01";
+
+            } else {
+
+                chapterImage.style.display =
+                    "none";
+
+            }
+
+
+            /* ---------------------------------------------
+               BUTTONS
+            --------------------------------------------- */
+
+            prevBtn.disabled =
+                currentChapter === 0;
+
+            nextBtn.disabled =
+                currentChapter ===
+                chapters.length - 1;
+
+
+            updateDots();
+
+
+            chapter.classList.remove(
+                "changing"
+            );
+
+
+            changing = false;
+
+
+        }, 500);
+
+    }
+
+
+    /* =====================================================
+       NEXT CHAPTER
+    ===================================================== */
 
     nextBtn.addEventListener(
         "click",
@@ -439,9 +386,9 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 
-    /* =====================================
-       PREVIOUS
-    ===================================== */
+    /* =====================================================
+       PREVIOUS CHAPTER
+    ===================================================== */
 
     prevBtn.addEventListener(
         "click",
@@ -459,98 +406,19 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 
-    /* =====================================
-       MUSIC
-    ===================================== */
-
-    musicBtn.addEventListener(
-        "click",
-        async () => {
-
-            if (musicPlaying) {
-
-                music.pause();
-
-                musicPlaying = false;
-
-                musicText.textContent =
-                    "SOUND OFF";
-
-            } else {
-
-                try {
-
-                    await music.play();
-
-                    musicPlaying = true;
-
-                    musicText.textContent =
-                        "SOUND ON";
-
-                } catch (error) {
-
-                    console.error(error);
-
-                }
-
-            }
-
-        }
-    );
-
-
-    /* =====================================
-       BACK
-    ===================================== */
-
-    backBtn.addEventListener(
-        "click",
-        () => {
-
-            music.pause();
-
-            musicPlaying = false;
-
-            museum.classList.remove(
-                "active"
-            );
-
-            setTimeout(() => {
-
-                entrance.style.display =
-                    "block";
-
-                entrance.classList.remove(
-                    "leave"
-                );
-
-                intro.classList.remove(
-                    "exit"
-                );
-
-                enterBtn.disabled = false;
-
-                entered = false;
-
-            }, 700);
-
-        }
-    );
-
-
-    /* =====================================
-       CLICK PHOTO → NEXT PHOTO
-    ===================================== */
+    /* =====================================================
+       PHOTO CLICK
+    ===================================================== */
 
     chapterImage.addEventListener(
         "click",
         () => {
 
-            const chapter =
-                chapters[currentChapter];
+            const number =
+                chapters[currentChapter].number;
 
             const photos =
-                getPhotos(chapter.number);
+                getPhotos(number);
 
 
             if (photos.length <= 1) {
@@ -558,13 +426,18 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
 
-            currentPhoto =
-                (currentPhoto + 1)
-                % photos.length;
+            currentPhoto++;
+
+            if (
+                currentPhoto >= photos.length
+            ) {
+
+                currentPhoto = 0;
+
+            }
 
 
-            chapterImage.style.opacity =
-                "0";
+            chapterImage.style.opacity = "0";
 
 
             setTimeout(() => {
@@ -575,58 +448,93 @@ document.addEventListener("DOMContentLoaded", () => {
                 chapterImage.style.opacity =
                     "1";
 
-            }, 300);
+
+                photoCurrent.textContent =
+                    String(
+                        currentPhoto + 1
+                    ).padStart(2, "0");
+
+
+            }, 350);
 
         }
     );
 
 
-    /* =====================================
+    /* =====================================================
+       MUSIC
+    ===================================================== */
+
+    musicBtn.addEventListener(
+        "click",
+        async () => {
+
+            if (
+                music.paused
+            ) {
+
+                try {
+
+                    await music.play();
+
+                    soundText.textContent =
+                        "SOUND ON";
+
+                } catch (error) {
+
+                    console.log(error);
+
+                }
+
+            } else {
+
+                music.pause();
+
+                soundText.textContent =
+                    "SOUND OFF";
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       BACK
+    ===================================================== */
+
+    backBtn.addEventListener(
+        "click",
+        () => {
+
+            window.location.href =
+                "index.html";
+
+        }
+    );
+
+
+    /* =====================================================
        KEYBOARD
-    ===================================== */
+    ===================================================== */
 
     document.addEventListener(
         "keydown",
         event => {
 
             if (
-                !museum.classList.contains(
-                    "active"
-                )
-            ) {
-                return;
-            }
-
-
-            if (
                 event.key === "ArrowRight"
             ) {
 
-                if (
-                    currentChapter <
-                    chapters.length - 1
-                ) {
-
-                    showChapter(
-                        currentChapter + 1
-                    );
-
-                }
+                nextBtn.click();
 
             }
-
 
             if (
                 event.key === "ArrowLeft"
             ) {
 
-                if (currentChapter > 0) {
-
-                    showChapter(
-                        currentChapter - 1
-                    );
-
-                }
+                prevBtn.click();
 
             }
 
@@ -634,10 +542,50 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 
-    /* =====================================
-       START
-    ===================================== */
+    /* =====================================================
+       LOAD JSON
+    ===================================================== */
 
-    loadMuseum();
+    try {
+
+        const response =
+            await fetch(
+                "sayak_content.json"
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Could not load museum data."
+            );
+
+        }
+
+
+        data =
+            await response.json();
+
+
+        chapters =
+            data.film.chapters;
+
+
+        createDots();
+
+        showChapter(0);
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        chapterTitle.textContent =
+            "THE MUSEUM";
+
+        chapterText.textContent =
+            "The collection could not be opened.";
+
+    }
 
 });
