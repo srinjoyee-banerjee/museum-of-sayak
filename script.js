@@ -1,28 +1,25 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    const enterButton = document.getElementById("enterBtn");
+    const button = document.getElementById("enterBtn");
     const intro = document.querySelector(".intro");
     const entrance = document.querySelector(".entrance");
 
-    let isEntering = false;
+    let clicked = false;
 
-    enterButton.addEventListener("click", () => {
+    button.addEventListener("click", () => {
 
-        if (isEntering) return;
+        if (clicked) return;
 
-        isEntering = true;
+        clicked = true;
 
-        enterButton.disabled = true;
+        button.disabled = true;
 
-        // Fade the title away
         intro.classList.add("exit");
 
-        // Begin cinematic image transition
         setTimeout(() => {
             entrance.classList.add("leave");
-        }, 250);
+        }, 300);
 
-        // Open the museum
         setTimeout(() => {
             window.location.href = "museum.html";
         }, 1000);
