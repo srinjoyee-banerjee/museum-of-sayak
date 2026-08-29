@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400&display=swap');
 
 * {
     margin: 0;
@@ -6,35 +6,52 @@
     box-sizing: border-box;
 }
 
+html,
 body {
-    background: #080808;
-    color: white;
-    font-family: 'Inter', sans-serif;
-    overflow: hidden;
+    width: 100%;
+    height: 100%;
 }
+
+body {
+    background: #050505;
+    color: #ffffff;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+}
+
+/* =========================
+   ENTRANCE
+========================= */
 
 .entrance {
     position: relative;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    overflow: hidden;
+    background: #050505;
 }
+
+/* =========================
+   BACKGROUND IMAGE
+========================= */
 
 .background {
     position: absolute;
-    inset: 0;
+    inset: -3%;
 
-    /* PUT SAYAK'S IMAGE HERE */
     background-image: url("sayak.jpg");
-
     background-size: cover;
-    background-position: center;
-    transform: scale(1.03);
+    background-position: center center;
+    background-repeat: no-repeat;
 
-    animation: slowZoom 12s ease-out forwards;
+    transform: scale(1.05);
+
+    animation: cinematicZoom 14s ease-out forwards;
 }
+
+/* =========================
+   CINEMATIC OVERLAY
+========================= */
 
 .overlay {
     position: absolute;
@@ -43,94 +60,239 @@ body {
     background:
         linear-gradient(
             90deg,
-            rgba(0,0,0,0.72),
-            rgba(0,0,0,0.25),
-            rgba(0,0,0,0.60)
+            rgba(0, 0, 0, 0.78) 0%,
+            rgba(0, 0, 0, 0.35) 50%,
+            rgba(0, 0, 0, 0.70) 100%
         );
 
-    backdrop-filter: blur(1px);
+    z-index: 1;
 }
+
+/* subtle vignette */
+
+.overlay::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at center,
+            transparent 30%,
+            rgba(0, 0, 0, 0.45) 100%
+        );
+}
+
+/* =========================
+   HERO
+========================= */
 
 .hero {
-    position: relative;
+    position: absolute;
     z-index: 2;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 90%;
+    max-width: 1100px;
+
     text-align: center;
 
-    animation: appear 2s ease forwards;
+    opacity: 0;
+
+    animation: heroAppear 2s ease forwards;
+    animation-delay: 0.4s;
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
 }
 
-h1 {
+/* =========================
+   TITLE
+========================= */
+
+.hero h1 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(55px, 8vw, 120px);
+
+    font-size: clamp(58px, 8vw, 125px);
+
     font-weight: 400;
-    line-height: 0.85;
-    letter-spacing: 3px;
-}
 
-p {
-    margin-top: 30px;
+    line-height: 0.82;
 
-    font-size: 14px;
-    font-weight: 300;
     letter-spacing: 5px;
-    text-transform: lowercase;
 
-    opacity: 0.85;
+    text-transform: uppercase;
+
+    text-shadow:
+        0 3px 30px rgba(0, 0, 0, 0.5);
 }
 
-button {
+/* =========================
+   SUBTITLE
+========================= */
+
+.hero p {
+    margin-top: 34px;
+
+    font-family: 'Cormorant Garamond', serif;
+
+    font-size: clamp(18px, 2vw, 25px);
+
+    font-weight: 300;
+
+    font-style: italic;
+
+    letter-spacing: 3px;
+
+    opacity: 0.9;
+}
+
+/* =========================
+   ENTER BUTTON
+========================= */
+
+#enterBtn {
     margin-top: 55px;
 
+    padding: 16px 28px;
+
     background: transparent;
+
+    border: 1px solid rgba(255, 255, 255, 0.55);
+
     color: white;
 
-    border: 1px solid rgba(255,255,255,0.55);
-
-    padding: 15px 30px;
-
     font-family: 'Inter', sans-serif;
-    font-size: 11px;
-    letter-spacing: 4px;
+
+    font-size: 10px;
+
+    font-weight: 400;
+
+    letter-spacing: 5px;
 
     cursor: pointer;
 
-    transition: all 0.4s ease;
+    transition:
+        background 0.4s ease,
+        color 0.4s ease,
+        border-color 0.4s ease,
+        transform 0.4s ease;
 }
 
-button span {
-    margin-left: 18px;
+#enterBtn span {
+    display: inline-block;
+
+    margin-left: 15px;
+
     transition: transform 0.4s ease;
 }
 
-button:hover {
+#enterBtn:hover {
     background: white;
-    color: black;
+
+    color: #050505;
+
     border-color: white;
+
+    transform: translateY(-2px);
 }
 
-button:hover span {
-    display: inline-block;
-    transform: translateX(6px);
+#enterBtn:hover span {
+    transform: translateX(7px);
 }
 
-@keyframes appear {
+#enterBtn:active {
+    transform: translateY(0);
+}
+
+/* =========================
+   EXIT ANIMATION
+========================= */
+
+.hero.exit {
+    opacity: 0;
+
+    transform:
+        translate(-50%, -55%)
+        scale(0.97);
+}
+
+.entrance.leaving {
+    animation: screenFade 1s ease forwards;
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes heroAppear {
     from {
         opacity: 0;
-        transform: translateY(25px);
+
+        transform:
+            translate(-50%, -45%);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
+
+        transform:
+            translate(-50%, -50%);
     }
 }
 
-@keyframes slowZoom {
+@keyframes cinematicZoom {
     from {
-        transform: scale(1.03);
+        transform: scale(1.05);
     }
 
     to {
-        transform: scale(1.10);
+        transform: scale(1.12);
+    }
+}
+
+@keyframes screenFade {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .background {
+        background-position: center;
+    }
+
+    .hero h1 {
+        font-size: 52px;
+
+        letter-spacing: 3px;
+    }
+
+    .hero p {
+        margin-top: 25px;
+
+        font-size: 17px;
+
+        letter-spacing: 2px;
+    }
+
+    #enterBtn {
+        margin-top: 42px;
+
+        padding: 14px 23px;
     }
 }
