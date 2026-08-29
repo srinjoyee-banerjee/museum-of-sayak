@@ -1,4 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap');
+
+
+/* =========================
+   RESET
+========================= */
 
 * {
     margin: 0;
@@ -6,18 +11,22 @@
     box-sizing: border-box;
 }
 
+
 html,
 body {
     width: 100%;
     height: 100%;
 }
 
+
 body {
-    background: #050505;
-    color: #ffffff;
+    background: #080808;
+    color: #f5f2ed;
     overflow: hidden;
+
     font-family: 'Inter', sans-serif;
 }
+
 
 /* =========================
    ENTRANCE
@@ -25,274 +34,422 @@ body {
 
 .entrance {
     position: relative;
-    width: 100%;
+
+    width: 100vw;
     height: 100vh;
+
     overflow: hidden;
-    background: #050505;
+
+    background: #080808;
 }
 
+
 /* =========================
-   BACKGROUND IMAGE
+   PHOTO
 ========================= */
 
-.background {
+.photo {
     position: absolute;
-    inset: -3%;
 
-    background-image: url("sayak.jpg");
+    inset: -2%;
+
+    background-image: url("sayak_bkgnd.jpeg");
+
     background-size: cover;
-    background-position: center center;
+    background-position: center;
+
     background-repeat: no-repeat;
 
-    transform: scale(1.05);
+    transform: scale(1.04);
 
-    animation: cinematicZoom 14s ease-out forwards;
+    animation: slowZoom 16s ease-out forwards;
 }
 
+
 /* =========================
-   CINEMATIC OVERLAY
+   DARK CINEMATIC SHADE
 ========================= */
 
-.overlay {
+.shade {
     position: absolute;
+
     inset: 0;
 
     background:
         linear-gradient(
             90deg,
             rgba(0, 0, 0, 0.78) 0%,
-            rgba(0, 0, 0, 0.35) 50%,
-            rgba(0, 0, 0, 0.70) 100%
+            rgba(0, 0, 0, 0.48) 38%,
+            rgba(0, 0, 0, 0.10) 75%,
+            rgba(0, 0, 0, 0.30) 100%
         );
 
     z-index: 1;
 }
 
-/* subtle vignette */
 
-.overlay::after {
+/* subtle bottom darkness */
+
+.shade::after {
     content: "";
+
     position: absolute;
+
     inset: 0;
 
     background:
-        radial-gradient(
-            circle at center,
-            transparent 30%,
-            rgba(0, 0, 0, 0.45) 100%
+        linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.65),
+            transparent 35%
         );
 }
 
+
 /* =========================
-   HERO
+   TOP LABEL
 ========================= */
 
-.hero {
+.museum-label {
     position: absolute;
-    z-index: 2;
 
+    top: 42px;
+    left: 55px;
+
+    z-index: 3;
+
+    font-size: 9px;
+
+    letter-spacing: 4px;
+
+    font-weight: 400;
+
+    opacity: 0.65;
+}
+
+
+/* =========================
+   INTRO
+========================= */
+
+.intro {
+    position: absolute;
+
+    z-index: 3;
+
+    left: 8vw;
     top: 50%;
-    left: 50%;
 
-    transform: translate(-50%, -50%);
+    transform: translateY(-50%);
 
-    width: 90%;
-    max-width: 1100px;
-
-    text-align: center;
+    width: 600px;
 
     opacity: 0;
 
-    animation: heroAppear 2s ease forwards;
+    animation: reveal 1.8s ease forwards;
     animation-delay: 0.4s;
-
-    transition:
-        opacity 0.8s ease,
-        transform 0.8s ease;
 }
+
+
+/* =========================
+   SMALL LINE
+========================= */
+
+.line {
+    width: 45px;
+    height: 1px;
+
+    background: rgba(255,255,255,0.7);
+
+    margin-bottom: 25px;
+}
+
+
+/* =========================
+   EYEBROW
+========================= */
+
+.eyebrow {
+    font-size: 9px;
+
+    letter-spacing: 5px;
+
+    font-weight: 400;
+
+    opacity: 0.65;
+
+    margin-bottom: 25px;
+}
+
 
 /* =========================
    TITLE
 ========================= */
 
-.hero h1 {
+h1 {
     font-family: 'Cormorant Garamond', serif;
 
-    font-size: clamp(58px, 8vw, 125px);
+    font-size: clamp(65px, 8vw, 120px);
 
-    font-weight: 400;
+    font-weight: 300;
 
-    line-height: 0.82;
+    line-height: 0.78;
 
-    letter-spacing: 5px;
+    letter-spacing: -2px;
 
     text-transform: uppercase;
-
-    text-shadow:
-        0 3px 30px rgba(0, 0, 0, 0.5);
 }
+
+
+h1 span {
+    font-weight: 500;
+
+    font-style: italic;
+
+    text-transform: none;
+
+    letter-spacing: -4px;
+}
+
 
 /* =========================
    SUBTITLE
 ========================= */
 
-.hero p {
-    margin-top: 34px;
+.subtitle {
+    margin-top: 35px;
 
     font-family: 'Cormorant Garamond', serif;
 
-    font-size: clamp(18px, 2vw, 25px);
+    font-size: 21px;
 
-    font-weight: 300;
+    line-height: 1.15;
 
     font-style: italic;
 
-    letter-spacing: 3px;
+    font-weight: 300;
 
-    opacity: 0.9;
+    opacity: 0.82;
 }
+
 
 /* =========================
    ENTER BUTTON
 ========================= */
 
 #enterBtn {
-    margin-top: 55px;
+    display: flex;
 
-    padding: 16px 28px;
+    align-items: center;
 
-    background: transparent;
+    gap: 30px;
 
-    border: 1px solid rgba(255, 255, 255, 0.55);
+    margin-top: 45px;
+
+    padding: 0;
+
+    background: none;
+
+    border: none;
 
     color: white;
 
+    cursor: pointer;
+
     font-family: 'Inter', sans-serif;
 
-    font-size: 10px;
+    font-size: 9px;
+
+    letter-spacing: 4px;
 
     font-weight: 400;
+}
 
-    letter-spacing: 5px;
 
-    cursor: pointer;
+#enterBtn strong {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 43px;
+    height: 43px;
+
+    border: 1px solid rgba(255,255,255,0.55);
+
+    border-radius: 50%;
+
+    font-size: 15px;
+
+    font-weight: 300;
 
     transition:
         background 0.4s ease,
         color 0.4s ease,
-        border-color 0.4s ease,
         transform 0.4s ease;
 }
 
-#enterBtn span {
-    display: inline-block;
 
-    margin-left: 15px;
-
-    transition: transform 0.4s ease;
-}
-
-#enterBtn:hover {
+#enterBtn:hover strong {
     background: white;
 
-    color: #050505;
+    color: black;
 
-    border-color: white;
-
-    transform: translateY(-2px);
+    transform: rotate(45deg);
 }
 
-#enterBtn:hover span {
-    transform: translateX(7px);
-}
-
-#enterBtn:active {
-    transform: translateY(0);
-}
 
 /* =========================
-   EXIT ANIMATION
+   BOTTOM NOTE
 ========================= */
 
-.hero.exit {
+.bottom-note {
+    position: absolute;
+
+    z-index: 3;
+
+    bottom: 40px;
+    right: 55px;
+
+    display: flex;
+
+    gap: 18px;
+
+    align-items: center;
+
+    font-size: 8px;
+
+    letter-spacing: 3px;
+
+    opacity: 0.55;
+}
+
+
+.bottom-note span:first-child {
+    font-family: 'Cormorant Garamond', serif;
+
+    font-size: 16px;
+
+    letter-spacing: 0;
+}
+
+
+/* =========================
+   EXIT
+========================= */
+
+.intro.exit {
     opacity: 0;
 
     transform:
-        translate(-50%, -55%)
-        scale(0.97);
+        translateY(-50%)
+        translateX(-30px);
+
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s ease;
 }
 
-.entrance.leaving {
-    animation: screenFade 1s ease forwards;
+
+.entrance.leave .photo {
+    transform: scale(1.12);
+
+    transition: transform 1.2s ease;
 }
+
+
+.entrance.leave {
+    opacity: 0;
+
+    transition: opacity 1s ease;
+}
+
 
 /* =========================
    ANIMATIONS
 ========================= */
 
-@keyframes heroAppear {
+@keyframes reveal {
+
     from {
         opacity: 0;
 
         transform:
-            translate(-50%, -45%);
+            translateY(-46%)
+            translateX(-25px);
     }
 
     to {
         opacity: 1;
 
         transform:
-            translate(-50%, -50%);
+            translateY(-50%)
+            translateX(0);
     }
 }
 
-@keyframes cinematicZoom {
+
+@keyframes slowZoom {
+
     from {
-        transform: scale(1.05);
+        transform: scale(1.04);
     }
 
     to {
-        transform: scale(1.12);
+        transform: scale(1.11);
     }
 }
 
-@keyframes screenFade {
-    from {
-        opacity: 1;
-    }
-
-    to {
-        opacity: 0;
-    }
-}
 
 /* =========================
    MOBILE
 ========================= */
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
 
-    .background {
-        background-position: center;
+    .museum-label {
+        top: 25px;
+        left: 25px;
     }
 
-    .hero h1 {
-        font-size: 52px;
 
-        letter-spacing: 3px;
+    .intro {
+        left: 25px;
+
+        width: calc(100% - 50px);
     }
 
-    .hero p {
-        margin-top: 25px;
 
-        font-size: 17px;
+    h1 {
+        font-size: 62px;
 
-        letter-spacing: 2px;
+        line-height: 0.82;
     }
 
-    #enterBtn {
-        margin-top: 42px;
 
-        padding: 14px 23px;
+    h1 span {
+        letter-spacing: -2px;
     }
+
+
+    .subtitle {
+        font-size: 19px;
+    }
+
+
+    .bottom-note {
+        right: 25px;
+        bottom: 25px;
+    }
+
+
+    .shade {
+        background:
+            linear-gradient(
+                90deg,
+                rgba(0,0,0,0.72),
+                rgba(0,0,0,0.25)
+            );
+    }
+
 }
