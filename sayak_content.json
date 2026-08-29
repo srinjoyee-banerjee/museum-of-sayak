@@ -1,0 +1,524 @@
+{
+    "title": "THE MUSEUM OF SAYAK",
+    "subtitle": "Exploring you through my eyes",
+    "chapters": [
+        {
+            "number": 1,
+            "title": "WHO ARE YOU?",
+            "status": "content_ready"
+        },
+        {
+            "number": 2,
+            "title": "THE LITTLE THINGS",
+            "status": "content_ready"
+        },
+        {
+            "number": 3,
+            "title": "YOUR FACE, YOUR HEART",
+            "status": "content_ready"
+        },
+        {
+            "number": 4,
+            "title": "HOW WE BECAME US",
+            "status": "content_ready"
+        },
+        {
+            "number": 5,
+            "title": "YOU, THROUGH MY EYES",
+            "status": "content_ready"
+        },
+        {
+            "number": 6,
+            "title": "DISTANCE",
+            "status": "content_ready"
+        },
+        {
+            "number": 7,
+            "title": "THE MEMORIES",
+            "status": "content_ready"
+        },
+        {
+            "number": 8,
+            "title": "THE LIFE WE'RE BUILDING",
+            "status": "content_ready"
+        },
+        {
+            "number": 9,
+            "title": "THE THINGS I'LL NEVER LET YOU FORGET",
+            "status": "content_ready"
+        },
+        {
+            "number": 10,
+            "title": "FOR YOU",
+            "status": "content_ready"
+        }
+    ],
+    "chapter_1": {
+        "title": "WHO ARE YOU?",
+        "content": [
+            "You are someone I keep discovering, even after all these years.",
+            "There are so many little things about you that I notice.",
+            "Some of them are funny. Some of them drive me crazy.",
+            "And some of them make me wonder how I got so lucky.",
+            "But if I had to describe you in one word, I don't think I could.",
+            "Because you are not just one thing.",
+            "You are my best friend, my safest place, my favourite person, and the person I want beside me.",
+            "And maybe that's what this whole movie is really about.",
+            "Me trying to show you the person I see when I look at you."
+        ],
+        "photo_sequence": [
+            {
+                "image": "assets/images/strong.jpeg",
+                "text_index": 0
+            },
+            {
+                "image": "assets/images/cand.jpeg",
+                "text_index": 3
+            },
+            {
+                "image": "assets/images/us_first.jpeg",
+                "text_index": 6
+            }
+        ]
+    },
+    "chapter_2": {
+        "title": "THE LITTLE THINGS",
+        "content": [
+            "I don't think you even realise how many little things about you I notice.",
+            "Like the way you eat green chutney.",
+            "You don't even need food sometimes. Just give you a bowl of green chutney and you're happy.",
+            "And if I take the bowl away, you literally drag it back.",
+            "Then there's your face when you dislike someone. You don't even have to say anything. Your face says everything.",
+            "And when we go out to eat, three or four spoons later, you're suddenly completely full.",
+            "Then comes the whole performance — leaning back, going 'ooh, ah', trying to open the first button of your shirt and showing me how full you are.",
+            "You absolutely love sleeping. Sometimes I genuinely feel you love sleep more than you love me.",
+            "And then there's your English.",
+            "You're actually amazing at speaking English, and somehow your accent makes you sound like a foreigner.",
+            "I just wish you weren't so shy about speaking it in front of other people.",
+            "When we walk together, you sometimes push your hand backwards so I can hold it.",
+            "You probably don't even notice that you do it.",
+            "And before every photograph, you fix your hair.",
+            "Then you ask me to take three more. Then four. Then five.",
+            "You are ridiculously talented, but somehow you keep thinking you're less than everyone else.",
+            "That is one thing about you I really wish I could change.",
+            "Because I wish you could see yourself the way I see you."
+        ]
+    },
+    "chapter_3": {
+        "title": "YOUR FACE, YOUR HEART",
+        "content": [
+            "I love your face.",
+            "I love your eyes.",
+            "And your eyelashes... I don't think you even know how beautiful they are.",
+            "Sometimes on our video calls, I'm not even listening to what you're saying. I'm just looking at your eyelashes.",
+            "Then there's your little, poky nose.",
+            "It's so small and cute that every time I see you, I feel like kissing it.",
+            "And your lips... honestly, I don't understand how they are that soft naturally.",
+            "But here's the thing.",
+            "As beautiful as you are on the outside, that's not what made me fall in love with you.",
+            "I fell in love with your heart.",
+            "You have one of the purest hearts I've ever known.",
+            "You are kind. You are genuine. You are transparent. You stand up for what you believe in.",
+            "After a long, exhausting day, when I come back to you, I find so much sincerity and softness.",
+            "You're a gem in a world that can sometimes feel very muddy.",
+            "Like a lotus in a muddy pond.",
+            "So yes, I find you incredibly attractive.",
+            "But I didn't fall in love with your face.",
+            "I fell in love with your heart.",
+            "Your soul.",
+            "You yourself.",
+            "And to me, my love, you are the most charming and beautiful man I have ever met."
+        ],
+        "photo_sequence": [
+            "assets/images/eyelash.jpeg",
+            "assets/images/fell.jpeg",
+            "assets/images/beautiful.jpeg",
+            "assets/images/simple.jpeg",
+            "assets/images/smile.jpeg",
+            "assets/images/soft.jpeg"
+        ]
+    },
+    "chapter_4": {
+        "title": "HOW WE BECAME US",
+        "content": [
+            "We met on the very first day of our online MSc Physics class.",
+            "And honestly, I don't think you had the best first impression of me.",
+            "My first WhatsApp message wasn't exactly the warmest introduction.",
+            "I didn't ask your name. I didn't ask how you were.",
+            "I just started asking you questions about an old friend.",
+            "And you basically thought, 'Who is this girl?'",
+            "Then I started seeing your WhatsApp statuses — mostly you cooking different things.",
+            "And somehow, food became the beginning of our friendship.",
+            "We became friends.",
+            "Then our offline classes started after summer vacation.",
+            "And somewhere along the way, I realised I didn't just like talking to you.",
+            "I liked you.",
+            "We were best friends for more than a year before those feelings slowly became something more.",
+            "Then came our St. Xavier's fest.",
+            "Two days. Two nights. So much time together.",
+            "And somewhere in those two days, something changed.",
+            "Friends became lovers.",
+            "One of the funniest memories we still have is that terrible lunch at Royal China.",
+            "But one of the moments when I knew you were my person was much quieter.",
+            "You wrote me a poem on my first birthday.",
+            "You cooked for me.",
+            "And whenever I was busy, you would simply say, 'It's okay. You do your work. We'll talk later.'",
+            "You never made me feel guilty for having a life.",
+            "You made me feel safe.",
+            "You made me feel seen.",
+            "You made me feel heard.",
+            "You respected my choices and my consent.",
+            "And I think respect was one of the first things that made me realise that you were my person.",
+            "Being with you has changed me too.",
+            "I've become more patient, more empathetic, more forgiving and calmer.",
+            "And after everything we've been through, the one thing I never want us to lose is that safe space we give each other.",
+            "That closeness.",
+            "That respect.",
+            "That feeling of being home with each other."
+        ],
+        "photo_sequence": [
+            "assets/images/msc us.jpeg",
+            "assets/images/Fest photo.jpeg",
+            "assets/images/Cuteearly relationship photo.jpeg",
+            "assets/images/Favourite early photo of you two.jpeg"
+        ]
+    },
+    "chapter_5": {
+        "title": "YOU, THROUGH MY EYES",
+        "content": [
+            "There are things about you that I don't think you realise.",
+            "You're one of the most intelligent people I've ever met.",
+            "And you're genuinely funny.",
+            "Your sarcasm and your humour are top-notch.",
+            "The funny thing is, not everyone gets it.",
+            "You also understand your surroundings incredibly well.",
+            "Sometimes people might think you don't understand something.",
+            "But you do.",
+            "You notice more than people realise.",
+            "Sometimes I feel like you understand me better than I understand myself.",
+            "You read me.",
+            "You know when something is wrong even when I don't say it.",
+            "And something I admire enormously about you is the way you treat equality.",
+            "You love cooking. You cook for your mother. You cook for your family.",
+            "You don't believe that certain roles belong to certain genders.",
+            "That is one of the things that makes you a true modern gentleman to me.",
+            "And even after four years together, you still make respect a priority.",
+            "You value emotions.",
+            "You value emotional availability.",
+            "You make space for feelings.",
+            "But more than anything, I wish you could see yourself the way I see you.",
+            "You have this strange habit of underestimating yourself.",
+            "You don't realise how much you bring into people's lives.",
+            "You don't realise how much softness there is inside you.",
+            "You don't realise how much goodness there is in you.",
+            "If I could give you one thing, it would be my eyes for one day.",
+            "Just so you could see yourself the way I see you."
+        ],
+        "photo_sequence": [
+            "assets/images/4.jpeg",
+            "assets/images/5.jpeg",
+            "assets/images/6.jpeg",
+            "assets/images/7.jpeg"
+        ]
+    },
+    "chapter_6": {
+        "title": "DISTANCE",
+        "content": [
+            "Almost a year ago, our lives started moving in two different directions.",
+            "I moved to Mumbai for my higher studies.",
+            "You stayed in Kolkata for your research and your studies.",
+            "And suddenly, two cities became part of our relationship.",
+            "The hardest part of being apart isn't actually the distance.",
+            "It's the goodbye.",
+            "We go out. We watch a movie. We have lunch. We spend the day together.",
+            "And then suddenly, it's time for the metro.",
+            "You go one way.",
+            "I go another.",
+            "And before that happens, I get one last hug.",
+            "I get to feel your perfume, your breath, your warmth.",
+            "And then I have to let you go.",
+            "Our video calls are honestly quite funny.",
+            "Half the time the network doesn't work.",
+            "I can't hear you. You can't hear me.",
+            "And then suddenly you say, 'Oh, the network issue again.'",
+            "But somehow, even through all of that, we're still there for each other.",
+            "I went to Kolkata during Durga Puja just to see you.",
+            "And after I moved to IIT Bombay, I still remember that first random call.",
+            "Just a simple, 'Hi. How are you?'",
+            "Nothing dramatic.",
+            "But it meant everything.",
+            "When I'm having a terrible day, you don't always try to fix it.",
+            "You just stay.",
+            "And that's enough.",
+            "You remember the things that hurt me.",
+            "You remember the people who hurt me.",
+            "Even when I've forgiven someone, you remember what they did to me.",
+            "That's one of the ways I know how deeply you care.",
+            "Months can pass.",
+            "And when I finally see you again, you're still the same charming person.",
+            "Distance hasn't changed you.",
+            "It hasn't changed us.",
+            "If anything, distance has taught me one thing.",
+            "Love doesn't decrease with distance.",
+            "It increases.",
+            "Exponentially."
+        ]
+    },
+    "chapter_7": {
+        "title": "THE ARCHIVE",
+        "content": [
+            "There are so many things I remember about us.",
+            "Not because they were extraordinary.",
+            "Just because they were ours.",
+            "JW Marriott is one of the happiest memories I have with you.",
+            "It was just a beautiful experience. The kind of day I wish I could replay.",
+            "Then there are the stupid little memories.",
+            "Like our phone calls where neither of us can hear the other because the network is terrible.",
+            "And then you suddenly say, 'Oh, the network issue again.'",
+            "I don't know why, but that still makes me laugh.",
+            "One of the most romantic memories I have is you whispering and singing 'Nishirat Bakhacha Takashi' into my ears in our astrophysics laboratory.",
+            "There was a full moon outside.",
+            "And somehow that moment has stayed with me.",
+            "Then you sang the same song again on our date to Romania Cafe.",
+            "Some memories are about places.",
+            "Dada Boudir Biryani in Barrackpore will always be one of ours.",
+            "We've gone there so many times that it feels like our place.",
+            "Then there was Marble Palace and lunch at Bawarchi.",
+            "Another completely ordinary day that I remember for no particular reason.",
+            "You were wearing a white shirt and jeans.",
+            "Your hair was messy.",
+            "You hadn't even shaved.",
+            "And somehow I thought you looked incredibly attractive.",
+            "I was lying on the college bench with my head on your lap.",
+            "Nothing extraordinary happened.",
+            "But I remember that day.",
+            "I remember your face.",
+            "I remember how it felt to simply be there with you.",
+            "Then there are our songs.",
+            "Hum Tere Pyaar Mein Sara Aalam.",
+            "Tere Paas Mein.",
+            "And the movies that remind me of us.",
+            "Edward and Bella.",
+            "Rose and Jack.",
+            "Shyam Singha Roy.",
+            "And that photograph from Victoria Memorial that I absolutely love and you absolutely hate.",
+            "You cringe every time you see it.",
+            "I still love it.",
+            "And then there are the moments when you cook for me or surprise me.",
+            "Those are the memories nobody else would understand in quite the same way.",
+            "Funny thing is, I don't think my favourite memories are the big ones.",
+            "They're the tiny moments that nobody else would remember.",
+            "But I do.",
+            "Because they happened with you."
+        ],
+        "photo_sequence": [
+            "assets/images/m.jpeg",
+            "assets/images/n.jpeg",
+            "assets/images/o.jpeg",
+            "assets/images/p.jpeg",
+            "assets/images/q.jpeg"
+        ]
+    },
+    "chapter_8": {
+        "title": "THE LIFE WE'RE BUILDING",
+        "content": [
+            "I don't really know what our life will look like ten years from now.",
+            "But I know who I want to be there.",
+            "You.",
+            "When I imagine our future, I imagine us married.",
+            "But not just husband and wife because that's what the world calls it.",
+            "I imagine us still being us.",
+            "Still best friends.",
+            "Still choosing each other.",
+            "Sometimes I imagine Paris.",
+            "Sometimes I imagine Venice.",
+            "Maybe one day we'll actually wake up there.",
+            "I imagine ordinary mornings more than anything else.",
+            "I wake up before you.",
+            "I work out. I shower. I make coffee.",
+            "You wake up a little later.",
+            "And before I leave for work, you give me a forehead kiss.",
+            "That's the kind of future I want.",
+            "I want us to be a team.",
+            "And if we become parents someday, I want us to raise our children by example.",
+            "I genuinely think we'd make an amazing team as parents.",
+            "There's one thing I really want to experience with you.",
+            "A proper trip.",
+            "Not one afternoon. Not one date.",
+            "Four or five days.",
+            "Just you and me.",
+            "No rushing back.",
+            "No metro goodbyes.",
+            "Just being somewhere together.",
+            "And I know what I want our home to feel like.",
+            "I don't need it to be perfect.",
+            "I want it to feel like a warm bowl of soup on a terrible day.",
+            "A place we want to come back to when life has exhausted us.",
+            "A place where we can put everything outside the door for a while.",
+            "Our resting place.",
+            "Our safe space.",
+            "Our home.",
+            "And when we're old, I hope one thing never changes.",
+            "The romance.",
+            "I hope we still look at each other and feel that same little spark.",
+            "I promise I'll stick by you.",
+            "And if I get to grow old with you, I hope I live long enough to spend all those years happily in your arms."
+        ],
+        "photo_sequence": [
+            "assets/images/i.jpeg",
+            "assets/images/i1.jpeg",
+            "assets/images/i2.jpeg",
+            "assets/images/i3.jpeg"
+        ]
+    },
+    "chapter_9": {
+        "title": "THE THINGS I'LL NEVER LET YOU FORGET",
+        "content": [
+            "Okay. Enough emotional nonsense.",
+            "Now let me tell you the things I will NEVER let you forget.",
+            "I still remember you saying, 'আজ এর বেশি এগুলো উচিত না.'",
+            "You absolutely cringe whenever I bring it up.",
+            "Which is exactly why I am putting it in this movie.",
+            "And then there's your greatest crime.",
+            "How can you stay without calling me?",
+            "How can you not text me?",
+            "How are you so calm?",
+            "How do you not miss me?",
+            "How are you not going crazy for me?",
+            "Honestly, I don't understand you.",
+            "You are also unbelievably good at cooking.",
+            "And yet you keep insisting that you cook only 'okay-okay'.",
+            "Please stop.",
+            "We both know that's not true.",
+            "Another thing you do is smile whenever I say something.",
+            "And sometimes I genuinely want to ask, 'WHY ARE YOU SMILING?'",
+            "But secretly, I'd miss that smile if you stopped.",
+            "I love how strongly you stand by what you believe in.",
+            "Although sometimes I think you could relax just a little.",
+            "The world is changing, Babu.",
+            "And you don't have to like everyone to live alongside them.",
+            "But that's also part of loving you.",
+            "I can admire you and still disagree with you.",
+            "And of course, there is your greatest achievement.",
+            "GREEN CHUTNEY CHAMPION.",
+            "Babu.",
+            "Babai.",
+            "Whatever I call you, you're still the same person I somehow chose to love.",
+            "And you are lucky I love you.",
+            "Because you will never get someone like me."
+        ],
+        "photo_sequence": [
+            "assets/images/c1.jpeg",
+            "assets/images/c2.jpeg"
+        ]
+    },
+    "chapter_10": {
+        "title": "FOR YOU",
+        "content": [
+            "If you were sitting directly in front of me right now, the first thing I would say is thank you.",
+            "Thank you to God for bringing you into my life.",
+            "You have always felt like God's greatest gift to me.",
+            "Thank you for loving me unconditionally.",
+            "Thank you for everything.",
+            "And I'm sorry.",
+            "I'm sorry for the times I misunderstood you.",
+            "For the times I rushed to conclusions.",
+            "For the times I didn't stop to understand your perspective.",
+            "Four years together have taught me that two people can be completely different.",
+            "What feels okay to one person might not feel okay to the other.",
+            "And sometimes loving each other means finding that middle ground.",
+            "Something I've never properly told you is how much I just want to hold your hand and stay with you for my whole life.",
+            "At IIT Bombay, there is so much around me.",
+            "But you're not here.",
+            "And sometimes a city without you feels like an empty city to me.",
+            "I love you very, very deeply.",
+            "And whenever you doubt yourself, I want you to remember this.",
+            "Look at the Paris Tower.",
+            "Look at the appreciation gift I sent you.",
+            "Look at the photograph I gave you.",
+            "Those things are reminders that you are special in someone's life.",
+            "No matter how many hardships you face.",
+            "No matter how many people make you feel like a failure.",
+            "There will always be one woman, sitting very far away, believing in you.",
+            "Praying for you.",
+            "Waiting for you.",
+            "And seeing you as her champion.",
+            "You are loved.",
+            "You are valued.",
+            "You are enough.",
+            "And Shayok, if there is one thing I want you to know before this movie ends...",
+            "I love you."
+        ],
+        "photo_sequence": [
+            "assets/images/e1.jpeg",
+            "assets/images/e2.jpeg",
+            "assets/images/e3.jpeg"
+        ]
+    },
+    "photo_map": {
+        "chapter_2": [
+            "assets/images/solo.jpeg",
+            "assets/images/candid.jpeg",
+            "assets/images/cook.jpeg",
+            "assets/images/simple.jpeg",
+            "assets/images/old.jpeg",
+            "assets/images/now.jpeg",
+            "assets/images/sayak_bkgnd.jpeg"
+        ]
+    },
+    "film": {
+        "type": "cinematic_movie",
+        "chapters": [
+            {
+                "id": "chapter_1",
+                "number": 1,
+                "title": "WHO ARE YOU?"
+            },
+            {
+                "id": "chapter_2",
+                "number": 2,
+                "title": "THE LITTLE THINGS"
+            },
+            {
+                "id": "chapter_3",
+                "number": 3,
+                "title": "YOUR FACE, YOUR HEART"
+            },
+            {
+                "id": "chapter_4",
+                "number": 4,
+                "title": "HOW WE BECAME US"
+            },
+            {
+                "id": "chapter_5",
+                "number": 5,
+                "title": "YOU, THROUGH MY EYES"
+            },
+            {
+                "id": "chapter_6",
+                "number": 6,
+                "title": "DISTANCE"
+            },
+            {
+                "id": "chapter_7",
+                "number": 7,
+                "title": "THE ARCHIVE"
+            },
+            {
+                "id": "chapter_8",
+                "number": 8,
+                "title": "THE LIFE WE'RE BUILDING"
+            },
+            {
+                "id": "chapter_9",
+                "number": 9,
+                "title": "THE THINGS I'LL NEVER LET YOU FORGET"
+            },
+            {
+                "id": "chapter_10",
+                "number": 10,
+                "title": "FOR YOU"
+            }
+        ]
+    }
+}

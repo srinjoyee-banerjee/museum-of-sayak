@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Museum of Sayak</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="film">
+
+    <!-- OPENING -->
+
+    <section id="opening">
+
+        <div class="opening-content">
+
+            <div class="opening-small">
+                A FILM BY MAADONA
+            </div>
+
+            <h1>
+                THE MUSEUM<br>
+                OF SAYAK
+            </h1>
+
+            <div class="opening-line"></div>
+
+            <p>
+                exploring you<br>
+                through my eyes
+            </p>
+
+            <button onclick="startMovie()">
+                BEGIN
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- MOVIE -->
+
+    <div id="movie">
+
+        <div id="background"></div>
+        <div id="dark"></div>
+
+        <div id="chapter">
+            <div id="chapter-number"></div>
+            <div id="chapter-title"></div>
+        </div>
+
+        <div id="story">
+            <div id="text"></div>
+        </div>
+
+        <div id="controls">
+
+            <button onclick="previousScene()">←</button>
+
+            <button onclick="togglePlay()" id="play">
+                ▶
+            </button>
+
+            <button onclick="nextScene()">→</button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
