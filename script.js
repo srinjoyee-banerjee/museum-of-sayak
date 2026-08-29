@@ -1,8 +1,8 @@
-document.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener("DOMContentLoaded", () => {
 
-    /* =====================================
+    /* =========================================
        ELEMENTS
-    ====================================== */
+    ========================================= */
 
     const enterBtn = document.getElementById("enterBtn");
 
@@ -11,9 +11,15 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const intro = document.querySelector(".intro");
 
-    const chapterNumber = document.getElementById("chapterNumber");
-    const chapterLabel = document.getElementById("chapterLabel");
-    const chapterTitle = document.getElementById("chapterTitle");
+    const chapterNumber =
+        document.getElementById("chapterNumber");
+
+    const chapterLabel =
+        document.getElementById("chapterLabel");
+
+    const chapterTitle =
+        document.getElementById("chapterTitle");
+
     const chapterDescription =
         document.getElementById("chapterDescription");
 
@@ -42,24 +48,28 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.getElementById("museumMusic");
 
 
-    /* =====================================
+    /* =========================================
        STATE
-    ====================================== */
+    ========================================= */
+
+    let museumData = null;
 
     let chapters = [];
 
     let currentChapter = 0;
+
+    let currentPhoto = 0;
 
     let entered = false;
 
     let musicPlaying = false;
 
 
-    /* =====================================
-       LOAD CONTENT FROM JSON
-    ====================================== */
+    /* =========================================
+       LOAD JSON
+    ========================================= */
 
-    async function loadChapters() {
+    async function loadMuseum() {
 
         try {
 
@@ -68,39 +78,19 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             if (!response.ok) {
                 throw new Error(
-                    "Could not load sayak_content.json"
+                    "sayak_content.json could not be loaded."
                 );
             }
 
-            const data = await response.json();
-
-
-            /*
-               Supports either:
-
-               {
-                   "chapters": [...]
-               }
-
-               OR
-
-               [...]
-            */
+            museumData = await response.json();
 
             chapters =
-                Array.isArray(data)
-                    ? data
-                    : data.chapters;
+                museumData.film.chapters;
 
-
-            if (!chapters || chapters.length === 0) {
-
-                throw new Error(
-                    "No chapters found in JSON."
-                );
-
-            }
-
+            console.log(
+                "Museum loaded:",
+                chapters
+            );
 
             showChapter(0);
 
@@ -109,19 +99,111 @@ document.addEventListener("DOMContentLoaded", async () => {
             console.error(error);
 
             chapterTitle.textContent =
-                "The museum is waiting.";
+                "THE COLLECTION";
 
             chapterDescription.textContent =
-                "Your collection could not be loaded.";
+                "Unable to load the museum.";
 
         }
 
     }
 
 
-    /* =====================================
+    /* =========================================
+       GET CHAPTER DATA
+    ========================================= */
+
+    function getChapterData(index) {
+
+        const chapter =
+            chapters[index];
+
+        if (!chapter) return null;
+
+        return museumData[
+            `chapter_${chapter.number}`
+        ];
+
+    }
+
+
+    /* =========================================
+       GET PHOTOS
+    ========================================= */
+
+    function getPhotos(chapterNumber) {
+
+        const chapter =
+            museumData[
+                `chapter_${chapterNumber}`
+            ];
+
+        if (!chapter) return [];
+
+
+        /* Normal photo sequence */
+
+        if (
+            Array.isArray(
+                chapter.photo_sequence
+            )
+        ) {
+
+            if (
+                chapter.photo_sequence.length === 0
+            ) {
+                return [];
+            }
+
+
+            /*
+                Chapter 1 contains objects
+                with an image property.
+            */
+
+            if (
+                typeof chapter.photo_sequence[0]
+                === "object"
+            ) {
+
+                return chapter.photo_sequence
+                    .map(photo => photo.image)
+                    .filter(Boolean);
+
+            }
+
+
+            /* Chapters 3–10 */
+
+            return chapter.photo_sequence;
+
+        }
+
+
+        /* Chapter 2 uses photo_map */
+
+        if (
+            museumData.photo_map &&
+            museumData.photo_map[
+                `chapter_${chapterNumber}`
+            ]
+        ) {
+
+            return museumData.photo_map[
+                `chapter_${chapterNumber}`
+            ];
+
+        }
+
+
+        return [];
+
+    }
+
+
+    /* =========================================
        SHOW CHAPTER
-    ====================================== */
+    ========================================= */
 
     function showChapter(index) {
 
@@ -129,205 +211,199 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
         currentChapter =
-            (index + chapters.length) %
-            chapters.length;
+            Math.max(
+                0,
+                Math.min(
+                    index,
+                    chapters.length - 1
+                )
+            );
+
+
+        currentPhoto = 0;
 
 
         const chapter =
             chapters[currentChapter];
 
+        const chapterData =
+            getChapterData(currentChapter);
 
-        /* Number */
+
+        if (!chapterData) return;
+
 
         const number =
-            String(currentChapter + 1)
+            String(chapter.number)
                 .padStart(2, "0");
 
 
-        chapterNumber.textContent = number;
+        /* Number */
 
-        progressNumber.textContent = number;
+        chapterNumber.textContent =
+            number;
+
+        progressNumber.textContent =
+            number;
 
 
         /* Label */
 
         chapterLabel.textContent =
-            chapter.label ||
             `CHAPTER ${number}`;
 
 
         /* Title */
 
         chapterTitle.textContent =
+            chapterData.title ||
             chapter.title ||
             "";
 
 
-        /* Description */
+        /* First paragraph */
 
-        chapterDescription.textContent =
-            chapter.description ||
-            chapter.text ||
-            "";
+        if (
+            chapterData.content &&
+            chapterData.content.length
+        ) {
 
+            chapterDescription.textContent =
+                chapterData.content[0];
 
-        /* Image */
+        } else {
 
-        const image =
-            chapter.image ||
-            chapter.photo ||
-            chapter.img;
-
-
-        if (image) {
-
-            chapterImage.src = image;
-
-            chapterImage.alt =
-                chapter.title ||
-                "Sayak";
+            chapterDescription.textContent =
+                "";
 
         }
 
 
-        /* Update buttons */
+        /* Photos */
+
+        const photos =
+            getPhotos(chapter.number);
+
+
+        if (photos.length > 0) {
+
+            chapterImage.src =
+                photos[0];
+
+            chapterImage.alt =
+                chapterData.title ||
+                "Sayak";
+
+        } else {
+
+            chapterImage.removeAttribute("src");
+
+        }
+
+
+        /* Navigation */
 
         prevBtn.disabled =
             currentChapter === 0;
 
         nextBtn.disabled =
-            currentChapter === chapters.length - 1;
+            currentChapter ===
+            chapters.length - 1;
 
 
-        /* Chapter animation */
+        /* Animation */
 
-        const content =
-            document.querySelector(".chapter-content");
-
-        content.classList.remove("chapter-change");
-
-        void content.offsetWidth;
-
-        content.classList.add("chapter-change");
+        animateChapter();
 
     }
 
 
-    /* =====================================
-       ENTER MUSEUM
-    ====================================== */
+    /* =========================================
+       CHAPTER ANIMATION
+    ========================================= */
 
-    enterBtn.addEventListener("click", async () => {
+    function animateChapter() {
 
-        if (entered) return;
-
-        entered = true;
-
-        enterBtn.disabled = true;
-
-
-        /* Fade entrance text */
-
-        intro.classList.add("exit");
-
-
-        /* Fade entrance */
-
-        setTimeout(() => {
-
-            entrance.classList.add("leave");
-
-        }, 250);
-
-
-        /* Show museum */
-
-        setTimeout(() => {
-
-            entrance.style.display = "none";
-
-            museum.classList.add("active");
-
-            document.body.style.overflow = "hidden";
-
-        }, 900);
-
-
-        /* Start music */
-
-        try {
-
-            await music.play();
-
-            musicPlaying = true;
-
-            musicText.textContent =
-                "SOUND ON";
-
-        } catch (error) {
-
-            console.log(
-                "Music will begin after interaction."
+        const content =
+            document.querySelector(
+                ".chapter-content"
             );
 
-        }
-
-    });
+        if (!content) return;
 
 
-    /* =====================================
-       NEXT CHAPTER
-    ====================================== */
-
-    nextBtn.addEventListener("click", () => {
-
-        if (
-            currentChapter <
-            chapters.length - 1
-        ) {
-
-            showChapter(
-                currentChapter + 1
-            );
-
-        }
-
-    });
+        content.classList.remove(
+            "chapter-change"
+        );
 
 
-    /* =====================================
-       PREVIOUS CHAPTER
-    ====================================== */
-
-    prevBtn.addEventListener("click", () => {
-
-        if (currentChapter > 0) {
-
-            showChapter(
-                currentChapter - 1
-            );
-
-        }
-
-    });
+        void content.offsetWidth;
 
 
-    /* =====================================
-       MUSIC
-    ====================================== */
+        content.classList.add(
+            "chapter-change"
+        );
 
-    musicBtn.addEventListener("click", async () => {
+    }
 
-        if (musicPlaying) {
 
-            music.pause();
+    /* =========================================
+       ENTER
+    ========================================= */
 
-            musicPlaying = false;
+    enterBtn.addEventListener(
+        "click",
+        async () => {
 
-            musicText.textContent =
-                "SOUND OFF";
+            if (entered) return;
 
-        } else {
+            entered = true;
+
+            enterBtn.disabled = true;
+
+
+            /*
+                Fade entrance text
+            */
+
+            intro.classList.add("exit");
+
+
+            /*
+                Fade entire entrance
+            */
+
+            setTimeout(() => {
+
+                entrance.classList.add(
+                    "leave"
+                );
+
+            }, 250);
+
+
+            /*
+                Reveal museum
+            */
+
+            setTimeout(() => {
+
+                entrance.style.display =
+                    "none";
+
+                museum.classList.add(
+                    "active"
+                );
+
+                document.body.style.overflow =
+                    "hidden";
+
+            }, 900);
+
+
+            /*
+                Start music
+            */
 
             try {
 
@@ -340,59 +416,23 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             } catch (error) {
 
-                console.error(
-                    "Unable to play music.",
-                    error
+                console.log(
+                    "Music playback waiting for permission."
                 );
 
             }
 
         }
-
-    });
-
-
-    /* =====================================
-       BACK TO ENTRANCE
-    ====================================== */
-
-    backBtn.addEventListener("click", () => {
-
-        music.pause();
-
-        musicPlaying = false;
-
-        museum.classList.remove("active");
-
-        setTimeout(() => {
-
-            entrance.style.display = "block";
-
-            entrance.classList.remove("leave");
-
-            intro.classList.remove("exit");
-
-            enterBtn.disabled = false;
-
-            entered = false;
-
-        }, 600);
-
-    });
+    );
 
 
-    /* =====================================
-       KEYBOARD NAVIGATION
-    ====================================== */
+    /* =========================================
+       NEXT
+    ========================================= */
 
-    document.addEventListener("keydown", (event) => {
-
-        if (!museum.classList.contains("active")) {
-            return;
-        }
-
-
-        if (event.key === "ArrowRight") {
+    nextBtn.addEventListener(
+        "click",
+        () => {
 
             if (
                 currentChapter <
@@ -406,9 +446,16 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
 
         }
+    );
 
 
-        if (event.key === "ArrowLeft") {
+    /* =========================================
+       PREVIOUS
+    ========================================= */
+
+    prevBtn.addEventListener(
+        "click",
+        () => {
 
             if (currentChapter > 0) {
 
@@ -419,14 +466,193 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
 
         }
+    );
 
-    });
+
+    /* =========================================
+       MUSIC
+    ========================================= */
+
+    musicBtn.addEventListener(
+        "click",
+        async () => {
+
+            if (musicPlaying) {
+
+                music.pause();
+
+                musicPlaying = false;
+
+                musicText.textContent =
+                    "SOUND OFF";
+
+            } else {
+
+                try {
+
+                    await music.play();
+
+                    musicPlaying = true;
+
+                    musicText.textContent =
+                        "SOUND ON";
+
+                } catch (error) {
+
+                    console.error(error);
+
+                }
+
+            }
+
+        }
+    );
 
 
-    /* =====================================
-       START
-    ====================================== */
+    /* =========================================
+       BACK
+    ========================================= */
 
-    await loadChapters();
+    backBtn.addEventListener(
+        "click",
+        () => {
+
+            music.pause();
+
+            musicPlaying = false;
+
+            museum.classList.remove(
+                "active"
+            );
+
+
+            setTimeout(() => {
+
+                entrance.style.display =
+                    "block";
+
+                entrance.classList.remove(
+                    "leave"
+                );
+
+                intro.classList.remove(
+                    "exit"
+                );
+
+                enterBtn.disabled = false;
+
+                entered = false;
+
+                showChapter(0);
+
+            }, 700);
+
+        }
+    );
+
+
+    /* =========================================
+       KEYBOARD
+    ========================================= */
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                !museum.classList.contains(
+                    "active"
+                )
+            ) {
+                return;
+            }
+
+
+            if (
+                event.key === "ArrowRight"
+            ) {
+
+                if (
+                    currentChapter <
+                    chapters.length - 1
+                ) {
+
+                    showChapter(
+                        currentChapter + 1
+                    );
+
+                }
+
+            }
+
+
+            if (
+                event.key === "ArrowLeft"
+            ) {
+
+                if (currentChapter > 0) {
+
+                    showChapter(
+                        currentChapter - 1
+                    );
+
+                }
+
+            }
+
+        }
+    );
+
+
+    /* =========================================
+       PHOTO CLICK
+       Cycle through chapter photos
+    ========================================= */
+
+    chapterImage.addEventListener(
+        "click",
+        () => {
+
+            const photos =
+                getPhotos(
+                    chapters[
+                        currentChapter
+                    ].number
+                );
+
+
+            if (photos.length <= 1) {
+                return;
+            }
+
+
+            currentPhoto =
+                (currentPhoto + 1) %
+                photos.length;
+
+
+            chapterImage.style.opacity =
+                "0";
+
+
+            setTimeout(() => {
+
+                chapterImage.src =
+                    photos[currentPhoto];
+
+                chapterImage.style.opacity =
+                    "1";
+
+            }, 250);
+
+        }
+    );
+
+
+    /* =========================================
+       INITIALIZE
+    ========================================= */
+
+    loadMuseum();
 
 });
