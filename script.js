@@ -1,37 +1,32 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    const enterBtn = document.getElementById("enterBtn");
-    const hero = document.querySelector(".hero");
+    const enterButton = document.getElementById("enterBtn");
+    const intro = document.querySelector(".intro");
     const entrance = document.querySelector(".entrance");
 
-    if (!enterBtn || !hero || !entrance) {
-        console.error("Museum entrance elements not found.");
-        return;
-    }
+    let isEntering = false;
 
-    let entering = false;
+    enterButton.addEventListener("click", () => {
 
-    enterBtn.addEventListener("click", () => {
+        if (isEntering) return;
 
-        // Prevent double-clicking
-        if (entering) return;
+        isEntering = true;
 
-        entering = true;
+        enterButton.disabled = true;
 
-        // Disable button
-        enterBtn.disabled = true;
+        // Fade the title away
+        intro.classList.add("exit");
 
-        // Start cinematic exit
-        hero.classList.add("exit");
-
+        // Begin cinematic image transition
         setTimeout(() => {
-            entrance.classList.add("leaving");
+            entrance.classList.add("leave");
         }, 250);
 
-        // Move into the museum
+        // Open the museum
         setTimeout(() => {
             window.location.href = "museum.html";
         }, 1000);
+
     });
 
 });
