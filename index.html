@@ -12,7 +12,11 @@
 
 <body>
 
-    <main class="entrance">
+    <!-- =====================================
+         PAGE 1 — ENTRANCE
+    ====================================== -->
+
+    <main class="entrance" id="entrance">
 
         <img
             class="sayak-photo"
@@ -35,7 +39,7 @@
                 through my eyes.
             </p>
 
-            <button id="enterBtn">
+            <button id="enterBtn" type="button">
                 ENTER
                 <span>↗</span>
             </button>
@@ -48,7 +52,136 @@
 
     </main>
 
+
+    <!-- =====================================
+         PAGE 2 — MUSEUM
+         Same page. No redirect.
+    ====================================== -->
+
+    <section class="museum" id="museum">
+
+        <!-- Background -->
+        <div class="museum-background"></div>
+
+        <!-- Dark overlay -->
+        <div class="museum-overlay"></div>
+
+
+        <!-- Chapter content -->
+
+        <div class="chapter">
+
+            <div class="chapter-meta">
+                <span id="chapterNumber">01</span>
+                <span class="meta-line"></span>
+                <span>10</span>
+            </div>
+
+
+            <div class="chapter-content">
+
+                <div class="chapter-text">
+
+                    <p class="chapter-label" id="chapterLabel">
+                        CHAPTER 01
+                    </p>
+
+                    <h2 id="chapterTitle">
+                        Loading...
+                    </h2>
+
+                    <p
+                        class="chapter-description"
+                        id="chapterDescription">
+                    </p>
+
+                </div>
+
+
+                <div class="chapter-visual">
+
+                    <div class="image-frame">
+
+                        <img
+                            id="chapterImage"
+                            src=""
+                            alt="Sayak"
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Navigation -->
+
+            <div class="chapter-navigation">
+
+                <button
+                    id="prevBtn"
+                    type="button">
+                    ←
+                </button>
+
+                <div class="chapter-progress">
+                    <span id="progressNumber">01</span>
+                    <span class="progress-line"></span>
+                    <span>10</span>
+                </div>
+
+                <button
+                    id="nextBtn"
+                    type="button">
+                    →
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- Music -->
+
+        <button
+            id="musicBtn"
+            class="music-button"
+            type="button">
+
+            <span class="music-icon">♪</span>
+            <span id="musicText">SOUND ON</span>
+
+        </button>
+
+
+        <!-- Exit / back -->
+
+        <button
+            id="backBtn"
+            class="back-button"
+            type="button">
+
+            ← BACK
+
+        </button>
+
+    </section>
+
+
+    <!-- =====================================
+         MUSIC
+    ====================================== -->
+
+    <audio
+        id="museumMusic"
+        src="mp3.mpeg"
+        loop>
+    </audio>
+
+
     <script src="script.js"></script>
 
 </body>
+
 </html>
