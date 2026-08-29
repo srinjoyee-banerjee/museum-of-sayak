@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,34 +13,35 @@
 
     <main class="museum">
 
-        <!-- Cinematic museum background -->
-        <div class="museum-bg"></div>
-        <div class="museum-dark"></div>
+        <!-- Background -->
+        <div class="museum-background"></div>
+        <div class="museum-vignette"></div>
         <div class="museum-grain"></div>
 
-        <!-- TOP BAR -->
-        <header class="topbar">
 
-            <div class="museum-name">
+        <!-- Top -->
+        <header class="museum-top">
+
+            <div class="museum-title">
                 THE MUSEUM OF SAYAK
             </div>
 
-            <div class="chapter-counter">
+            <div class="counter">
                 <span id="currentNumber">01</span>
-                <span class="counter-line"></span>
+                <span>/</span>
                 <span>10</span>
             </div>
 
         </header>
 
 
-        <!-- MAIN CONTENT -->
-        <section class="chapter">
+        <!-- Main -->
+        <section class="museum-content">
 
             <!-- LEFT -->
-            <div class="chapter-info">
+            <div class="text-side">
 
-                <div class="chapter-small" id="chapterSmall">
+                <div class="chapter-number" id="chapterNumber">
                     CHAPTER 01
                 </div>
 
@@ -49,7 +49,7 @@
                     WHO ARE YOU?
                 </h1>
 
-                <div class="title-line"></div>
+                <div class="little-line"></div>
 
                 <p id="chapterText">
                     You are someone I keep discovering,
@@ -59,14 +59,10 @@
             </div>
 
 
-            <!-- RIGHT IMAGE -->
-            <div class="photo-area">
+            <!-- RIGHT -->
+            <div class="image-side">
 
-                <div class="photo-number">
-                    <span id="photoCurrent">01</span>
-                </div>
-
-                <div class="photo-frame">
+                <div class="image-wrapper">
 
                     <img
                         id="chapterImage"
@@ -76,8 +72,8 @@
 
                 </div>
 
-                <div class="photo-caption">
-                    A MEMORY I KEEP
+                <div class="image-counter">
+                    <span id="photoNumber">01</span>
                 </div>
 
             </div>
@@ -85,44 +81,43 @@
         </section>
 
 
-        <!-- BOTTOM NAVIGATION -->
-        <footer class="bottom">
+        <!-- Bottom navigation -->
+        <div class="bottom-navigation">
 
-            <button
-                id="prevBtn"
-                class="nav-btn"
-            >
+            <button id="prevBtn">
                 ←
             </button>
 
-            <div class="chapter-dots" id="chapterDots"></div>
+            <div class="progress">
+                <div
+                    class="progress-fill"
+                    id="progressFill"
+                ></div>
+            </div>
 
-            <button
-                id="nextBtn"
-                class="nav-btn"
-            >
+            <button id="nextBtn">
                 →
             </button>
 
-        </footer>
+        </div>
 
 
-        <!-- SOUND -->
+        <!-- Sound -->
         <button
+            class="sound-button"
             id="musicBtn"
-            class="sound"
         >
-            <span>♪</span>
+            ♪
             <span id="soundText">SOUND ON</span>
         </button>
 
 
-        <!-- BACK -->
+        <!-- Back -->
         <button
+            class="back-button"
             id="backBtn"
-            class="back"
         >
-            EXIT MUSEUM
+            ← BACK
         </button>
 
     </main>
@@ -132,11 +127,11 @@
         id="museumMusic"
         src="mp3.mpeg"
         loop
+        preload="auto"
     ></audio>
 
 
     <script src="script.js"></script>
 
 </body>
-
 </html>
