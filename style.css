@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap');
 
-
 /* =========================
    RESET
 ========================= */
@@ -11,19 +10,16 @@
     box-sizing: border-box;
 }
 
-
 html,
 body {
     width: 100%;
     height: 100%;
 }
 
-
 body {
     background: #080808;
     color: #f5f2ed;
     overflow: hidden;
-
     font-family: 'Inter', sans-serif;
 }
 
@@ -34,74 +30,83 @@ body {
 
 .entrance {
     position: relative;
-
     width: 100vw;
     height: 100vh;
-
     overflow: hidden;
-
     background: #080808;
 }
 
 
 /* =========================
-   PHOTO
+   SAYAK PHOTO
 ========================= */
 
 .photo {
     position: absolute;
-
-    inset: -2%;
+    inset: 0;
 
     background-image: url("sayak_bkgnd.jpeg");
 
+    /*
+       Keep the whole composition visible
+       as much as possible.
+    */
     background-size: cover;
-    background-position: center;
+
+    /*
+       IMPORTANT:
+       Change this if Sayak needs to move
+       slightly left/right.
+    */
+    background-position: center center;
 
     background-repeat: no-repeat;
 
-    transform: scale(1.04);
+    /*
+       Almost no zoom.
+       This prevents his face/body
+       from being unnecessarily cropped.
+    */
+    transform: scale(1);
 
-    animation: slowZoom 16s ease-out forwards;
+    animation: gentleZoom 18s ease-out forwards;
 }
 
 
 /* =========================
-   DARK CINEMATIC SHADE
+   CINEMATIC OVERLAY
 ========================= */
 
 .shade {
     position: absolute;
-
     inset: 0;
+
+    z-index: 1;
 
     background:
         linear-gradient(
             90deg,
-            rgba(0, 0, 0, 0.78) 0%,
-            rgba(0, 0, 0, 0.48) 38%,
-            rgba(0, 0, 0, 0.10) 75%,
-            rgba(0, 0, 0, 0.30) 100%
+            rgba(0, 0, 0, 0.68) 0%,
+            rgba(0, 0, 0, 0.35) 38%,
+            rgba(0, 0, 0, 0.08) 70%,
+            rgba(0, 0, 0, 0.22) 100%
         );
-
-    z-index: 1;
 }
 
 
-/* subtle bottom darkness */
+/* Bottom cinematic fade */
 
 .shade::after {
     content: "";
 
     position: absolute;
-
     inset: 0;
 
     background:
         linear-gradient(
-            0deg,
-            rgba(0, 0, 0, 0.65),
-            transparent 35%
+            to top,
+            rgba(0, 0, 0, 0.60),
+            transparent 38%
         );
 }
 
@@ -113,18 +118,18 @@ body {
 .museum-label {
     position: absolute;
 
-    top: 42px;
-    left: 55px;
+    top: 38px;
+    left: 45px;
 
     z-index: 3;
 
-    font-size: 9px;
+    font-size: 8px;
 
     letter-spacing: 4px;
 
     font-weight: 400;
 
-    opacity: 0.65;
+    opacity: 0.6;
 }
 
 
@@ -142,26 +147,26 @@ body {
 
     transform: translateY(-50%);
 
-    width: 600px;
+    width: 550px;
 
     opacity: 0;
 
-    animation: reveal 1.8s ease forwards;
-    animation-delay: 0.4s;
+    animation: reveal 1.6s ease forwards;
+    animation-delay: 0.3s;
 }
 
 
 /* =========================
-   SMALL LINE
+   LINE
 ========================= */
 
 .line {
-    width: 45px;
+    width: 42px;
     height: 1px;
 
-    background: rgba(255,255,255,0.7);
+    background: rgba(255, 255, 255, 0.65);
 
-    margin-bottom: 25px;
+    margin-bottom: 22px;
 }
 
 
@@ -170,15 +175,15 @@ body {
 ========================= */
 
 .eyebrow {
-    font-size: 9px;
+    margin-bottom: 24px;
+
+    font-size: 8px;
 
     letter-spacing: 5px;
 
     font-weight: 400;
 
-    opacity: 0.65;
-
-    margin-bottom: 25px;
+    opacity: 0.6;
 }
 
 
@@ -189,17 +194,16 @@ body {
 h1 {
     font-family: 'Cormorant Garamond', serif;
 
-    font-size: clamp(65px, 8vw, 120px);
+    font-size: clamp(60px, 7.5vw, 110px);
 
     font-weight: 300;
 
-    line-height: 0.78;
+    line-height: 0.82;
 
     letter-spacing: -2px;
 
     text-transform: uppercase;
 }
-
 
 h1 span {
     font-weight: 500;
@@ -208,7 +212,7 @@ h1 span {
 
     text-transform: none;
 
-    letter-spacing: -4px;
+    letter-spacing: -3px;
 }
 
 
@@ -217,11 +221,11 @@ h1 span {
 ========================= */
 
 .subtitle {
-    margin-top: 35px;
+    margin-top: 30px;
 
     font-family: 'Cormorant Garamond', serif;
 
-    font-size: 21px;
+    font-size: 20px;
 
     line-height: 1.15;
 
@@ -229,12 +233,12 @@ h1 span {
 
     font-weight: 300;
 
-    opacity: 0.82;
+    opacity: 0.8;
 }
 
 
 /* =========================
-   ENTER BUTTON
+   ENTER
 ========================= */
 
 #enterBtn {
@@ -242,13 +246,13 @@ h1 span {
 
     align-items: center;
 
-    gap: 30px;
+    gap: 22px;
 
-    margin-top: 45px;
+    margin-top: 40px;
 
     padding: 0;
 
-    background: none;
+    background: transparent;
 
     border: none;
 
@@ -258,13 +262,12 @@ h1 span {
 
     font-family: 'Inter', sans-serif;
 
-    font-size: 9px;
+    font-size: 8px;
 
     letter-spacing: 4px;
 
     font-weight: 400;
 }
-
 
 #enterBtn strong {
     display: flex;
@@ -272,10 +275,10 @@ h1 span {
     align-items: center;
     justify-content: center;
 
-    width: 43px;
-    height: 43px;
+    width: 42px;
+    height: 42px;
 
-    border: 1px solid rgba(255,255,255,0.55);
+    border: 1px solid rgba(255, 255, 255, 0.55);
 
     border-radius: 50%;
 
@@ -289,18 +292,17 @@ h1 span {
         transform 0.4s ease;
 }
 
-
 #enterBtn:hover strong {
     background: white;
 
     color: black;
 
-    transform: rotate(45deg);
+    transform: translateX(5px);
 }
 
 
 /* =========================
-   BOTTOM NOTE
+   BOTTOM INFORMATION
 ========================= */
 
 .bottom-note {
@@ -308,27 +310,26 @@ h1 span {
 
     z-index: 3;
 
-    bottom: 40px;
-    right: 55px;
+    bottom: 35px;
+    right: 45px;
 
     display: flex;
 
-    gap: 18px;
-
     align-items: center;
 
-    font-size: 8px;
+    gap: 15px;
+
+    font-size: 7px;
 
     letter-spacing: 3px;
 
-    opacity: 0.55;
+    opacity: 0.5;
 }
-
 
 .bottom-note span:first-child {
     font-family: 'Cormorant Garamond', serif;
 
-    font-size: 16px;
+    font-size: 15px;
 
     letter-spacing: 0;
 }
@@ -343,20 +344,18 @@ h1 span {
 
     transform:
         translateY(-50%)
-        translateX(-30px);
+        translateX(-25px);
 
     transition:
         opacity 0.7s ease,
         transform 0.7s ease;
 }
 
-
 .entrance.leave .photo {
-    transform: scale(1.12);
+    transform: scale(1.04);
 
-    transition: transform 1.2s ease;
+    transition: transform 1.1s ease;
 }
-
 
 .entrance.leave {
     opacity: 0;
@@ -375,8 +374,8 @@ h1 span {
         opacity: 0;
 
         transform:
-            translateY(-46%)
-            translateX(-25px);
+            translateY(-50%)
+            translateX(-20px);
     }
 
     to {
@@ -388,15 +387,14 @@ h1 span {
     }
 }
 
-
-@keyframes slowZoom {
+@keyframes gentleZoom {
 
     from {
-        transform: scale(1.04);
+        transform: scale(1);
     }
 
     to {
-        transform: scale(1.11);
+        transform: scale(1.025);
     }
 }
 
@@ -408,48 +406,38 @@ h1 span {
 @media (max-width: 700px) {
 
     .museum-label {
-        top: 25px;
-        left: 25px;
+        top: 24px;
+        left: 24px;
     }
-
 
     .intro {
         left: 25px;
-
         width: calc(100% - 50px);
     }
 
-
     h1 {
-        font-size: 62px;
-
-        line-height: 0.82;
+        font-size: 58px;
+        line-height: 0.84;
     }
-
 
     h1 span {
         letter-spacing: -2px;
     }
 
-
     .subtitle {
-        font-size: 19px;
+        font-size: 18px;
     }
-
 
     .bottom-note {
         right: 25px;
         bottom: 25px;
     }
 
-
-    .shade {
-        background:
-            linear-gradient(
-                90deg,
-                rgba(0,0,0,0.72),
-                rgba(0,0,0,0.25)
-            );
+    /*
+       On phones, slightly favor
+       the center of the photograph.
+    */
+    .photo {
+        background-position: center center;
     }
-
 }
