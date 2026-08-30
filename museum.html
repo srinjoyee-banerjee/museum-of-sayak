@@ -12,34 +12,115 @@
 
 <body>
 
-    <main class="museum">
+    <main id="museum">
 
-        <div class="museum-background"></div>
+        <!-- =====================================
+             CINEMATIC BACKGROUND
+        ====================================== -->
 
-        <div class="museum-dark"></div>
+        <div id="museumImage"></div>
+        <div class="museum-vignette"></div>
+        <div class="museum-grain"></div>
 
 
-        <!-- CHAPTER DOOR -->
+        <!-- =====================================
+             TOP NAVIGATION
+        ====================================== -->
 
-        <section class="chapter-door">
+        <header class="museum-header">
 
-            <div class="chapter-number">
-                01
+            <div class="museum-name">
+                THE MUSEUM OF SAYAK
             </div>
 
-            <div class="chapter-label">
-                CHAPTER
+            <div class="progress">
+                <span id="currentPage">01</span>
+                <i></i>
+                <span>26</span>
             </div>
 
-            <h1>
+        </header>
+
+
+        <!-- =====================================
+             MAIN EXHIBITION
+        ====================================== -->
+
+        <section class="exhibition">
+
+            <div class="chapter-number" id="chapterNumber">
+                CHAPTER 01
+            </div>
+
+            <h1 id="chapterTitle">
                 WHO ARE YOU?
             </h1>
 
-            <p>
-                Enter the first room.
-            </p>
+            <div class="exhibit-layout">
 
-            <button id="chapterEnter">
+                <!-- PHOTOGRAPH -->
+                <div class="photograph-frame">
+
+                    <div class="frame-inner">
+
+                        <img
+                            id="chapterImage"
+                            src=""
+                            alt="Sayak"
+                        >
+
+                    </div>
+
+                    <div
+                        class="photograph-caption"
+                        id="photoCaption">
+                    </div>
+
+                </div>
+
+
+                <!-- WRITING -->
+                <div class="writing">
+
+                    <div
+                        class="text-number"
+                        id="textNumber">
+                        01
+                    </div>
+
+                    <p id="chapterText">
+                        You are someone I keep discovering,
+                        even after all these years.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             CHAPTER DOOR
+        ====================================== -->
+
+        <section
+            id="chapterDoor"
+            class="chapter-door hidden">
+
+            <div class="door-number" id="doorNumber">
+                01
+            </div>
+
+            <div class="door-small">
+                NEXT ROOM
+            </div>
+
+            <h2 id="doorTitle">
+                WHO ARE YOU?
+            </h2>
+
+            <button id="openDoor">
                 ENTER
                 <span>↗</span>
             </button>
@@ -47,38 +128,77 @@
         </section>
 
 
-        <!-- MUSIC -->
+        <!-- =====================================
+             NAVIGATION
+        ====================================== -->
 
-        <audio id="backgroundMusic" loop>
-            <source src="mp3.mpeg" type="audio/mpeg">
+        <nav class="museum-navigation">
+
+            <button id="backBtn">
+                ←
+            </button>
+
+            <button id="nextBtn">
+                →
+            </button>
+
+        </nav>
+
+
+        <!-- =====================================
+             SOUND
+        ====================================== -->
+
+        <div class="sound-control">
+
+            <button id="soundBtn">
+                ♪ SOUND ON
+            </button>
+
+        </div>
+
+
+        <!-- =====================================
+             BACK
+        ====================================== -->
+
+        <button
+            id="exitBtn"
+            class="exit-museum">
+            ← EXIT
+        </button>
+
+
+        <!-- =====================================
+             MUSIC
+        ====================================== -->
+
+        <audio
+            id="music"
+            src="mp3.mpeg"
+            loop
+            preload="auto">
         </audio>
 
+
+        <!-- =====================================
+             LOADING
+        ====================================== -->
+
+        <div id="loading">
+
+            <div class="loading-line"></div>
+
+            <p>
+                ENTERING THE MUSEUM
+            </p>
+
+        </div>
 
     </main>
 
 
-    <script>
-
-        document.addEventListener("DOMContentLoaded", () => {
-
-            const music =
-                document.getElementById("backgroundMusic");
-
-            const button =
-                document.getElementById("chapterEnter");
-
-
-            button.addEventListener("click", () => {
-
-                music.play().catch(() => {});
-
-                button.innerHTML = "OPENING...";
-
-            });
-
-        });
-
-    </script>
+    <script src="script.js"></script>
 
 </body>
 
