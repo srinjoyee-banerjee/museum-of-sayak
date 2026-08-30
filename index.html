@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,176 +11,58 @@
 
 <body>
 
-    <!-- =====================================
-         PAGE 1 — ENTRANCE
-    ====================================== -->
+    <main class="entrance">
 
-    <main class="entrance" id="entrance">
-
+        <!-- SAYAK'S PHOTOGRAPH -->
         <img
-            class="sayak-photo"
             src="sayak_bkgnd.jpeg"
             alt="Sayak"
+            class="entrance-photo"
         >
 
-        <div class="photo-overlay"></div>
+        <!-- CINEMATIC OVERLAY -->
+        <div class="entrance-overlay"></div>
 
-        <section class="intro">
+
+        <!-- LEFT SIDE CONTENT -->
+        <section class="entrance-content">
+
+            <div class="small-title">
+                A PRIVATE COLLECTION
+            </div>
 
             <h1>
                 THE MUSEUM
                 <br>
-                <span>OF SAYAK</span>
+                <em>OF SAYAK</em>
             </h1>
 
-            <p>
+            <p class="tagline">
                 exploring you,<br>
                 through my eyes.
             </p>
 
-            <button id="enterBtn" type="button">
-                ENTER
-                <span>↗</span>
+            <button id="enterBtn">
+                <span>ENTER THE MUSEUM</span>
+                <b>↗</b>
             </button>
 
         </section>
 
-        <div class="collection">
-            PRIVATE COLLECTION · 2026
+
+        <!-- BOTTOM -->
+        <div class="year">
+            2026
+        </div>
+
+        <div class="edition">
+            ONE PERSON · TWENTY-SIX MOMENTS
         </div>
 
     </main>
 
 
-    <!-- =====================================
-         PAGE 2 — MUSEUM
-         Same page. No redirect.
-    ====================================== -->
-
-    <section class="museum" id="museum">
-
-        <!-- Background -->
-        <div class="museum-background"></div>
-
-        <!-- Dark overlay -->
-        <div class="museum-overlay"></div>
-
-
-        <!-- Chapter content -->
-
-        <div class="chapter">
-
-            <div class="chapter-meta">
-                <span id="chapterNumber">01</span>
-                <span class="meta-line"></span>
-                <span>10</span>
-            </div>
-
-
-            <div class="chapter-content">
-
-                <div class="chapter-text">
-
-                    <p class="chapter-label" id="chapterLabel">
-                        CHAPTER 01
-                    </p>
-
-                    <h2 id="chapterTitle">
-                        Loading...
-                    </h2>
-
-                    <p
-                        class="chapter-description"
-                        id="chapterDescription">
-                    </p>
-
-                </div>
-
-
-                <div class="chapter-visual">
-
-                    <div class="image-frame">
-
-                        <img
-                            id="chapterImage"
-                            src=""
-                            alt="Sayak"
-                        >
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- Navigation -->
-
-            <div class="chapter-navigation">
-
-                <button
-                    id="prevBtn"
-                    type="button">
-                    ←
-                </button>
-
-                <div class="chapter-progress">
-                    <span id="progressNumber">01</span>
-                    <span class="progress-line"></span>
-                    <span>10</span>
-                </div>
-
-                <button
-                    id="nextBtn"
-                    type="button">
-                    →
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- Music -->
-
-        <button
-            id="musicBtn"
-            class="music-button"
-            type="button">
-
-            <span class="music-icon">♪</span>
-            <span id="musicText">SOUND ON</span>
-
-        </button>
-
-
-        <!-- Exit / back -->
-
-        <button
-            id="backBtn"
-            class="back-button"
-            type="button">
-
-            ← BACK
-
-        </button>
-
-    </section>
-
-
-    <!-- =====================================
-         MUSIC
-    ====================================== -->
-
-    <audio
-        id="museumMusic"
-        src="mp3.mpeg"
-        loop>
-    </audio>
-
-
     <script src="script.js"></script>
 
 </body>
-
 </html>
