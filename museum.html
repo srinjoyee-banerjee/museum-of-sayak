@@ -1,194 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>The Museum of Sayak</title>
-
-    <link rel="stylesheet" href="style.css">
-
+    <title>Museum of Sayak</title>
 </head>
 
-<body>
-
-    <div id="museumPage">
-
-        <!-- DOOR SCREEN -->
-
-        <div id="museumDoors">
-
-            <div class="doorLight"></div>
-
-            <div class="door doorLeft">
-                <div class="doorWriting">
-                    <small>THE</small>
-                    <strong>MUSEUM</strong>
-                    <small>OF SAYAK</small>
-                </div>
-            </div>
-
-            <div class="door doorRight">
-                <div class="doorWriting">
-                    <small>PRIVATE</small>
-                    <strong>COLLECTION</strong>
-                    <small>2026</small>
-                </div>
-            </div>
-
-            <div class="enteringText">
-                <span>01</span>
-                <p>ENTERING THE MUSEUM</p>
-            </div>
-
-        </div>
-
-
-        <!-- ACTUAL MUSEUM -->
-
-        <div id="museumInside">
-
-            <div class="museumBg"></div>
-
-            <div class="museumShade"></div>
-
-
-            <header>
-
-                <div class="museumLogo">
-                    THE MUSEUM OF SAYAK
-                </div>
-
-                <div class="pageCount">
-                    01 / 26
-                </div>
-
-            </header>
-
-
-            <main class="chapter">
-
-                <div class="chapterLabel">
-                    CHAPTER 01
-                </div>
-
-                <h1>
-                    WHO ARE YOU?
-                </h1>
-
-
-                <div class="chapterContent">
-
-                    <div class="imageBox">
-
-                        <img
-                            src="strong.jpeg"
-                            alt="Sayak"
-                        >
-
-                    </div>
-
-
-                    <div class="chapterWriting">
-
-                        <p>
-                            You are someone I keep discovering,
-                            even after all these years.
-                        </p>
-
-                        <p>
-                            There are so many little things
-                            about you that I notice.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </main>
-
-
-            <div class="museumBottom">
-
-                <button id="previous">
-                    ←
-                </button>
-
-                <span>01 / 26</span>
-
-                <button id="next">
-                    →
-                </button>
-
-            </div>
-
-
-            <div class="sound">
-                ♪ SOUND ON
-            </div>
-
-
-            <audio
-                id="music"
-                src="mp3.mpeg"
-                loop
-            ></audio>
-
-        </div>
-
-    </div>
-
-
-    <script>
-
-        document.addEventListener("DOMContentLoaded", function () {
-
-            const doors =
-                document.getElementById("museumDoors");
-
-            const music =
-                document.getElementById("music");
-
-
-            /*
-             * THE MUSEUM PAGE HAS LOADED.
-             * Open the doors automatically.
-             */
-
-            setTimeout(function () {
-
-                doors.classList.add("open");
-
-                if (music) {
-
-                    music.volume = 0.6;
-
-                    music.play().catch(function () {
-                        console.log("Music waiting for browser permission.");
-                    });
-
-                }
-
-            }, 1200);
-
-
-            /*
-             * Remove the door layer after animation.
-             */
-
-            setTimeout(function () {
-
-                doors.classList.add("gone");
-
-            }, 3500);
-
-        });
-
-    </script>
+<body style="
+    margin:0;
+    height:100vh;
+    background:#111;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:Arial;
+">
+
+    <h1>THE MUSEUM OF SAYAK — PAGE 2 WORKS</h1>
 
 </body>
-
 </html>
