@@ -2,30 +2,103 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>The Museum of Sayak</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
-    <main id="museum">
+<main id="museum">
 
-        <!-- =====================================
-             CINEMATIC BACKGROUND
-        ====================================== -->
 
-        <div id="museumImage"></div>
-        <div class="museum-vignette"></div>
+    <!-- =========================================
+         MUSEUM ENTRANCE
+    ========================================== -->
+
+    <section id="museumEntrance">
+
+
+        <!-- LIGHT BEHIND THE DOORS -->
+
+        <div class="door-light"></div>
+
+
+        <!-- LEFT DOOR -->
+
+        <div class="museum-door door-left">
+
+            <div class="door-panel">
+
+                <span>THE</span>
+
+                <strong>MUSEUM</strong>
+
+                <span>OF SAYAK</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT DOOR -->
+
+        <div class="museum-door door-right">
+
+            <div class="door-panel">
+
+                <span>PRIVATE</span>
+
+                <strong>COLLECTION</strong>
+
+                <span>2026</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- CENTER TEXT -->
+
+        <div class="door-title">
+
+            <div class="door-number">
+                01
+            </div>
+
+            <p>
+                ENTERING THE MUSEUM
+            </p>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =========================================
+         ACTUAL MUSEUM
+    ========================================== -->
+
+    <section id="museumInside">
+
+        <div class="museum-background"></div>
+
+        <div class="museum-dark"></div>
+
         <div class="museum-grain"></div>
 
-
-        <!-- =====================================
-             TOP NAVIGATION
-        ====================================== -->
 
         <header class="museum-header">
 
@@ -34,31 +107,40 @@
             </div>
 
             <div class="progress">
-                <span id="currentPage">01</span>
+
+                <span id="currentPage">
+                    01
+                </span>
+
                 <i></i>
-                <span>26</span>
+
+                <span>
+                    26
+                </span>
+
             </div>
 
         </header>
 
 
-        <!-- =====================================
-             MAIN EXHIBITION
-        ====================================== -->
-
         <section class="exhibition">
 
-            <div class="chapter-number" id="chapterNumber">
+            <div
+                class="chapter-number"
+                id="chapterNumber"
+            >
                 CHAPTER 01
             </div>
+
 
             <h1 id="chapterTitle">
                 WHO ARE YOU?
             </h1>
 
+
             <div class="exhibit-layout">
 
-                <!-- PHOTOGRAPH -->
+
                 <div class="photograph-frame">
 
                     <div class="frame-inner">
@@ -73,43 +155,43 @@
 
                     <div
                         class="photograph-caption"
-                        id="photoCaption">
-                    </div>
+                        id="photoCaption"
+                    ></div>
 
                 </div>
 
 
-                <!-- WRITING -->
                 <div class="writing">
 
                     <div
                         class="text-number"
-                        id="textNumber">
+                        id="textNumber"
+                    >
                         01
                     </div>
 
-                    <p id="chapterText">
-                        You are someone I keep discovering,
-                        even after all these years.
-                    </p>
+                    <p id="chapterText"></p>
 
                 </div>
+
 
             </div>
 
         </section>
 
 
-        <!-- =====================================
-             CHAPTER DOOR
-        ====================================== -->
+        <!-- CHAPTER DOOR -->
 
         <section
             id="chapterDoor"
-            class="chapter-door hidden">
+            class="chapter-door hidden"
+        >
 
-            <div class="door-number" id="doorNumber">
-                01
+            <div
+                class="door-number"
+                id="doorNumber"
+            >
+                02
             </div>
 
             <div class="door-small">
@@ -117,20 +199,21 @@
             </div>
 
             <h2 id="doorTitle">
-                WHO ARE YOU?
+                THE LITTLE THINGS
             </h2>
 
             <button id="openDoor">
+
                 ENTER
+
                 <span>↗</span>
+
             </button>
 
         </section>
 
 
-        <!-- =====================================
-             NAVIGATION
-        ====================================== -->
+        <!-- NAVIGATION -->
 
         <nav class="museum-navigation">
 
@@ -145,9 +228,7 @@
         </nav>
 
 
-        <!-- =====================================
-             SOUND
-        ====================================== -->
+        <!-- SOUND -->
 
         <div class="sound-control">
 
@@ -158,47 +239,33 @@
         </div>
 
 
-        <!-- =====================================
-             BACK
-        ====================================== -->
+        <!-- EXIT -->
 
         <button
             id="exitBtn"
-            class="exit-museum">
+            class="exit-museum"
+        >
             ← EXIT
         </button>
 
 
-        <!-- =====================================
-             MUSIC
-        ====================================== -->
+        <!-- MUSIC -->
 
         <audio
             id="music"
             src="mp3.mpeg"
             loop
-            preload="auto">
-        </audio>
+            preload="auto"
+        ></audio>
 
 
-        <!-- =====================================
-             LOADING
-        ====================================== -->
-
-        <div id="loading">
-
-            <div class="loading-line"></div>
-
-            <p>
-                ENTERING THE MUSEUM
-            </p>
-
-        </div>
-
-    </main>
+    </section>
 
 
-    <script src="script.js"></script>
+</main>
+
+
+<script src="script.js"></script>
 
 </body>
 
