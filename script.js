@@ -1,668 +1,615 @@
-document.addEventListener("DOMContentLoaded", () => {
+```javascript
+document.addEventListener("DOMContentLoaded", async () => {
 
-```
-/* =====================================================
-   ELEMENTS
-===================================================== */
+    /* =====================================================
+       ELEMENTS
+    ===================================================== */
 
-const entrance = document.getElementById("entrance");
-const museum = document.getElementById("museum");
+    const cover = document.getElementById("cover");
+    const doors = document.getElementById("doors");
+    const museum = document.getElementById("museum");
+    const scene = document.getElementById("scene");
 
-const enterBtn = document.getElementById("enterBtn");
-const nextBtn = document.getElementById("nextBtn");
-const prevBtn = document.getElementById("prevBtn");
+    const enterBtn = document.getElementById("enterBtn");
+    const previousBtn = document.getElementById("previousBtn");
+    const nextBtn = document.getElementById("nextBtn");
 
-const exhibit = document.getElementById("exhibit");
+    const currentNumber = document.getElementById("currentNumber");
 
-const roomBackground =
-    document.querySelector(".room-background");
+    const music = document.getElementById("music");
+    const soundBtn = document.getElementById("soundBtn");
 
-const chapterCounter =
-    document.getElementById("roomNumber");
 
-const chapterTitle =
-    document.getElementById("chapterTitle");
+    /* =====================================================
+       STATE
+    ===================================================== */
 
-const doorChapter =
-    document.getElementById("doorChapter");
+    let data = null;
 
-const doors =
-    document.getElementById("doors");
+    let currentPage = 0;
 
-const momentCurrent =
-    document.getElementById("momentCurrent");
+    let musicStarted = false;
 
-const soundBtn =
-    document.getElementById("soundBtn");
+    const TOTAL_PAGES = 26;
 
-const music =
-    document.getElementById("music");
 
-
-/* =====================================================
-   IMAGE PATHS
-   ALL FILES ARE IN THE SAME FOLDER AS INDEX.HTML
-===================================================== */
-
-const img = name => name;
-
-
-/* =====================================================
-   10 CHAPTERS
-===================================================== */
-
-const chapters = [
-
-    {
-        number: 1,
-        title: "WHO ARE YOU?",
-        theme: "theme-1",
-
-        moments: [
-
-            {
-                type: "intro",
-                text:
-                    "You are someone I keep discovering, even after all these years."
-            },
-
-            {
-                type: "gallery",
-
-                images: [
-                    img("strong.jpeg"),
-                    img("cand.jpeg"),
-                    img("us_first.jpeg")
-                ],
-
-                text:
-                    "There are so many little things about you that I notice."
-            },
-
-            {
-                type: "text",
-
-                text:
-                    "Some of them are funny. Some of them drive me crazy. And some of them make me wonder how I got so lucky."
-            }
-
-        ]
-    },
-
-
-    {
-        number: 2,
-        title: "THE LITTLE THINGS",
-        theme: "theme-2",
-
-        moments: [
-
-            {
-                type: "intro",
-
-                text:
-                    "I don't think you even realise how many little things about you I notice."
-            },
-
-            {
-                type: "gallery",
-
-                images: [
-                    img("solo.jpeg"),
-                    img("candid.jpeg"),
-                    img("cook.jpeg")
-                ],
-
-                text:
-                    "Like the way you eat green chutney. You don't even need food sometimes."
-            },
-
-            {
-                type: "gallery",
-
-                images: [
-                    img("simple.jpeg"),
-                    img("old.jpeg"),
-                    img("now.jpeg")
-                ],
-
-                text:
-                    "You probably don't even notice the little things you do. I do."
-            }
-
-        ]
-    },
-
-
-    {
-        number: 3,
-        title: "YOUR FACE, YOUR HEART",
-        theme: "theme-3",
-
-        moments: [
-
-            {
-                type: "intro",
-
-                text:
-                    "I love your face. I love your eyes."
-            },
-
-            {
-                type: "gallery",
-
-                images: [
-                    img("eyelash.jpeg"),
-                    img("fell.jpeg"),
-                    img("beautiful.jpeg")
-                ],
-
-                text:
-                    "And your eyelashes... I don't think you even know how beautiful they are."
-            },
-
-            {
-                type: "gallery",
-
-                images: [
-                    img("simple.jpeg"),
-                    img("smile.jpeg"),
-                    img("soft.jpeg")
-                ],
-
-                text:
-                    "As beautiful as you are on the outside, that's not what made me fall in love with you."
-            },
-
-            {
-                type: "text",
-
-                text:
-                    "I fell in love with your heart. Your soul. You yourself."
-            }
-
-        ]
-    },
-
-
-    {
-        number: 4,
-        title: "HOW WE BECAME US",
-        theme: "theme-4",
-
-        moments: [
-
-            {
-                type: "intro",
-
-                text:
-                    "We met on the very first day of our online MSc Physics class."
-            },
-
-            {
-                type: "gallery",
-
-                images: [
-                    img("msc us.jpeg"),
-                    img("Fest photo.jpeg"),
-                    img("Cuteearly relationship photo.jpeg")
-                ],
-
-                text:
-                    "Friends became lovers."
-            },
-
-            {
-                type: "gallery",
-
-                images: [
-                    img("Favourite early photo of you two.jpeg"),
-                    img("us_first.jpeg")
-                ],
-
-                text:
-                    "You made me feel safe. You made me feel seen. You made me feel heard."
-            }
-
-        ]
-    },
-
-
-    {
-        number: 5,
-        title: "YOU, THROUGH MY EYES",
-        theme: "theme-5",
-
-        moments: [
-
-            {
-                type: "intro",
-
-                text:
-                    "There are things about you that I don't think you realise."
-            },
-
-            {
-                type: "gallery",
-
-                images: [
-                    img("4.jpeg"),
-                    img("5.jpeg"),
-                    img("6.jpeg")
-                ],
-
-                text:
-                    "You're one of the most intelligent people I've ever met. And you're genuinely funny."
-            },
-
-            {
-                type: "gallery",
-
-                images: [
-                    img("7.jpeg"),
-                    img("beautiful.jpeg")
-                ],
-
-                text:
-                    "If I could give you one thing, it would be my eyes for one day."
-            }
-
-        ]
-    },
-
-
-    {
-        number: 6,
-        title: "DISTANCE",
-        theme: "theme-6",
-
-        moments: [
-
-            {
-                type: "intro",
-
-                text:
-                    "Almost a year ago, our lives started moving in two different directions."
-            },
-
-            {
-                type: "gallery",
-
-                images: [
-                    img("i.jpeg"),
-                    img("i1.jpeg"),
-                    img("i2.jpeg")
-                ],
-
-                text:
-                    "Two cities became part of our relationship."
-            },
-
-            {
-                type: "gallery",
-
-                images: [
-                    img("i3.jpeg"),
-                    img("sayak_bkgnd.jpeg")
-                ],
-
-                text:
-                    "Love doesn't decrease with distance. It increases. Exponentially."
-            }
-
-        ]
-    },
-
-
-    {
-        number: 7,
-        title: "THE ARCHIVE",
-        theme: "theme-7",
-
-        moments: [
-
-            {
-                type: "intro",
-
-                text:
-                    "There are so many things I remember about us. Not because they were extraordinary. Just because they were ours."
-            },
-
-            {
-                type: "gallery",
-
-                images: [
-                    img("m.jpeg"),
-                    img("n.jpeg"),
-                    img("o.jpeg")
-                ],
-
-                text:
-                    "Some memories are about places."
-            },
-
-            {
-                type: "gallery",
-
-                images: [
-                    img("p.jpeg"),
-                    img("q.jpeg"),
-                    img("candid.jpeg")
-                ],
-
-                text:
-                    "But my favourite memories are the tiny moments that nobody else would remember."
-            }
-
-        ]
-    },
-
-
-    {
-        number: 8,
-        title: "THE LIFE WE'RE BUILDING",
-        theme: "theme-8",
-
-        moments: [
-
-            {
-                type: "intro",
-
-                text:
-                    "I don't really know what our life will look like ten years from now. But I know who I want to be there."
-            },
-
-            {
-                type: "gallery",
-
-                images: [
-                    img("e1.jpeg"),
-                    img("e2.jpeg"),
-                    img("e3.jpeg")
-                ],
-
-                text:
-                    "You."
-            },
-
-            {
-                type: "text",
-
-                text:
-                    "I want us to be a team. Our resting place. Our safe space. Our home."
-            }
-
-        ]
-    },
-
-
-    {
-        number: 9,
-        title: "THE THINGS I'LL NEVER LET YOU FORGET",
-        theme: "theme-9",
-
-        moments: [
-
-            {
-                type: "intro",
-
-                text:
-                    "Okay. Enough emotional nonsense."
-            },
-
-            {
-                type: "gallery",
-
-                images: [
-                    img("c1.jpeg"),
-                    img("c2.jpeg"),
-                    img("cook.jpeg")
-                ],
-
-                text:
-                    "Now let me tell you the things I will NEVER let you forget."
-            },
-
-            {
-                type: "text",
-
-                text:
-                    "GREEN CHUTNEY CHAMPION. Babu. Babai. Whatever I call you, you're still the same person I somehow chose to love."
-            }
-
-        ]
-    },
-
-
-    {
-        number: 10,
-        title: "FOR YOU",
-        theme: "theme-10",
-
-        moments: [
-
-            {
-                type: "intro",
-
-                text:
-                    "If you were sitting directly in front of me right now, the first thing I would say is thank you."
-            },
-
-            {
-                type: "gallery",
-
-                images: [
-                    img("e1.jpeg"),
-                    img("e2.jpeg"),
-                    img("e3.jpeg")
-                ],
-
-                text:
-                    "Thank you for loving me unconditionally. Thank you for everything."
-            },
-
-            {
-                type: "text",
-
-                text:
-                    "You are loved. You are valued. You are enough."
-            },
-
-            {
-                type: "final",
-
-                text:
-                    "I love you."
-            }
-
-        ]
-    }
-
-];
-
-
-/* =====================================================
-   FLATTEN ALL MOMENTS
-===================================================== */
-
-const moments = [];
-
-chapters.forEach((chapter, chapterIndex) => {
-
-    chapter.moments.forEach((moment, momentIndex) => {
-
-        moments.push({
-            ...moment,
-            chapterIndex,
-            momentIndex
-        });
-
-    });
-
-});
-
-
-let current = 0;
-let insideMuseum = false;
-let changing = false;
-
-
-/* =====================================================
-   ENTER MUSEUM
-===================================================== */
-
-enterBtn.addEventListener("click", async () => {
-
-    if (insideMuseum) return;
-
-    insideMuseum = true;
-
-    entrance.classList.add("hidden");
-
-    museum.classList.add("active");
-
-    /*
-     * Browser allows audio after a click.
-     */
+    /* =====================================================
+       LOAD JSON
+    ===================================================== */
 
     try {
-        music.volume = 0.45;
-        await music.play();
 
-        soundBtn.textContent = "♪ SOUND ON";
+        const response = await fetch("sayak_content.json");
+
+        if (!response.ok) {
+            throw new Error("Could not load sayak_content.json");
+        }
+
+        data = await response.json();
 
     } catch (error) {
 
-        soundBtn.textContent = "♪ SOUND OFF";
+        console.error(error);
 
+        /*
+           The website still works even if JSON fails.
+        */
+
+        data = null;
     }
 
 
-    /*
-     * First museum room.
-     */
+    /* =====================================================
+       IMAGE PATH FIX
+       
+       Your JSON says:
+       assets/images/strong.jpeg
 
-    current = 0;
+       But your actual files are in the SAME folder.
 
-    setTimeout(() => {
+       This converts it automatically to:
+       strong.jpeg
+    ===================================================== */
 
-        updateMuseum();
+    function imagePath(path) {
 
-        doors.classList.add("closed");
+        if (!path) return "";
+
+        return path
+            .replace(/^assets\/images\//, "")
+            .replace(/^assets\/images\\/, "");
+    }
+
+
+    /* =====================================================
+       START MUSIC
+    ===================================================== */
+
+    function startMusic() {
+
+        if (musicStarted) return;
+
+        musicStarted = true;
+
+        music.volume = 0.45;
+
+        music.play()
+            .then(() => {
+                soundBtn.textContent = "♪ SOUND ON";
+            })
+            .catch(() => {
+                soundBtn.textContent = "♪ CLICK FOR SOUND";
+                musicStarted = false;
+            });
+    }
+
+
+    /* =====================================================
+       ENTER MUSEUM
+    ===================================================== */
+
+    enterBtn.addEventListener("click", () => {
+
+        startMusic();
+
+        enterBtn.disabled = true;
+
+        cover.style.opacity = "0";
+
+        cover.style.transition = "opacity 1s ease";
 
         setTimeout(() => {
 
-            doors.classList.remove("closed");
+            cover.classList.add("hidden");
 
-        }, 900);
+            doors.classList.remove("hidden");
 
-    }, 700);
+            /*
+               Give the door a moment to appear
+               before opening it.
+            */
 
-});
+            setTimeout(() => {
+
+                doors.classList.add("open");
+
+            }, 250);
+
+        }, 1000);
 
 
-/* =====================================================
-   RENDER
-===================================================== */
+        /*
+           After doors open:
+           show the museum.
+        */
 
-function updateMuseum() {
+        setTimeout(() => {
 
-    const item = moments[current];
+            doors.classList.add("hidden");
 
-    const chapter = chapters[item.chapterIndex];
+            museum.classList.remove("hidden");
 
-    const chapterChanged =
-        !exhibit.dataset.chapter ||
-        exhibit.dataset.chapter !== String(item.chapterIndex);
+            currentPage = 0;
 
+            renderPage();
+
+        }, 2600);
+
+    });
+
+
+    /* =====================================================
+       SOUND BUTTON
+    ===================================================== */
+
+    soundBtn.addEventListener("click", () => {
+
+        if (music.paused) {
+
+            music.play();
+
+            soundBtn.textContent = "♪ SOUND ON";
+
+        } else {
+
+            music.pause();
+
+            soundBtn.textContent = "♪ SOUND OFF";
+        }
+
+    });
+
+
+    /* =====================================================
+       CHAPTER DATA
+       
+       26 pages total.
+
+       Each chapter gets:
+       - one chapter opening page
+       - several memory pages
+       
+       This gives the feeling of moving through rooms.
+    ===================================================== */
+
+    const pagePlan = [
+
+        /* ================= CHAPTER 1 ================= */
+
+        {
+            chapter: 1,
+            type: "intro",
+            title: "WHO ARE YOU?"
+        },
+
+        {
+            chapter: 1,
+            type: "memory",
+            images: [
+                "strong.jpeg",
+                "cand.jpeg",
+                "us_first.jpeg"
+            ],
+            text: [
+                "You are someone I keep discovering, even after all these years."
+            ]
+        },
+
+        {
+            chapter: 1,
+            type: "text",
+            text:
+                "You are my best friend, my safest place, my favourite person."
+        },
+
+
+        /* ================= CHAPTER 2 ================= */
+
+        {
+            chapter: 2,
+            type: "intro",
+            title: "THE LITTLE THINGS"
+        },
+
+        {
+            chapter: 2,
+            type: "memory",
+            images: [
+                "solo.jpeg",
+                "candid.jpeg"
+            ],
+            text: [
+                "I don't think you even realise how many little things about you I notice.",
+                "Like the way you eat green chutney."
+            ]
+        },
+
+        {
+            chapter: 2,
+            type: "memory",
+            images: [
+                "cook.jpeg",
+                "simple.jpeg"
+            ],
+            text: [
+                "You absolutely love sleeping.",
+                "And then there's your English."
+            ]
+        },
+
+
+        /* ================= CHAPTER 3 ================= */
+
+        {
+            chapter: 3,
+            type: "intro",
+            title: "YOUR FACE, YOUR HEART"
+        },
+
+        {
+            chapter: 3,
+            type: "memory",
+            images: [
+                "eyelash.jpeg",
+                "fell.jpeg",
+                "beautiful.jpeg"
+            ],
+            text: [
+                "I love your face.",
+                "I love your eyes.",
+                "And your eyelashes... I don't think you even know how beautiful they are."
+            ]
+        },
+
+        {
+            chapter: 3,
+            type: "memory",
+            images: [
+                "simple.jpeg",
+                "smile.jpeg",
+                "soft.jpeg"
+            ],
+            text: [
+                "As beautiful as you are on the outside, that's not what made me fall in love with you.",
+                "I fell in love with your heart."
+            ]
+        },
+
+
+        /* ================= CHAPTER 4 ================= */
+
+        {
+            chapter: 4,
+            type: "intro",
+            title: "HOW WE BECAME US"
+        },
+
+        {
+            chapter: 4,
+            type: "memory",
+            images: [
+                "msc us.jpeg",
+                "Fest photo.jpeg"
+            ],
+            text: [
+                "We met on the very first day of our online MSc Physics class.",
+                "And honestly, I don't think you had the best first impression of me."
+            ]
+        },
+
+        {
+            chapter: 4,
+            type: "memory",
+            images: [
+                "Cuteearly relationship photo.jpeg",
+                "Favourite early photo of you two.jpeg"
+            ],
+            text: [
+                "Friends became lovers.",
+                "You made me feel safe.",
+                "You made me feel seen."
+            ]
+        },
+
+
+        /* ================= CHAPTER 5 ================= */
+
+        {
+            chapter: 5,
+            type: "intro",
+            title: "YOU, THROUGH MY EYES"
+        },
+
+        {
+            chapter: 5,
+            type: "memory",
+            images: [
+                "4.jpeg",
+                "5.jpeg"
+            ],
+            text: [
+                "You're one of the most intelligent people I've ever met.",
+                "And you're genuinely funny."
+            ]
+        },
+
+        {
+            chapter: 5,
+            type: "memory",
+            images: [
+                "6.jpeg",
+                "7.jpeg"
+            ],
+            text: [
+                "Sometimes I feel like you understand me better than I understand myself.",
+                "You notice more than people realise."
+            ]
+        },
+
+
+        /* ================= CHAPTER 6 ================= */
+
+        {
+            chapter: 6,
+            type: "intro",
+            title: "DISTANCE"
+        },
+
+        {
+            chapter: 6,
+            type: "text",
+            text:
+                "Two cities became part of our relationship."
+        },
+
+        {
+            chapter: 6,
+            type: "text",
+            text:
+                "Love doesn't decrease with distance. It increases. Exponentially."
+        },
+
+
+        /* ================= CHAPTER 7 ================= */
+
+        {
+            chapter: 7,
+            type: "intro",
+            title: "THE ARCHIVE"
+        },
+
+        {
+            chapter: 7,
+            type: "memory",
+            images: [
+                "m.jpeg",
+                "n.jpeg",
+                "o.jpeg"
+            ],
+            text: [
+                "There are so many things I remember about us.",
+                "Not because they were extraordinary.",
+                "Just because they were ours."
+            ]
+        },
+
+        {
+            chapter: 7,
+            type: "memory",
+            images: [
+                "p.jpeg",
+                "q.jpeg"
+            ],
+            text: [
+                "I don't think my favourite memories are the big ones.",
+                "They're the tiny moments that nobody else would remember."
+            ]
+        },
+
+
+        /* ================= CHAPTER 8 ================= */
+
+        {
+            chapter: 8,
+            type: "intro",
+            title: "THE LIFE WE'RE BUILDING"
+        },
+
+        {
+            chapter: 8,
+            type: "memory",
+            images: [
+                "i.jpeg",
+                "i1.jpeg"
+            ],
+            text: [
+                "I don't really know what our life will look like ten years from now.",
+                "But I know who I want to be there.",
+                "You."
+            ]
+        },
+
+        {
+            chapter: 8,
+            type: "memory",
+            images: [
+                "i2.jpeg",
+                "i3.jpeg"
+            ],
+            text: [
+                "I want us to be a team.",
+                "Our resting place.",
+                "Our safe space.",
+                "Our home."
+            ]
+        },
+
+
+        /* ================= CHAPTER 9 ================= */
+
+        {
+            chapter: 9,
+            type: "intro",
+            title: "THE THINGS I'LL NEVER LET YOU FORGET"
+        },
+
+        {
+            chapter: 9,
+            type: "memory",
+            images: [
+                "c1.jpeg",
+                "c2.jpeg"
+            ],
+            text: [
+                "Okay. Enough emotional nonsense.",
+                "Now let me tell you the things I will NEVER let you forget."
+            ]
+        },
+
+        {
+            chapter: 9,
+            type: "text",
+            text:
+                "GREEN CHUTNEY CHAMPION."
+        },
+
+
+        /* ================= CHAPTER 10 ================= */
+
+        {
+            chapter: 10,
+            type: "intro",
+            title: "FOR YOU"
+        },
+
+        {
+            chapter: 10,
+            type: "memory",
+            images: [
+                "e1.jpeg",
+                "e2.jpeg",
+                "e3.jpeg"
+            ],
+            text: [
+                "If you were sitting directly in front of me right now, the first thing I would say is thank you.",
+                "Thank you for everything."
+            ]
+        },
+
+        {
+            chapter: 10,
+            type: "final",
+            text:
+                "You are loved.\n\nYou are valued.\n\nYou are enough.\n\nI love you."
+        }
+
+    ];
+
+
+    /* =====================================================
+       SAFETY
+    ===================================================== */
 
     /*
-     * Chapter theme
-     */
+       We want exactly 26 scenes.
 
-    museum.className =
-        `screen active ${chapter.theme}`;
+       If something changes later, this prevents
+       the counter from breaking.
+    */
 
-
-    roomBackground.style.background =
-        getComputedStyle(museum)
-            .getPropertyValue("--bg");
+    const pages = pagePlan.slice(0, TOTAL_PAGES);
 
 
-    /*
-     * Header
-     */
+    /* =====================================================
+       GET CHAPTER CLASS
+    ===================================================== */
 
-    chapterCounter.textContent =
-        `CHAPTER ${chapter.number}`;
+    function chapterClass(chapter) {
 
-
-    chapterTitle.textContent =
-        chapter.title;
-
-
-    momentCurrent.textContent =
-        String(current + 1).padStart(2, "0");
-
-
-    /*
-     * Chapter transition
-     */
-
-    if (chapterChanged && current !== 0) {
-
-        playDoors(chapter);
+        return `chapter-${chapter}`;
 
     }
 
 
-    exhibit.dataset.chapter =
-        item.chapterIndex;
+    /* =====================================================
+       RENDER PAGE
+    ===================================================== */
+
+    function renderPage() {
+
+        const page = pages[currentPage];
+
+        if (!page) return;
 
 
-    renderMoment(item);
+        /* ---------------------------------------------
+           UPDATE COUNTER
+        --------------------------------------------- */
 
-}
-
-
-/* =====================================================
-   RENDER MOMENT
-===================================================== */
-
-function renderMoment(item) {
-
-    exhibit.classList.add("fade");
-
-    setTimeout(() => {
-
-        exhibit.innerHTML = "";
-
-        const chapter =
-            chapters[item.chapterIndex];
+        currentNumber.textContent =
+            String(currentPage + 1).padStart(2, "0");
 
 
-        /* =========================
-           INTRO
-        ========================== */
+        /* ---------------------------------------------
+           RESET CHAPTER DESIGN
+        --------------------------------------------- */
 
-        if (item.type === "intro") {
+        museum.className = "";
 
-            exhibit.innerHTML = `
+        museum.classList.add(
+            chapterClass(page.chapter)
+        );
 
-                <div class="chapter-intro exhibit-in">
 
-                    <div class="chapter-small">
-                        CHAPTER ${chapter.number}
-                    </div>
+        /* ---------------------------------------------
+           BUILD SCENE
+        --------------------------------------------- */
 
-                    <h2>
-                        ${chapter.title}
-                    </h2>
+        let html = "";
 
-                    <div class="chapter-line"></div>
 
-                    <div class="intro-moment-text">
-                        ${item.text}
+        /* =================================================
+           CHAPTER INTRO
+        ================================================= */
+
+        if (page.type === "intro") {
+
+            html = `
+
+                <div class="chapter-intro scene-enter">
+
+                    <div class="chapter-header">
+
+                        <div class="chapter-number">
+                            CHAPTER ${page.chapter}
+                        </div>
+
+                        <div class="chapter-title">
+                            ${page.title}
+                        </div>
+
+                        <div class="chapter-intro-line"></div>
+
                     </div>
 
                 </div>
@@ -672,80 +619,61 @@ function renderMoment(item) {
         }
 
 
-        /* =========================
-           GALLERY
-        ========================== */
+        /* =================================================
+           MEMORY PAGE
+        ================================================= */
 
-        else if (item.type === "gallery") {
+        else if (page.type === "memory") {
 
-            const photos =
-                item.images
-                .map(image => `
-                    <img
-                        class="gallery-photo"
-                        src="${image}"
-                        alt="Sayak"
-                    >
-                `)
+            const images = page.images || [];
+
+            let imageClass = "";
+
+            if (images.length === 1) {
+                imageClass = "single";
+            }
+
+            if (images.length === 3) {
+                imageClass = "three";
+            }
+
+
+            const imageHTML = images
+                .map(image => {
+
+                    return `
+                        <img
+                            src="${imagePath(image)}"
+                            alt="Memory"
+                            onerror="this.style.display='none'"
+                        >
+                    `;
+
+                })
                 .join("");
 
 
-            exhibit.innerHTML = `
-
-                <div class="photo-gallery exhibit-in">
-
-                    ${photos}
-
-                </div>
-
-                <div class="gallery-caption exhibit-in">
-
-                    ${item.text}
-
-                </div>
-
-            `;
-
-        }
+            const textHTML = (page.text || [])
+                .map(text => `<p>${text}</p>`)
+                .join("");
 
 
-        /* =========================
-           TEXT
-        ========================== */
+            html = `
 
-        else if (item.type === "text") {
+                <div class="memory-page scene-enter">
 
-            exhibit.innerHTML = `
-
-                <div class="text-exhibit exhibit-in">
-
-                    <div class="text-number">
-                        ${String(current + 1).padStart(2, "0")}
+                    <div class="memory-images ${imageClass}">
+                        ${imageHTML}
                     </div>
 
-                    <p>
-                        ${item.text}
-                    </p>
+                    <div class="memory-text">
 
-                </div>
+                        <div class="memory-small">
+                            CHAPTER ${page.chapter}
+                        </div>
 
-            `;
+                        ${textHTML}
 
-        }
-
-
-        /* =========================
-           FINAL
-        ========================== */
-
-        else if (item.type === "final") {
-
-            exhibit.innerHTML = `
-
-                <div class="final-exhibit exhibit-in">
-
-                    <div>
-                        ${item.text}
                     </div>
 
                 </div>
@@ -755,247 +683,151 @@ function renderMoment(item) {
         }
 
 
-        exhibit.classList.remove("fade");
+        /* =================================================
+           TEXT PAGE
+        ================================================= */
 
-    }, 450);
+        else if (page.type === "text") {
 
-}
+            const text = page.text || "";
 
+            html = `
 
-/* =====================================================
-   DOOR TRANSITION
-===================================================== */
+                <div class="text-page scene-enter">
 
-function playDoors(chapter) {
+                    <div class="text-page-inner">
 
-    if (changing) return;
+                        <div class="tiny">
+                            CHAPTER ${page.chapter}
+                        </div>
 
-    changing = true;
+                        <p>
+                            ${text}
+                        </p>
 
-    doorChapter.textContent =
-        `CHAPTER ${chapter.number}`;
+                    </div>
 
-
-    /*
-     * Close doors.
-     */
-
-    doors.classList.add("closed");
-
-
-    setTimeout(() => {
-
-        changing = false;
-
-    }, 1500);
-
-}
-
-
-/* =====================================================
-   NEXT
-===================================================== */
-
-nextBtn.addEventListener("click", () => {
-
-    if (changing) return;
-
-    if (current >= moments.length - 1) {
-
-        finishMuseum();
-
-        return;
-    }
-
-    const oldChapter =
-        moments[current].chapterIndex;
-
-    current++;
-
-    const newChapter =
-        moments[current].chapterIndex;
-
-
-    /*
-     * Chapter change.
-     */
-
-    if (oldChapter !== newChapter) {
-
-        changing = true;
-
-        const chapter =
-            chapters[newChapter];
-
-        doorChapter.textContent =
-            `CHAPTER ${chapter.number}`;
-
-        doors.classList.add("closed");
-
-        setTimeout(() => {
-
-            updateMuseum();
-
-            doors.classList.remove("closed");
-
-        }, 1150);
-
-        setTimeout(() => {
-
-            changing = false;
-
-        }, 1550);
-
-    } else {
-
-        updateMuseum();
-
-    }
-
-});
-
-
-/* =====================================================
-   PREVIOUS
-===================================================== */
-
-prevBtn.addEventListener("click", () => {
-
-    if (changing) return;
-
-    if (current <= 0) {
-
-        return;
-
-    }
-
-    const oldChapter =
-        moments[current].chapterIndex;
-
-    current--;
-
-    const newChapter =
-        moments[current].chapterIndex;
-
-
-    if (oldChapter !== newChapter) {
-
-        changing = true;
-
-        const chapter =
-            chapters[newChapter];
-
-        doorChapter.textContent =
-            `CHAPTER ${chapter.number}`;
-
-        doors.classList.add("closed");
-
-        setTimeout(() => {
-
-            updateMuseum();
-
-            doors.classList.remove("closed");
-
-        }, 1150);
-
-        setTimeout(() => {
-
-            changing = false;
-
-        }, 1550);
-
-    } else {
-
-        updateMuseum();
-
-    }
-
-});
-
-
-/* =====================================================
-   SOUND
-===================================================== */
-
-soundBtn.addEventListener("click", () => {
-
-    if (music.paused) {
-
-        music.play();
-
-        soundBtn.textContent =
-            "♪ SOUND ON";
-
-    } else {
-
-        music.pause();
-
-        soundBtn.textContent =
-            "♪ SOUND OFF";
-
-    }
-
-});
-
-
-/* =====================================================
-   KEYBOARD
-===================================================== */
-
-document.addEventListener("keydown", event => {
-
-    if (!insideMuseum) return;
-
-    if (event.key === "ArrowRight") {
-
-        nextBtn.click();
-
-    }
-
-    if (event.key === "ArrowLeft") {
-
-        prevBtn.click();
-
-    }
-
-});
-
-
-/* =====================================================
-   FINISH
-===================================================== */
-
-function finishMuseum() {
-
-    exhibit.classList.add("fade");
-
-    setTimeout(() => {
-
-        exhibit.innerHTML = `
-
-            <div class="final-exhibit exhibit-in">
-
-                <div class="final-small">
-                    THE END
                 </div>
 
-                <div class="final-title">
-                    I LOVE YOU.
+            `;
+
+        }
+
+
+        /* =================================================
+           FINAL PAGE
+        ================================================= */
+
+        else if (page.type === "final") {
+
+            html = `
+
+                <div class="text-page scene-enter">
+
+                    <div class="text-page-inner">
+
+                        <div class="tiny">
+                            CHAPTER 10 · FOR YOU
+                        </div>
+
+                        <p>
+                            ${page.text.replace(/\n/g, "<br>")}
+                        </p>
+
+                    </div>
+
                 </div>
 
-                <div class="final-small">
-                    THANK YOU FOR BEING YOU.
-                </div>
+            `;
 
-            </div>
+        }
 
-        `;
 
-        exhibit.classList.remove("fade");
+        scene.innerHTML = html;
 
-    }, 500);
 
-}
+        /* ---------------------------------------------
+           NAVIGATION STATES
+        --------------------------------------------- */
+
+        previousBtn.style.visibility =
+            currentPage === 0
+                ? "hidden"
+                : "visible";
+
+
+        nextBtn.style.visibility =
+            currentPage === pages.length - 1
+                ? "hidden"
+                : "visible";
+
+    }
+
+
+    /* =====================================================
+       NEXT
+    ===================================================== */
+
+    nextBtn.addEventListener("click", () => {
+
+        if (currentPage >= pages.length - 1) {
+            return;
+        }
+
+        currentPage++;
+
+        renderPage();
+
+    });
+
+
+    /* =====================================================
+       PREVIOUS
+    ===================================================== */
+
+    previousBtn.addEventListener("click", () => {
+
+        if (currentPage <= 0) {
+            return;
+        }
+
+        currentPage--;
+
+        renderPage();
+
+    });
+
+
+    /* =====================================================
+       KEYBOARD
+    ===================================================== */
+
+    document.addEventListener("keydown", event => {
+
+        if (museum.classList.contains("hidden")) {
+            return;
+        }
+
+        if (event.key === "ArrowRight") {
+
+            nextBtn.click();
+
+        }
+
+        if (event.key === "ArrowLeft") {
+
+            previousBtn.click();
+
+        }
+
+    });
+
+
+    /* =====================================================
+       INITIAL STATE
+    ===================================================== */
+
+    museum.classList.add("hidden");
+
+});
 ```
-
-});
