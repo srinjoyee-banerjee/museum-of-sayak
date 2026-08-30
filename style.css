@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Manrope:wght@300;400&display=swap');
 
 * {
     margin: 0;
@@ -7,691 +6,306 @@
     box-sizing: border-box;
 }
 
-
 html,
 body {
     width: 100%;
     height: 100%;
 }
 
-
 body {
-    background: #080706;
+    background: #090806;
     color: #eee9df;
     overflow: hidden;
-
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Manrope', sans-serif;
 }
 
 
-/* =====================================================
-   MUSEUM
-===================================================== */
+/* =========================================
+   ENTRANCE
+========================================= */
 
-.museum {
-    position: fixed;
-    inset: 0;
-
+.entrance {
+    position: relative;
     width: 100vw;
     height: 100vh;
-
     overflow: hidden;
-
-    background: #080706;
+    background: #090806;
 }
 
 
-/* =====================================================
-   CINEMATIC BACKGROUND
-===================================================== */
+/* =========================================
+   SAYAK PHOTO
+========================================= */
 
-.museum-bg {
+.entrance-photo {
     position: absolute;
-    inset: -5%;
 
-    background-image:
-        url("sayak_bkgnd.jpeg");
+    width: 100%;
+    height: 100%;
 
-    background-size: cover;
-    background-position: center;
+    object-fit: cover;
+    object-position: center center;
 
-    filter:
-        blur(2px)
-        brightness(.30)
-        saturate(.65);
+    transform: scale(1.03);
 
-    transform: scale(1.08);
-
-    animation: backgroundMove 20s ease-in-out infinite alternate;
+    animation: cinematicZoom 18s ease-out forwards;
 
     z-index: 0;
 }
 
 
-.museum-dark {
+/* =========================================
+   CINEMATIC OVERLAY
+========================================= */
+
+.entrance-overlay {
     position: absolute;
     inset: 0;
-
-    background:
-        radial-gradient(
-            ellipse at 70% 50%,
-            rgba(255,255,255,.08),
-            transparent 40%
-        ),
-
-        linear-gradient(
-            90deg,
-            rgba(7,6,5,.97) 0%,
-            rgba(7,6,5,.87) 38%,
-            rgba(7,6,5,.48) 68%,
-            rgba(7,6,5,.70) 100%
-        );
 
     z-index: 1;
-}
-
-
-/* =====================================================
-   FILM GRAIN
-===================================================== */
-
-.museum-grain {
-    position: absolute;
-    inset: 0;
-
-    opacity: .08;
-
-    z-index: 2;
-
-    pointer-events: none;
-
-    background-image:
-        url("sayak_bkgnd.jpeg");
-
-    background-size: 250px;
-
-    mix-blend-mode: soft-light;
-}
-
-
-/* =====================================================
-   TOP
-===================================================== */
-
-.topbar {
-    position: absolute;
-
-    top: 38px;
-    left: 5vw;
-    right: 5vw;
-
-    display: flex;
-
-    justify-content: space-between;
-    align-items: center;
-
-    z-index: 10;
-}
-
-
-.museum-name {
-    font-size: 8px;
-
-    letter-spacing: 5px;
-
-    opacity: .52;
-}
-
-
-.chapter-counter {
-    display: flex;
-
-    align-items: center;
-
-    gap: 13px;
-
-    font-family:
-        'Cormorant Garamond',
-        serif;
-
-    font-size: 17px;
-
-    opacity: .7;
-}
-
-
-.counter-line {
-    width: 32px;
-
-    height: 1px;
-
-    background: rgba(255,255,255,.35);
-}
-
-
-/* =====================================================
-   CHAPTER
-===================================================== */
-
-.chapter {
-    position: absolute;
-
-    inset: 0;
-
-    z-index: 5;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    padding:
-        80px
-        9vw
-        100px
-        7vw;
-
-    gap: 8vw;
-}
-
-
-/* =====================================================
-   TEXT
-===================================================== */
-
-.chapter-info {
-    width: 42%;
-
-    max-width: 570px;
-}
-
-
-.chapter-small {
-    font-size: 8px;
-
-    letter-spacing: 5px;
-
-    opacity: .5;
-
-    margin-bottom: 25px;
-}
-
-
-.chapter-info h1 {
-    font-family:
-        'Cormorant Garamond',
-        serif;
-
-    font-weight: 300;
-
-    font-size:
-        clamp(
-            52px,
-            6vw,
-            95px
-        );
-
-    line-height: .88;
-
-    letter-spacing: -3px;
-
-    text-transform: uppercase;
-
-    max-width: 600px;
-}
-
-
-.title-line {
-    width: 50px;
-
-    height: 1px;
-
-    background: rgba(255,255,255,.5);
-
-    margin: 30px 0;
-}
-
-
-#chapterText {
-    font-family:
-        'Cormorant Garamond',
-        serif;
-
-    font-size: 20px;
-
-    line-height: 1.45;
-
-    font-weight: 300;
-
-    max-width: 440px;
-
-    color:
-        rgba(238,233,223,.78);
-}
-
-
-/* =====================================================
-   IMAGE
-===================================================== */
-
-.photo-area {
-    width: 40%;
-
-    max-width: 570px;
-
-    height: 70vh;
-
-    position: relative;
-
-    display: flex;
-
-    align-items: center;
-}
-
-
-.photo-frame {
-    width: 100%;
-    height: 100%;
-
-    overflow: hidden;
-
-    position: relative;
-
-    background: #111;
-
-    box-shadow:
-        0 30px 90px
-        rgba(0,0,0,.65);
-}
-
-
-.photo-frame::after {
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
 
     background:
         linear-gradient(
-            180deg,
-            transparent 65%,
-            rgba(0,0,0,.25)
+            90deg,
+            rgba(5,4,3,.94) 0%,
+            rgba(5,4,3,.78) 25%,
+            rgba(5,4,3,.35) 55%,
+            rgba(5,4,3,.12) 100%
         );
 
     pointer-events: none;
 }
 
 
-#chapterImage {
-    width: 100%;
-    height: 100%;
+/* =========================================
+   LEFT CONTENT
+========================================= */
 
-    display: block;
-
-    object-fit: cover;
-
-    object-position: center;
-
-    transition:
-        opacity .6s ease,
-        transform 1.2s ease;
-}
-
-
-.photo-frame:hover #chapterImage {
-    transform: scale(1.025);
-}
-
-
-.photo-number {
+.entrance-content {
     position: absolute;
 
-    left: -42px;
+    left: 7vw;
+    top: 50%;
 
-    top: 10px;
-
-    font-family:
-        'Cormorant Garamond',
-        serif;
-
-    font-size: 14px;
-
-    opacity: .45;
+    transform: translateY(-50%);
 
     z-index: 5;
+
+    width: 620px;
+
+    animation: entranceReveal 1.6s ease forwards;
 }
 
 
-.photo-caption {
-    position: absolute;
+.small-title {
+    font-size: 8px;
+    letter-spacing: 5px;
 
-    right: -2px;
+    opacity: .55;
 
-    bottom: -28px;
+    margin-bottom: 28px;
+}
 
-    font-size: 7px;
+
+.entrance-content h1 {
+    font-family: 'Cormorant Garamond', serif;
+
+    font-weight: 300;
+
+    font-size: clamp(65px, 8vw, 118px);
+
+    line-height: .78;
+
+    letter-spacing: -4px;
+
+    text-transform: uppercase;
+}
+
+
+.entrance-content h1 em {
+    font-style: italic;
+    font-weight: 400;
+
+    letter-spacing: -5px;
+}
+
+
+.tagline {
+    margin-top: 35px;
+
+    font-family: 'Cormorant Garamond', serif;
+
+    font-size: 23px;
+
+    line-height: 1.15;
+
+    font-style: italic;
+
+    opacity: .78;
+}
+
+
+/* =========================================
+   ENTER
+========================================= */
+
+#enterBtn {
+
+    margin-top: 48px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 22px;
+
+    background: transparent;
+
+    border: none;
+
+    color: #eee9df;
+
+    cursor: pointer;
+
+    font-family: 'Manrope', sans-serif;
+
+    font-size: 8px;
 
     letter-spacing: 4px;
 
-    opacity: .38;
+    padding: 0;
 }
 
 
-/* =====================================================
-   BOTTOM
-===================================================== */
+#enterBtn b {
 
-.bottom {
+    width: 48px;
+    height: 48px;
+
+    border: 1px solid rgba(238,233,223,.55);
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-family: 'Cormorant Garamond', serif;
+
+    font-size: 20px;
+
+    font-weight: 300;
+
+    transition: .4s ease;
+}
+
+
+#enterBtn:hover b {
+
+    background: #eee9df;
+
+    color: #090806;
+
+    transform: rotate(45deg);
+
+}
+
+
+/* =========================================
+   BOTTOM
+========================================= */
+
+.year {
+
     position: absolute;
 
     left: 7vw;
     bottom: 38px;
 
-    display: flex;
+    z-index: 5;
 
-    align-items: center;
+    font-family: 'Cormorant Garamond', serif;
 
-    gap: 25px;
+    font-size: 15px;
 
-    z-index: 10;
+    opacity: .45;
 }
 
 
-.nav-btn {
-    width: 40px;
-    height: 40px;
+.edition {
 
-    border-radius: 50%;
-
-    border:
-        1px solid
-        rgba(255,255,255,.35);
-
-    background: transparent;
-
-    color: white;
-
-    font-size: 17px;
-
-    cursor: pointer;
-
-    transition: .35s ease;
-}
-
-
-.nav-btn:hover:not(:disabled) {
-    background: #eee9df;
-
-    color: #080706;
-}
-
-
-.nav-btn:disabled {
-    opacity: .18;
-
-    cursor: default;
-}
-
-
-.chapter-dots {
-    display: flex;
-
-    align-items: center;
-
-    gap: 8px;
-}
-
-
-.chapter-dot {
-    width: 4px;
-    height: 4px;
-
-    border-radius: 50%;
-
-    background: rgba(255,255,255,.28);
-
-    transition: .3s ease;
-}
-
-
-.chapter-dot.active {
-    width: 22px;
-
-    border-radius: 0;
-
-    background: rgba(255,255,255,.8);
-}
-
-
-/* =====================================================
-   SOUND
-===================================================== */
-
-.sound {
     position: absolute;
 
-    right: 38px;
-    bottom: 38px;
-
-    z-index: 10;
-
-    border: 0;
-
-    background: transparent;
-
-    color: white;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 9px;
-
-    font-size: 7px;
-
-    letter-spacing: 3px;
-
-    opacity: .5;
-
-    cursor: pointer;
-
-    transition: .3s ease;
-}
-
-
-.sound:hover {
-    opacity: 1;
-}
-
-
-.sound span:first-child {
-    font-family:
-        'Cormorant Garamond',
-        serif;
-
-    font-size: 18px;
-}
-
-
-/* =====================================================
-   EXIT
-===================================================== */
-
-.back {
-    position: absolute;
-
-    top: 38px;
     right: 5vw;
+    bottom: 40px;
 
-    transform: translateY(28px);
-
-    z-index: 10;
-
-    border: 0;
-
-    background: transparent;
-
-    color: white;
+    z-index: 5;
 
     font-size: 7px;
 
     letter-spacing: 3px;
 
-    opacity: .35;
-
-    cursor: pointer;
-
-    transition: .3s ease;
+    opacity: .4;
 }
 
 
-.back:hover {
-    opacity: 1;
-}
+/* =========================================
+   ANIMATIONS
+========================================= */
 
-
-/* =====================================================
-   CHAPTER ANIMATION
-===================================================== */
-
-.chapter.changing .chapter-info {
-    animation:
-        textOut .45s ease forwards;
-}
-
-
-.chapter.changing .photo-area {
-    animation:
-        imageOut .55s ease forwards;
-}
-
-
-@keyframes textOut {
-
-    0% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-
-    100% {
-        opacity: 0;
-        transform: translateX(-25px);
-    }
-
-}
-
-
-@keyframes imageOut {
-
-    0% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-
-    100% {
-        opacity: 0;
-        transform: translateX(25px);
-    }
-
-}
-
-
-@keyframes backgroundMove {
+@keyframes cinematicZoom {
 
     from {
-        transform:
-            scale(1.08)
-            translate3d(0,0,0);
+        transform: scale(1.03);
     }
 
     to {
-        transform:
-            scale(1.13)
-            translate3d(-1%, -1%, 0);
+        transform: scale(1.10);
     }
 
 }
 
 
-/* =====================================================
+@keyframes entranceReveal {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(-46%)
+            translateX(-25px);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(-50%)
+            translateX(0);
+    }
+
+}
+
+
+/* =========================================
    MOBILE
-===================================================== */
+========================================= */
 
-@media (max-width: 850px) {
+@media (max-width: 700px) {
 
-    body {
-        overflow-y: auto;
+    .entrance-photo {
+        object-position: 65% center;
     }
 
-    .museum {
-        min-height: 100vh;
-        height: auto;
-
-        overflow-y: auto;
+    .entrance-content {
+        left: 25px;
+        width: calc(100% - 50px);
     }
 
-    .chapter {
-        position: relative;
-
-        min-height: 100vh;
-
-        flex-direction: column;
-
-        justify-content: center;
-
-        padding:
-            110px
-            25px
-            110px;
-
-        gap: 50px;
+    .entrance-content h1 {
+        font-size: 62px;
     }
 
-    .chapter-info {
-        width: 100%;
-    }
-
-    .chapter-info h1 {
-        font-size: 52px;
-    }
-
-    #chapterText {
-        font-size: 18px;
-    }
-
-    .photo-area {
-        width: 100%;
-
-        height: 55vh;
-    }
-
-    .photo-number {
+    .edition {
         display: none;
-    }
-
-    .bottom {
-        left: 25px;
-        bottom: 25px;
-    }
-
-    .sound {
-        right: 25px;
-        bottom: 25px;
-    }
-
-    .topbar {
-        left: 25px;
-        right: 25px;
-    }
-
-    .museum-name {
-        letter-spacing: 3px;
-    }
-
-    .back {
-        right: 25px;
     }
 
 }
