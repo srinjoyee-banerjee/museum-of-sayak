@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,125 +14,72 @@
 
     <main class="museum">
 
-        <!-- Background -->
         <div class="museum-background"></div>
-        <div class="museum-vignette"></div>
-        <div class="museum-grain"></div>
+
+        <div class="museum-dark"></div>
 
 
-        <!-- Top -->
-        <header class="museum-top">
+        <!-- CHAPTER DOOR -->
 
-            <div class="museum-title">
-                THE MUSEUM OF SAYAK
+        <section class="chapter-door">
+
+            <div class="chapter-number">
+                01
             </div>
 
-            <div class="counter">
-                <span id="currentNumber">01</span>
-                <span>/</span>
-                <span>10</span>
+            <div class="chapter-label">
+                CHAPTER
             </div>
 
-        </header>
+            <h1>
+                WHO ARE YOU?
+            </h1>
 
+            <p>
+                Enter the first room.
+            </p>
 
-        <!-- Main -->
-        <section class="museum-content">
-
-            <!-- LEFT -->
-            <div class="text-side">
-
-                <div class="chapter-number" id="chapterNumber">
-                    CHAPTER 01
-                </div>
-
-                <h1 id="chapterTitle">
-                    WHO ARE YOU?
-                </h1>
-
-                <div class="little-line"></div>
-
-                <p id="chapterText">
-                    You are someone I keep discovering,
-                    even after all these years.
-                </p>
-
-            </div>
-
-
-            <!-- RIGHT -->
-            <div class="image-side">
-
-                <div class="image-wrapper">
-
-                    <img
-                        id="chapterImage"
-                        src="strong.jpeg"
-                        alt="Sayak"
-                    >
-
-                </div>
-
-                <div class="image-counter">
-                    <span id="photoNumber">01</span>
-                </div>
-
-            </div>
+            <button id="chapterEnter">
+                ENTER
+                <span>↗</span>
+            </button>
 
         </section>
 
 
-        <!-- Bottom navigation -->
-        <div class="bottom-navigation">
+        <!-- MUSIC -->
 
-            <button id="prevBtn">
-                ←
-            </button>
+        <audio id="backgroundMusic" loop>
+            <source src="mp3.mpeg" type="audio/mpeg">
+        </audio>
 
-            <div class="progress">
-                <div
-                    class="progress-fill"
-                    id="progressFill"
-                ></div>
-            </div>
-
-            <button id="nextBtn">
-                →
-            </button>
-
-        </div>
-
-
-        <!-- Sound -->
-        <button
-            class="sound-button"
-            id="musicBtn"
-        >
-            ♪
-            <span id="soundText">SOUND ON</span>
-        </button>
-
-
-        <!-- Back -->
-        <button
-            class="back-button"
-            id="backBtn"
-        >
-            ← BACK
-        </button>
 
     </main>
 
 
-    <audio
-        id="museumMusic"
-        src="mp3.mpeg"
-        loop
-        preload="auto"
-    ></audio>
+    <script>
+
+        document.addEventListener("DOMContentLoaded", () => {
+
+            const music =
+                document.getElementById("backgroundMusic");
+
+            const button =
+                document.getElementById("chapterEnter");
 
 
-    <script src="script.js"></script>
+            button.addEventListener("click", () => {
+
+                music.play().catch(() => {});
+
+                button.innerHTML = "OPENING...";
+
+            });
+
+        });
+
+    </script>
 
 </body>
+
 </html>
