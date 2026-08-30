@@ -1495,3 +1495,466 @@ body {
     }
 
 }
+/* =====================================================
+   MUSEUM DOOR INTRO
+===================================================== */
+
+#museumPage {
+    position: fixed;
+    inset: 0;
+    background: #080705;
+    overflow: hidden;
+}
+
+
+/* THE ACTUAL MUSEUM */
+
+#museumInside {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+
+/* BACKGROUND */
+
+.museumBg {
+    position: absolute;
+    inset: 0;
+
+    background-image:
+        url("sayak_bkgnd.jpeg");
+
+    background-size: cover;
+    background-position: center;
+
+    filter: brightness(.32);
+
+    transform: scale(1.05);
+}
+
+
+/* DARK CINEMATIC LAYER */
+
+.museumShade {
+    position: absolute;
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at center,
+            transparent 10%,
+            rgba(0,0,0,.65) 100%
+        );
+
+    z-index: 1;
+}
+
+
+/* HEADER */
+
+#museumInside header {
+    position: absolute;
+
+    top: 35px;
+    left: 5vw;
+    right: 5vw;
+
+    z-index: 5;
+
+    display: flex;
+    justify-content: space-between;
+
+    font-size: 8px;
+    letter-spacing: 4px;
+
+    opacity: .6;
+}
+
+
+/* CHAPTER */
+
+.chapter {
+    position: absolute;
+
+    left: 7vw;
+    top: 17vh;
+
+    z-index: 5;
+
+    width: 86vw;
+}
+
+
+.chapterLabel {
+    font-size: 8px;
+    letter-spacing: 5px;
+
+    opacity: .55;
+
+    margin-bottom: 15px;
+}
+
+
+.chapter h1 {
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: clamp(55px, 7vw, 100px);
+
+    font-weight: 300;
+
+    letter-spacing: -3px;
+
+    margin-bottom: 45px;
+}
+
+
+/* CONTENT */
+
+.chapterContent {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7vw;
+}
+
+
+/* IMAGE */
+
+.imageBox {
+    width: 390px;
+    height: 470px;
+
+    border: 1px solid rgba(255,255,255,.2);
+
+    padding: 10px;
+
+    background: rgba(0,0,0,.35);
+}
+
+
+.imageBox img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+/* TEXT */
+
+.chapterWriting {
+    max-width: 420px;
+
+    border-left: 1px solid rgba(255,255,255,.2);
+
+    padding-left: 30px;
+}
+
+
+.chapterWriting p {
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 29px;
+
+    line-height: 1.15;
+
+    margin-bottom: 25px;
+
+    opacity: .9;
+}
+
+
+/* BOTTOM */
+
+.museumBottom {
+    position: absolute;
+
+    bottom: 35px;
+    right: 5vw;
+
+    z-index: 6;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+
+.museumBottom button {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    background: transparent;
+
+    border: 1px solid rgba(255,255,255,.35);
+
+    color: white;
+
+    cursor: pointer;
+}
+
+
+.museumBottom span {
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    opacity: .55;
+}
+
+
+.sound {
+    position: absolute;
+
+    bottom: 40px;
+    left: 5vw;
+
+    z-index: 6;
+
+    font-size: 7px;
+
+    letter-spacing: 3px;
+
+    opacity: .45;
+}
+
+
+/* =====================================================
+   DOORS
+===================================================== */
+
+#museumDoors {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 100;
+
+    background: #080705;
+
+    overflow: hidden;
+}
+
+
+.doorLight {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(220,205,175,.65),
+            rgba(20,16,11,.7) 45%,
+            #050403 100%
+        );
+}
+
+
+/* DOOR */
+
+.door {
+    position: absolute;
+
+    top: 0;
+
+    width: 50%;
+    height: 100%;
+
+    z-index: 2;
+
+    background:
+        linear-gradient(
+            90deg,
+            #0b0907,
+            #211b15,
+            #0b0907
+        );
+
+    border: 1px solid rgba(255,255,255,.15);
+
+    transition:
+        transform 2.2s cubic-bezier(.77,0,.18,1);
+}
+
+
+.doorLeft {
+    left: 0;
+
+    transform-origin: left center;
+}
+
+
+.doorRight {
+    right: 0;
+
+    transform-origin: right center;
+}
+
+
+/* DOOR DESIGN */
+
+.doorWriting {
+    position: absolute;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 70%;
+    height: 70%;
+
+    border: 1px solid rgba(255,255,255,.15);
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 15px;
+
+    font-family: "Cormorant Garamond", serif;
+}
+
+
+.doorLeft .doorWriting {
+    right: 10%;
+}
+
+
+.doorRight .doorWriting {
+    left: 10%;
+}
+
+
+.doorWriting small {
+    font-family: "DM Mono", monospace;
+
+    font-size: 7px;
+
+    letter-spacing: 5px;
+
+    opacity: .5;
+}
+
+
+.doorWriting strong {
+    font-size: 55px;
+
+    font-weight: 300;
+}
+
+
+/* CENTER TEXT */
+
+.enteringText {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 5;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    pointer-events: none;
+
+    transition: opacity .6s ease;
+}
+
+
+.enteringText span {
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 100px;
+
+    opacity: .12;
+}
+
+
+.enteringText p {
+    font-size: 8px;
+
+    letter-spacing: 6px;
+
+    opacity: .75;
+}
+
+
+/* OPEN */
+
+#museumDoors.open .doorLeft {
+    transform:
+        perspective(1200px)
+        rotateY(-88deg);
+}
+
+
+#museumDoors.open .doorRight {
+    transform:
+        perspective(1200px)
+        rotateY(88deg);
+}
+
+
+#museumDoors.open .enteringText {
+    opacity: 0;
+}
+
+
+/* REMOVE DOOR */
+
+#museumDoors.gone {
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition:
+        opacity .8s ease;
+}
+
+
+/* MOBILE */
+
+@media(max-width:700px) {
+
+    .chapter {
+        top: 13vh;
+    }
+
+    .chapterContent {
+        display: block;
+    }
+
+    .imageBox {
+        width: 280px;
+        height: 320px;
+    }
+
+    .chapterWriting {
+        margin-top: 25px;
+    }
+
+    .chapterWriting p {
+        font-size: 23px;
+    }
+
+}
