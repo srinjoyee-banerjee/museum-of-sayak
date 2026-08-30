@@ -1,998 +1,1227 @@
-@import url(
-    'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap'
-);
-
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@300;400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap');
 
 /* =====================================================
-   RESET
+RESET
 ===================================================== */
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
 
 html,
 body {
-    width: 100%;
-    height: 100%;
+width: 100%;
+height: 100%;
 }
 
 body {
-    background: #080706;
-    color: #eee9df;
-    overflow: hidden;
+overflow: hidden;
+background: #050505;
 }
 
+/* =====================================================
+APP
+===================================================== */
+
+#app {
+width: 100vw;
+height: 100vh;
+position: relative;
+}
 
 /* =====================================================
-   GENERAL SCREEN
+SCREENS
 ===================================================== */
 
 .screen {
-    position: fixed;
-    inset: 0;
-
-    width: 100vw;
-    height: 100vh;
-
-    overflow: hidden;
-
-    opacity: 0;
-    visibility: hidden;
-
-    pointer-events: none;
-
-    transition:
-        opacity 1s ease,
-        visibility 1s ease;
+position: absolute;
+inset: 0;
+width: 100%;
+height: 100%;
+overflow: hidden;
 }
 
-.screen.active {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
+#entrance {
+opacity: 1;
+visibility: visible;
+z-index: 20;
+transition:
+opacity 1.2s ease,
+visibility 1.2s;
 }
 
+#entrance.hidden {
+opacity: 0;
+visibility: hidden;
+pointer-events: none;
+}
+
+#museum {
+opacity: 0;
+visibility: hidden;
+z-index: 10;
+transition:
+opacity 1s ease,
+visibility 1s;
+}
+
+#museum.active {
+opacity: 1;
+visibility: visible;
+}
 
 /* =====================================================
-   PAGE 1
+ENTRANCE PHOTO
 ===================================================== */
 
-#entrancePage {
-    background: #090807;
+.entrance-photo {
+position: absolute;
+inset: 0;
+
+```
+width: 100%;
+height: 100%;
+
+object-fit: cover;
+
+object-position: center center;
+
+transform: scale(1.02);
+
+animation: entranceZoom 18s ease-out forwards;
+```
+
 }
 
+.entrance-overlay {
+position: absolute;
+inset: 0;
 
-/* SAYAK PHOTO */
+```
+background:
+    linear-gradient(
+        90deg,
+        rgba(0,0,0,.80) 0%,
+        rgba(0,0,0,.52) 35%,
+        rgba(0,0,0,.14) 75%,
+        rgba(0,0,0,.38) 100%
+    );
 
-.entrancePhoto {
+z-index: 1;
+```
 
-    position: absolute;
-
-    top: 3vh;
-    right: 4vw;
-
-    width: 61vw;
-    height: 94vh;
-
-    object-fit: cover;
-    object-position: center;
-
-    filter:
-        brightness(.82)
-        contrast(.95);
-
-    animation: slowPhoto 18s ease-out forwards;
 }
 
+.entrance-overlay::after {
+content: "";
+position: absolute;
+inset: 0;
 
-/* DARK GRADIENT */
+```
+background:
+    linear-gradient(
+        0deg,
+        rgba(0,0,0,.75),
+        transparent 45%
+    );
+```
 
-.entranceShade {
-
-    position: absolute;
-
-    inset: 0;
-
-    background:
-        linear-gradient(
-            90deg,
-            #090807 0%,
-            rgba(9,8,7,.98) 16%,
-            rgba(9,8,7,.76) 36%,
-            rgba(9,8,7,.18) 70%,
-            rgba(9,8,7,.4) 100%
-        );
-
-    z-index: 2;
 }
-
-
-/* CONTENT */
-
-.entranceContent {
-
-    position: absolute;
-
-    left: 7vw;
-    top: 50%;
-
-    transform: translateY(-50%);
-
-    z-index: 5;
-
-    width: 560px;
-
-    animation: entranceReveal 1.4s ease forwards;
-}
-
-
-.private {
-
-    font-family: "DM Mono", monospace;
-
-    font-size: 8px;
-
-    letter-spacing: 5px;
-
-    opacity: .48;
-
-    margin-bottom: 27px;
-}
-
-
-.entranceContent h1 {
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        clamp(70px, 8vw, 120px);
-
-    line-height: .78;
-
-    font-weight: 300;
-
-    letter-spacing: -5px;
-}
-
-
-.entranceContent h1 em {
-
-    font-style: italic;
-
-    font-weight: 400;
-
-    letter-spacing: -6px;
-}
-
-
-.entranceContent p {
-
-    margin-top: 38px;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size: 24px;
-
-    line-height: 1;
-
-    font-style: italic;
-
-    opacity: .78;
-}
-
-
-/* ENTER */
-
-#enterMuseum {
-
-    margin-top: 44px;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 18px;
-
-    border: 0;
-
-    background: transparent;
-
-    color: #eee9df;
-
-    font-family:
-        "DM Mono",
-        monospace;
-
-    font-size: 8px;
-
-    letter-spacing: 4px;
-
-    cursor: pointer;
-}
-
-
-#enterMuseum span {
-
-    width: 43px;
-    height: 43px;
-
-    border: 1px solid rgba(238,233,223,.5);
-
-    border-radius: 50%;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    font-size: 17px;
-
-    transition:
-        transform .4s ease,
-        background .4s ease,
-        color .4s ease;
-}
-
-
-#enterMuseum:hover span {
-
-    transform: rotate(45deg);
-
-    background: #eee9df;
-
-    color: #090807;
-}
-
-
-/* FOOTER */
-
-.entranceYear {
-
-    position: absolute;
-
-    left: 7vw;
-    bottom: 37px;
-
-    z-index: 5;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size: 17px;
-
-    opacity: .45;
-}
-
-
-.entranceBottom {
-
-    position: absolute;
-
-    right: 5vw;
-    bottom: 40px;
-
-    z-index: 5;
-
-    font-family:
-        "DM Mono",
-        monospace;
-
-    font-size: 7px;
-
-    letter-spacing: 3px;
-
-    opacity: .4;
-}
-
 
 /* =====================================================
-   DOOR PAGE
+ENTRANCE CONTENT
 ===================================================== */
 
-#doorPage {
+.entrance-content {
+position: absolute;
+z-index: 3;
 
-    background: #080706;
+```
+left: 8vw;
+top: 50%;
 
-    z-index: 20;
+transform: translateY(-50%);
+
+color: #f2eee7;
+
+animation: entranceReveal 1.5s ease both;
+```
+
 }
 
-
-/* LIGHT */
-
-.museumLight {
-
-    position: absolute;
-
-    inset: 0;
-
-    background:
-        radial-gradient(
-            ellipse at center,
-            rgba(218,202,170,.65),
-            rgba(30,24,17,.75) 42%,
-            #050403 100%
-        );
+.entrance-kicker {
+font-family: "DM Mono", monospace;
+font-size: 9px;
+letter-spacing: 5px;
+margin-bottom: 28px;
+opacity: .65;
 }
 
+.entrance-content h1 {
+font-family: "Bodoni Moda", serif;
 
-/* DOORS */
+```
+font-size: clamp(65px, 8vw, 125px);
 
-.museumDoor {
+font-weight: 400;
+line-height: .78;
 
-    position: absolute;
+letter-spacing: -5px;
 
-    top: 0;
+text-transform: uppercase;
+```
 
-    width: 50%;
-    height: 100%;
-
-    z-index: 2;
-
-    background:
-        linear-gradient(
-            90deg,
-            #0b0907,
-            #211b15,
-            #0b0907
-        );
-
-    border: 1px solid rgba(238,233,223,.15);
-
-    transition:
-        transform 2.3s
-        cubic-bezier(.77,0,.18,1);
 }
 
+.entrance-content h1 em {
+display: block;
 
-.leftDoor {
-    left: 0;
-    transform-origin: left center;
+```
+font-family: "Cormorant Garamond", serif;
+
+font-size: .86em;
+
+font-weight: 300;
+font-style: italic;
+
+text-transform: none;
+
+letter-spacing: -3px;
+
+margin-top: 12px;
+```
+
 }
 
+.entrance-content p {
+margin-top: 38px;
 
-.rightDoor {
-    right: 0;
-    transform-origin: right center;
+```
+font-family: "Cormorant Garamond", serif;
+
+font-size: 25px;
+line-height: 1.05;
+
+font-style: italic;
+
+opacity: .85;
+```
+
 }
 
+#enterBtn {
+margin-top: 45px;
 
-/* DOOR FRAME */
+```
+display: flex;
+align-items: center;
+gap: 25px;
 
-.doorFrame {
+border: 0;
+background: none;
 
-    position: absolute;
+color: white;
 
-    top: 50%;
+font-family: "DM Mono", monospace;
 
-    transform: translateY(-50%);
+font-size: 10px;
+letter-spacing: 3px;
 
-    width: 70%;
-    height: 70%;
+cursor: pointer;
 
-    border: 1px solid rgba(238,233,223,.16);
+transition: opacity .3s;
+```
 
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-    justify-content: center;
-
-    gap: 15px;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
 }
 
+#enterBtn span {
+width: 45px;
+height: 45px;
 
-.leftDoor .doorFrame {
-    right: 10%;
+```
+display: flex;
+align-items: center;
+justify-content: center;
+
+border: 1px solid rgba(255,255,255,.6);
+
+border-radius: 50%;
+
+font-size: 18px;
+
+transition:
+    background .4s,
+    color .4s,
+    transform .4s;
+```
+
 }
 
-
-.rightDoor .doorFrame {
-    left: 10%;
+#enterBtn:hover span {
+background: white;
+color: black;
+transform: rotate(45deg);
 }
 
+.entrance-footer {
+position: absolute;
+z-index: 3;
 
-.doorFrame small {
+```
+left: 8vw;
+bottom: 38px;
 
-    font-family:
-        "DM Mono",
-        monospace;
+display: flex;
+gap: 35px;
 
-    font-size: 7px;
+color: white;
 
-    letter-spacing: 5px;
+font-family: "DM Mono", monospace;
 
-    opacity: .5;
+font-size: 8px;
+letter-spacing: 3px;
+
+opacity: .55;
+```
+
 }
-
-
-.doorFrame strong {
-
-    font-size: 55px;
-
-    font-weight: 300;
-}
-
-
-/* CENTER */
-
-.doorText {
-
-    position: absolute;
-
-    inset: 0;
-
-    z-index: 5;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-    justify-content: center;
-
-    transition: opacity .6s ease;
-}
-
-
-.doorText span {
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size: 105px;
-
-    opacity: .12;
-}
-
-
-.doorText p {
-
-    font-family:
-        "DM Mono",
-        monospace;
-
-    font-size: 8px;
-
-    letter-spacing: 6px;
-
-    opacity: .75;
-}
-
-
-/* DOOR OPEN */
-
-#doorPage.open .leftDoor {
-
-    transform:
-        perspective(1300px)
-        rotateY(-88deg);
-}
-
-
-#doorPage.open .rightDoor {
-
-    transform:
-        perspective(1300px)
-        rotateY(88deg);
-}
-
-
-#doorPage.open .doorText {
-
-    opacity: 0;
-}
-
 
 /* =====================================================
-   MUSEUM
+MUSEUM BACKGROUND
 ===================================================== */
 
-#museumPage {
-    z-index: 10;
+.room-background {
+position: absolute;
+inset: 0;
+
+```
+background: #090909;
+
+transition:
+    background 1s ease;
+```
+
 }
 
+.room-light {
+position: absolute;
+inset: 0;
 
-/* BACKGROUND */
+```
+background:
+    radial-gradient(
+        ellipse at 50% 40%,
+        rgba(255,255,255,.07),
+        transparent 55%
+    );
 
-.museumBackground {
+pointer-events: none;
+```
 
-    position: absolute;
-
-    inset: -5%;
-
-    background-image:
-        url("sayak_bkgnd.jpeg");
-
-    background-size: cover;
-
-    background-position: center;
-
-    filter:
-        brightness(.22)
-        blur(1px);
-
-    transform: scale(1.06);
 }
 
+.film-grain {
+position: absolute;
+inset: -100%;
 
-/* OVERLAY */
+```
+opacity: .045;
 
-.museumOverlay {
+background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
 
-    position: absolute;
+pointer-events: none;
+z-index: 15;
+```
 
-    inset: 0;
-
-    background:
-        radial-gradient(
-            ellipse at center,
-            transparent 5%,
-            rgba(0,0,0,.7) 90%
-        );
 }
-
-
-/* HEADER */
-
-.museumHeader {
-
-    position: absolute;
-
-    top: 34px;
-
-    left: 5vw;
-    right: 5vw;
-
-    z-index: 5;
-
-    display: flex;
-
-    justify-content: space-between;
-
-    font-family:
-        "DM Mono",
-        monospace;
-
-    font-size: 8px;
-
-    letter-spacing: 4px;
-
-    opacity: .55;
-}
-
-
-/* MAIN */
-
-.museumContent {
-
-    position: absolute;
-
-    inset: 0;
-
-    z-index: 4;
-
-    padding:
-        13vh
-        8vw
-        10vh;
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-}
-
-
-/* CHAPTER */
-
-#chapterNumber {
-
-    font-family:
-        "DM Mono",
-        monospace;
-
-    font-size: 8px;
-
-    letter-spacing: 5px;
-
-    opacity: .55;
-
-    margin-bottom: 14px;
-}
-
-
-#chapterTitle {
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        clamp(55px, 6.5vw, 100px);
-
-    font-weight: 300;
-
-    letter-spacing: -3px;
-
-    line-height: .85;
-
-    margin-bottom: 42px;
-}
-
-
-/* EXHIBIT */
-
-.exhibit {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 7vw;
-}
-
-
-/* PHOTO */
-
-.photoFrame {
-
-    width: 390px;
-    height: 450px;
-
-    padding: 10px;
-
-    border:
-        1px solid
-        rgba(238,233,223,.2);
-
-    background:
-        rgba(0,0,0,.3);
-
-    flex-shrink: 0;
-
-    box-shadow:
-        0 30px 80px
-        rgba(0,0,0,.5);
-}
-
-
-.photoFrame img {
-
-    width: 100%;
-    height: 100%;
-
-    display: block;
-
-    object-fit: cover;
-
-    object-position: center;
-}
-
-
-.imageCaption {
-
-    margin-top: 10px;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size: 14px;
-
-    font-style: italic;
-
-    opacity: .5;
-}
-
-
-/* STORY */
-
-.story {
-
-    max-width: 440px;
-
-    border-left:
-        1px solid
-        rgba(238,233,223,.2);
-
-    padding-left: 30px;
-}
-
-
-.storyNumber {
-
-    font-family:
-        "DM Mono",
-        monospace;
-
-    font-size: 8px;
-
-    letter-spacing: 3px;
-
-    opacity: .4;
-
-    margin-bottom: 25px;
-}
-
-
-#storyText {
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        clamp(25px, 2.5vw, 36px);
-
-    line-height: 1.12;
-
-    font-weight: 300;
-
-    opacity: .9;
-}
-
 
 /* =====================================================
-   NAVIGATION
+MUSEUM HEADER
 ===================================================== */
 
-.navigation {
+.museum-top {
+position: absolute;
 
-    position: absolute;
+```
+top: 35px;
+left: 45px;
+right: 45px;
 
-    right: 5vw;
-    bottom: 34px;
+z-index: 8;
 
-    z-index: 10;
+display: flex;
+justify-content: space-between;
+align-items: flex-start;
 
-    display: flex;
+color: var(--text);
+```
 
-    align-items: center;
-
-    gap: 12px;
 }
 
+.museum-mark {
+font-family: "DM Mono", monospace;
 
-.navigation button {
+```
+font-size: 8px;
+line-height: 1.5;
 
-    width: 44px;
-    height: 44px;
+letter-spacing: 3px;
 
-    border:
-        1px solid
-        rgba(238,233,223,.35);
+opacity: .55;
+```
 
-    border-radius: 50%;
-
-    background: transparent;
-
-    color: white;
-
-    font-size: 18px;
-
-    cursor: pointer;
-
-    transition: .3s ease;
 }
 
+#roomNumber {
+font-family: "DM Mono", monospace;
 
-.navigation button:hover {
+```
+font-size: 9px;
 
-    background: white;
+letter-spacing: 3px;
 
-    color: black;
+opacity: .55;
+```
+
 }
 
+/* =====================================================
+EXHIBIT
+===================================================== */
 
-#navCounter {
+#exhibit {
+position: absolute;
+inset: 0;
 
-    font-family:
-        "DM Mono",
-        monospace;
+```
+z-index: 3;
 
-    font-size: 8px;
+color: var(--text);
 
-    letter-spacing: 2px;
+transition:
+    opacity .65s ease,
+    transform .65s ease;
+```
 
-    opacity: .5;
 }
 
+#exhibit.fade {
+opacity: 0;
+transform: translateY(18px);
+}
 
-/* SOUND */
+/* =====================================================
+CHAPTER INTRO
+===================================================== */
+
+.chapter-intro {
+position: absolute;
+
+```
+left: 9vw;
+top: 50%;
+
+transform: translateY(-50%);
+
+max-width: 700px;
+```
+
+}
+
+.chapter-small {
+font-family: "DM Mono", monospace;
+
+```
+font-size: 10px;
+letter-spacing: 5px;
+
+opacity: .65;
+
+margin-bottom: 22px;
+```
+
+}
+
+.chapter-intro h2 {
+font-family: var(--title-font);
+
+```
+font-size: clamp(55px, 8vw, 115px);
+
+font-weight: var(--title-weight);
+
+line-height: .85;
+
+letter-spacing: -3px;
+
+color: var(--accent);
+```
+
+}
+
+.chapter-line {
+width: 70px;
+height: 1px;
+
+```
+margin-top: 35px;
+
+background: var(--accent);
+
+opacity: .6;
+```
+
+}
+
+/* =====================================================
+TEXT EXHIBIT
+===================================================== */
+
+.text-exhibit {
+position: absolute;
+
+```
+left: 9vw;
+right: 9vw;
+bottom: 15vh;
+
+display: flex;
+justify-content: space-between;
+align-items: flex-end;
+
+gap: 60px;
+```
+
+}
+
+.text-exhibit .text-number {
+font-family: "DM Mono", monospace;
+
+```
+font-size: 11px;
+letter-spacing: 3px;
+
+opacity: .5;
+```
+
+}
+
+.text-exhibit p {
+max-width: 750px;
+
+```
+font-family: var(--body-font);
+
+font-size: clamp(23px, 2.2vw, 34px);
+
+line-height: 1.18;
+
+color: var(--accent);
+```
+
+}
+
+/* =====================================================
+PHOTO GALLERY
+===================================================== */
+
+.photo-gallery {
+position: absolute;
+
+```
+inset: 12vh 8vw 18vh;
+
+display: flex;
+
+align-items: center;
+justify-content: center;
+
+gap: 2vw;
+```
+
+}
+
+.gallery-photo {
+position: relative;
+
+```
+height: min(55vh, 550px);
+
+width: auto;
+
+max-width: 31vw;
+
+object-fit: cover;
+
+box-shadow:
+    0 25px 60px rgba(0,0,0,.45);
+
+border: 8px solid rgba(255,255,255,.92);
+
+background: #111;
+
+transition:
+    transform .8s ease,
+    opacity .8s ease;
+```
+
+}
+
+.gallery-photo:nth-child(1) {
+transform: rotate(-3deg) translateY(12px);
+}
+
+.gallery-photo:nth-child(2) {
+transform: rotate(1deg) translateY(-10px);
+z-index: 2;
+}
+
+.gallery-photo:nth-child(3) {
+transform: rotate(4deg) translateY(15px);
+}
+
+.gallery-caption {
+position: absolute;
+
+```
+bottom: 8vh;
+
+left: 9vw;
+
+max-width: 700px;
+
+font-family: var(--body-font);
+
+font-size: 22px;
+
+line-height: 1.2;
+
+color: var(--accent);
+
+z-index: 4;
+```
+
+}
+
+/* =====================================================
+SPLIT EXHIBIT
+===================================================== */
+
+.split-exhibit {
+position: absolute;
+inset: 0;
+
+```
+display: grid;
+
+grid-template-columns: 55% 45%;
+
+align-items: center;
+```
+
+}
+
+.split-image {
+height: 67vh;
+
+```
+margin-left: 8vw;
+
+object-fit: cover;
+
+width: min(48vw, 650px);
+
+box-shadow: 0 30px 80px rgba(0,0,0,.45);
+```
+
+}
+
+.split-text {
+padding: 8vw;
+
+```
+padding-left: 4vw;
+```
+
+}
+
+.split-text .small {
+font-family: "DM Mono", monospace;
+
+```
+font-size: 10px;
+letter-spacing: 4px;
+
+opacity: .6;
+
+margin-bottom: 25px;
+```
+
+}
+
+.split-text p {
+font-family: var(--body-font);
+
+```
+font-size: clamp(22px, 2.1vw, 32px);
+
+line-height: 1.2;
+
+color: var(--accent);
+```
+
+}
+
+/* =====================================================
+DOORS
+===================================================== */
+
+.doors {
+position: absolute;
+inset: 0;
+
+```
+z-index: 30;
+
+pointer-events: none;
+
+display: flex;
+```
+
+}
+
+.door {
+width: 50%;
+height: 100%;
+
+```
+background:
+    linear-gradient(
+        90deg,
+        #080808,
+        #171717 45%,
+        #0b0b0b
+    );
+
+border: 1px solid rgba(255,255,255,.05);
+
+transition:
+    transform 1.35s cubic-bezier(.77,0,.18,1);
+```
+
+}
+
+.door-left {
+transform: translateX(-100%);
+}
+
+.door-right {
+transform: translateX(100%);
+}
+
+.doors.closed .door-left {
+transform: translateX(0);
+}
+
+.doors.closed .door-right {
+transform: translateX(0);
+}
+
+.door-title {
+position: absolute;
+
+```
+top: 50%;
+left: 50%;
+
+transform: translate(-50%, -50%);
+
+color: white;
+
+text-align: center;
+
+font-family: "DM Mono", monospace;
+
+letter-spacing: 4px;
+
+opacity: 0;
+
+transition: opacity .4s;
+```
+
+}
+
+.doors.closed .door-title {
+opacity: 1;
+}
+
+.door-title span {
+display: block;
+
+```
+font-size: 8px;
+
+opacity: .55;
+
+margin-bottom: 15px;
+```
+
+}
+
+.door-title strong {
+font-family: "Bodoni Moda", serif;
+
+```
+font-size: 35px;
+
+font-weight: 400;
+
+letter-spacing: 2px;
+```
+
+}
+
+/* =====================================================
+NAVIGATION
+===================================================== */
+
+.museum-navigation {
+position: absolute;
+
+```
+left: 45px;
+right: 45px;
+bottom: 35px;
+
+z-index: 10;
+
+display: flex;
+
+align-items: center;
+
+justify-content: space-between;
+```
+
+}
+
+.museum-navigation button {
+border: 0;
+
+```
+background: none;
+
+color: var(--text);
+
+cursor: pointer;
+
+font-family: "DM Mono", monospace;
+
+font-size: 9px;
+
+letter-spacing: 3px;
+
+opacity: .7;
+
+transition: opacity .3s;
+```
+
+}
+
+.museum-navigation button:hover {
+opacity: 1;
+}
+
+.museum-navigation button:first-child {
+font-size: 25px;
+}
+
+.moment {
+position: absolute;
+
+```
+left: 50%;
+
+transform: translateX(-50%);
+
+font-family: "DM Mono", monospace;
+
+font-size: 9px;
+
+letter-spacing: 3px;
+
+color: var(--text);
+
+opacity: .55;
+```
+
+}
+
+.moment i {
+font-style: normal;
+
+```
+margin: 0 8px;
+
+opacity: .4;
+```
+
+}
+
+/* =====================================================
+SOUND
+===================================================== */
 
 #soundBtn {
+position: absolute;
 
-    position: absolute;
+```
+right: 45px;
+bottom: 82px;
 
-    left: 5vw;
-    bottom: 39px;
+z-index: 10;
 
-    z-index: 10;
+border: 0;
 
-    border: 0;
+background: none;
 
-    background: transparent;
+color: var(--text);
 
-    color: white;
+font-family: "DM Mono", monospace;
 
-    font-family:
-        "DM Mono",
-        monospace;
+font-size: 8px;
 
-    font-size: 7px;
+letter-spacing: 2px;
 
-    letter-spacing: 3px;
+opacity: .5;
 
-    opacity: .5;
+cursor: pointer;
+```
 
-    cursor: pointer;
 }
-
-
-/* EXIT */
-
-#exitBtn {
-
-    position: absolute;
-
-    top: 34px;
-
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    z-index: 10;
-
-    border: 0;
-
-    background: transparent;
-
-    color: white;
-
-    font-family:
-        "DM Mono",
-        monospace;
-
-    font-size: 7px;
-
-    letter-spacing: 3px;
-
-    opacity: .35;
-
-    cursor: pointer;
-}
-
 
 /* =====================================================
-   ANIMATION
+CHAPTER THEMES
 ===================================================== */
 
-@keyframes slowPhoto {
+/* CHAPTER 1 */
 
-    from {
-        transform: scale(1.01);
-    }
+.theme-1 {
+--bg: #090909;
+--text: #eeeae1;
+--accent: #eeeae1;
 
-    to {
-        transform: scale(1.06);
-    }
+```
+--title-font: "Bodoni Moda", serif;
+--body-font: "Cormorant Garamond", serif;
+--title-weight: 400;
+```
+
 }
 
+/* CHAPTER 2 */
+
+.theme-2 {
+--bg: #123c2d;
+--text: #f2eee2;
+--accent: #fffaf0;
+
+```
+--title-font: "Libre Baskerville", serif;
+--body-font: "Manrope", sans-serif;
+--title-weight: 400;
+```
+
+}
+
+/* CHAPTER 3 */
+
+.theme-3 {
+--bg: #581719;
+--text: #ffe48a;
+--accent: #ffe48a;
+
+```
+--title-font: "Playfair Display", serif;
+--body-font: "Cormorant Garamond", serif;
+--title-weight: 400;
+```
+
+}
+
+/* CHAPTER 4 */
+
+.theme-4 {
+--bg: #b8a27b;
+--text: #241d17;
+--accent: #241d17;
+
+```
+--title-font: "Libre Baskerville", serif;
+--body-font: "Libre Baskerville", serif;
+--title-weight: 400;
+```
+
+}
+
+/* CHAPTER 5 */
+
+.theme-5 {
+--bg: #102a43;
+--text: #e6eef5;
+--accent: #dcecff;
+
+```
+--title-font: "Cormorant Garamond", serif;
+--body-font: "Manrope", sans-serif;
+--title-weight: 300;
+```
+
+}
+
+/* CHAPTER 6 */
+
+.theme-6 {
+--bg: #11142c;
+--text: #e3e5ff;
+--accent: #d7dcff;
+
+```
+--title-font: "Bodoni Moda", serif;
+--body-font: "Cormorant Garamond", serif;
+--title-weight: 400;
+```
+
+}
+
+/* CHAPTER 7 */
+
+.theme-7 {
+--bg: #30251d;
+--text: #ead9b9;
+--accent: #ead9b9;
+
+```
+--title-font: "Libre Baskerville", serif;
+--body-font: "Cormorant Garamond", serif;
+--title-weight: 400;
+```
+
+}
+
+/* CHAPTER 8 */
+
+.theme-8 {
+--bg: #9a6040;
+--text: #fff1dc;
+--accent: #fff1dc;
+
+```
+--title-font: "Playfair Display", serif;
+--body-font: "Cormorant Garamond", serif;
+--title-weight: 400;
+```
+
+}
+
+/* CHAPTER 9 */
+
+.theme-9 {
+--bg: #332046;
+--text: #f4eaff;
+--accent: #f4eaff;
+
+```
+--title-font: "Manrope", sans-serif;
+--body-font: "Manrope", sans-serif;
+--title-weight: 300;
+```
+
+}
+
+/* CHAPTER 10 */
+
+.theme-10 {
+--bg: #11100f;
+--text: #f3eadc;
+--accent: #f3eadc;
+
+```
+--title-font: "Bodoni Moda", serif;
+--body-font: "Cormorant Garamond", serif;
+--title-weight: 400;
+```
+
+}
+
+/* =====================================================
+ANIMATIONS
+===================================================== */
+
+@keyframes entranceZoom {
+from {
+transform: scale(1.02);
+}
+
+```
+to {
+    transform: scale(1.09);
+}
+```
+
+}
 
 @keyframes entranceReveal {
-
-    from {
-
-        opacity: 0;
-
-        transform:
-            translateY(-47%)
-            translateX(-25px);
-    }
-
-    to {
-
-        opacity: 1;
-
-        transform:
-            translateY(-50%)
-            translateX(0);
-    }
+from {
+opacity: 0;
+transform: translate(-35px, -50%);
 }
 
+```
+to {
+    opacity: 1;
+    transform: translate(0, -50%);
+}
+```
+
+}
+
+@keyframes exhibitIn {
+from {
+opacity: 0;
+transform: translateY(30px);
+}
+
+```
+to {
+    opacity: 1;
+    transform: translateY(0);
+}
+```
+
+}
+
+.exhibit-in {
+animation: exhibitIn .9s ease both;
+}
 
 /* =====================================================
-   MOBILE
+MOBILE
 ===================================================== */
 
-@media(max-width: 800px) {
+@media (max-width: 700px) {
 
-    .entrancePhoto {
+```
+.entrance-content {
+    left: 28px;
+    right: 28px;
+}
 
-        width: 100vw;
-        height: 100vh;
+.entrance-content h1 {
+    font-size: 61px;
+}
 
-        right: 0;
-        top: 0;
-    }
+.entrance-footer {
+    left: 28px;
+    right: 28px;
+    bottom: 25px;
 
+    flex-direction: column;
+    gap: 8px;
+}
 
-    .entranceShade {
+.museum-top {
+    left: 25px;
+    right: 25px;
+    top: 25px;
+}
 
-        background:
-            linear-gradient(
-                90deg,
-                rgba(9,8,7,.9),
-                rgba(9,8,7,.35)
-            );
-    }
+.chapter-intro {
+    left: 28px;
+    right: 28px;
+}
 
+.chapter-intro h2 {
+    font-size: 55px;
+}
 
-    .entranceContent {
+.photo-gallery {
+    inset: 12vh 25px 23vh;
 
-        left: 8vw;
+    gap: 7px;
+}
 
-        width: 82vw;
-    }
+.gallery-photo {
+    height: 40vh;
+    max-width: 42vw;
 
+    border-width: 5px;
+}
 
-    .entranceContent h1 {
+.gallery-photo:nth-child(1) {
+    display: none;
+}
 
-        font-size: 65px;
-    }
+.gallery-caption {
+    left: 28px;
+    right: 28px;
+    bottom: 14vh;
 
+    font-size: 19px;
+}
 
-    .entranceBottom {
+.split-exhibit {
+    display: block;
+}
 
-        display: none;
-    }
+.split-image {
+    position: absolute;
 
+    top: 14vh;
+    left: 28px;
 
-    .exhibit {
+    width: calc(100% - 56px);
+    height: 47vh;
 
-        display: block;
-    }
+    margin: 0;
+}
 
+.split-text {
+    position: absolute;
 
-    .photoFrame {
+    left: 28px;
+    right: 28px;
+    bottom: 13vh;
 
-        width: 280px;
-        height: 310px;
-    }
+    padding: 0;
+}
 
+.split-text p {
+    font-size: 20px;
+}
 
-    .story {
+.text-exhibit {
+    left: 28px;
+    right: 28px;
+    bottom: 14vh;
+}
 
-        margin-top: 25px;
+.text-exhibit p {
+    font-size: 22px;
+}
 
-        max-width: 85%;
-    }
+.museum-navigation {
+    left: 25px;
+    right: 25px;
+    bottom: 25px;
+}
 
-
-    #chapterTitle {
-
-        margin-bottom: 20px;
-    }
-
-
-    #storyText {
-
-        font-size: 24px;
-    }
+#soundBtn {
+    right: 25px;
+    bottom: 65px;
+}
+```
 
 }
