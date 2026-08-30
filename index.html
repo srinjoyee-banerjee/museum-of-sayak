@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
 
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>The Museum of Sayak</title>
-
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -14,216 +12,153 @@
 
 <div id="app">
 
-    <!-- =========================================
-         PAGE 1 — MUSEUM ENTRANCE
-    ========================================== -->
+```
+<!-- =========================
+     ENTRANCE
+========================== -->
 
-    <section id="entrancePage" class="screen active">
+<section id="entrance" class="screen active">
 
-        <img
-            src="sayak_bkgnd.jpeg"
-            class="entrancePhoto"
-            alt="Sayak"
-        >
+    <img
+        src="sayak_bkgnd.jpeg"
+        class="entrance-photo"
+        alt="Sayak"
+    >
 
-        <div class="entranceShade"></div>
+    <div class="entrance-overlay"></div>
 
-        <div class="entranceContent">
+    <div class="entrance-content">
 
-            <div class="private">
-                A PRIVATE COLLECTION
-            </div>
-
-            <h1>
-                THE MUSEUM
-                <br>
-                <em>OF SAYAK</em>
-            </h1>
-
-            <p>
-                exploring you,<br>
-                through my eyes.
-            </p>
-
-            <button id="enterMuseum">
-                ENTER THE MUSEUM
-                <span>↗</span>
-            </button>
-
+        <div class="entrance-kicker">
+            A PRIVATE COLLECTION
         </div>
 
-        <div class="entranceYear">
-            2026
-        </div>
+        <h1>
+            THE MUSEUM
+            <em>OF SAYAK</em>
+        </h1>
 
-        <div class="entranceBottom">
-            ONE PERSON · TWENTY-SIX MOMENTS
-        </div>
+        <p>
+            exploring you,<br>
+            through my eyes.
+        </p>
 
-    </section>
-
-
-    <!-- =========================================
-         MUSEUM DOOR
-    ========================================== -->
-
-    <section id="doorPage" class="screen">
-
-        <div class="museumLight"></div>
-
-        <div class="museumDoor leftDoor">
-
-            <div class="doorFrame">
-                <small>THE</small>
-                <strong>MUSEUM</strong>
-                <small>OF SAYAK</small>
-            </div>
-
-        </div>
-
-        <div class="museumDoor rightDoor">
-
-            <div class="doorFrame">
-                <small>PRIVATE</small>
-                <strong>COLLECTION</strong>
-                <small>2026</small>
-            </div>
-
-        </div>
-
-        <div class="doorText">
-
-            <span>01</span>
-
-            <p>
-                ENTERING THE MUSEUM
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================================
-         ACTUAL MUSEUM
-    ========================================== -->
-
-    <section id="museumPage" class="screen">
-
-        <div class="museumBackground"></div>
-
-        <div class="museumOverlay"></div>
-
-        <header class="museumHeader">
-
-            <div>
-                THE MUSEUM OF SAYAK
-            </div>
-
-            <div id="pageCounter">
-                01 / 26
-            </div>
-
-        </header>
-
-
-        <main class="museumContent">
-
-            <div class="chapterInfo">
-
-                <div id="chapterNumber">
-                    CHAPTER 01
-                </div>
-
-                <h2 id="chapterTitle">
-                    WHO ARE YOU?
-                </h2>
-
-            </div>
-
-
-            <div class="exhibit">
-
-                <div class="photoFrame">
-
-                    <img
-                        id="momentImage"
-                        src="strong.jpeg"
-                        alt="Sayak"
-                    >
-
-                    <div
-                        id="imageCaption"
-                        class="imageCaption">
-                    </div>
-
-                </div>
-
-
-                <div class="story">
-
-                    <div
-                        id="storyNumber"
-                        class="storyNumber">
-                        01
-                    </div>
-
-                    <p id="storyText">
-                        You are someone I keep discovering,
-                        even after all these years.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </main>
-
-
-        <!-- NAVIGATION -->
-
-        <div class="navigation">
-
-            <button id="previousBtn">
-                ←
-            </button>
-
-            <div id="navCounter">
-                01 / 26
-            </div>
-
-            <button id="nextBtn">
-                →
-            </button>
-
-        </div>
-
-
-        <!-- SOUND -->
-
-        <button id="soundBtn">
-            ♪ SOUND ON
+        <button id="enterBtn">
+            ENTER THE MUSEUM
+            <span>↗</span>
         </button>
 
+    </div>
 
-        <!-- EXIT -->
+    <div class="entrance-footer">
+        2026
+        <span>ONE PERSON · TWENTY-SIX MOMENTS</span>
+    </div>
 
-        <button id="exitBtn">
-            ← EXIT
+</section>
+
+
+<!-- =========================
+     MUSEUM
+========================== -->
+
+<section id="museum" class="screen">
+
+    <div class="room-background"></div>
+    <div class="room-light"></div>
+    <div class="film-grain"></div>
+
+
+    <!-- TOP -->
+
+    <header class="museum-top">
+
+        <div class="museum-mark">
+            THE MUSEUM<br>
+            OF SAYAK
+        </div>
+
+        <div id="roomNumber">
+            CHAPTER 1
+        </div>
+
+    </header>
+
+
+    <!-- DOOR TRANSITION -->
+
+    <div id="doors" class="doors">
+
+        <div class="door door-left"></div>
+        <div class="door door-right"></div>
+
+        <div class="door-title">
+            <span>ENTERING</span>
+            <strong id="doorChapter">
+                CHAPTER 1
+            </strong>
+        </div>
+
+    </div>
+
+
+    <!-- EXHIBIT -->
+
+    <main id="exhibit">
+
+        <div class="chapter-intro">
+
+            <div class="chapter-small">
+                CHAPTER 1
+            </div>
+
+            <h2 id="chapterTitle">
+                WHO ARE YOU?
+            </h2>
+
+            <div class="chapter-line"></div>
+
+        </div>
+
+    </main>
+
+
+    <!-- NAVIGATION -->
+
+    <div class="museum-navigation">
+
+        <button id="prevBtn">
+            ←
         </button>
 
+        <div class="moment">
+            <span id="momentCurrent">01</span>
+            <i>/</i>
+            <span>26</span>
+        </div>
 
-        <audio
-            id="music"
-            src="mp3.mpeg"
-            loop
-            preload="auto">
-        </audio>
+        <button id="nextBtn">
+            NEXT
+            <span>→</span>
+        </button>
 
-    </section>
+    </div>
+
+
+    <!-- MUSIC -->
+
+    <button id="soundBtn">
+        ♪ SOUND ON
+    </button>
+
+</section>
+```
 
 </div>
 
+<audio id="music" loop preload="auto">
+    <source src="mp3.mpeg" type="audio/mpeg">
+</audio>
 
 <script src="script.js"></script>
 
